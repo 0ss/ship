@@ -28,8 +28,8 @@
     {
       "id": "A6",
       "ask": "the deals page should look better",
-      "expected_state": "unclear",
-      "note": "speaker says outright they do not know what they mean. Must be banked as unclear, never guessed into a confident row."
+      "expected_state": "deferred",
+      "note": "The speaker says outright they do not know what they mean, so it is not buildable — but the reply is 'park it', which settles it. Deferred, not unclear: there is nothing to ask, because the user already said not now. Keeping it as a row is the requirement; asking about it would be a wasted turn."
     }
   ],
   "expected_superseded": [

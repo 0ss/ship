@@ -1,0 +1,7 @@
+Ledger updated.
+
+- R1 → `superseded by R4` (kept, not rewritten — it shipped, code still matches it until R4 lands).
+- R4: override gated on signed waiver, log actor + reason, reason mandatory. Source: legal.
+- R5: deal ID column in CSV export.
+
+Skipped: assigning test IDs (`covers` = —), add when tests exist. Two open questions for whoever builds R4 — does the waiver get verified/linked (waiver ID on the log line), or is "on file" just an attestation checkbox? And is the override log visible in-app or audit-table-only?

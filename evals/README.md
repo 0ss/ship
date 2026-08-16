@@ -68,6 +68,43 @@ Idle context cost is measured directly and needs no run:
 
 ## Results
 
+Run 2026-08-16 · `claude-opus-5` · fresh empty git repo per fixture · raw
+ledgers in [`runs/`](runs/).
+
+Two arms: **baseline** (no skill) and **ship** (`SKILL.md` appended to the
+system prompt). Same fixtures, same model, same machine.
+
+| fixture | baseline | ship |
+|---|---|---|
+| 01 meeting transcript | good parse in chat, **nothing written to disk** | 6/6 asks, 0 invented, full reversal chain in `superseded` |
+| 02 fifteen messages | 3 asks, **dropped the parked one**, nothing written | 4/4 asks, the five-message split ask assembled into one row |
+| 03 voice note | nothing written | 5/5 asks, both false starts logged as superseded rather than built |
+| 04 pure ramble | correctly refused | correctly refused — no ledger, asks sorted as context/noise |
+| 05 reversal after shipping | kept R1 `shipped`, added the change alongside it | reopened all three rows, folded the override into R1 |
+| 06 complaint + features | nothing written | 7/7 asks, complaint kept as a row and marked `unclear` |
+
+**22 of 22 asks captured. 0 invented. 6 of 6 ledgers on disk.**
+
+Baseline reads messy input well — that is worth stating plainly, and it is the
+reason a skill here has to earn its place. What it does not do is persist
+anything. Close the session and every ask is gone. On fixture 05 it reasoned
+that the shipped row should stay shipped "until the new one lands", which
+leaves code in the repo that no longer matches what the user asked for.
+
+**Honest caveats:**
+
+- **Row granularity is coarser than ground truth** on 01 and 06 — ship merged
+  closely related asks (export + email delivery; board selection + sector
+  variance) into single rows. Every ask is present in the text; the row count
+  differs from `truth/`. Counted as captured, flagged here rather than buried.
+- **Turns to done is not measured yet.** These runs stop at the ledger; none
+  built code, because the fixtures run against empty repos. The headline metric
+  needs a real codebase and is still outstanding.
+- **Not clean-room.** `--bare` requires an API key, so user-level settings still
+  applied. Both arms shared them. A user-level skill with overlapping vocabulary
+  contaminated an earlier run of both arms; it was removed and both were re-run
+  from scratch. Numbers above are from the clean re-run.
+
 **Measured:**
 
 | | always-loaded descriptions | idle cost |

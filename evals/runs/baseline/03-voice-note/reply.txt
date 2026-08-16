@@ -1,0 +1,9 @@
+Requirements from voice note (landed forms only):
+
+1. **Schedule** — Thursday morning. (rejected: Monday, "nobody reads anything on monday")
+2. **Format** — xlsx. (rejected: PDF, people need to copy numbers out)
+3. **Revenue numbers** — exclude trial accounts from revenue line. Currently counted, wrong.
+4. **Recipients** — editable list in settings. Currently hardcoded to speaker + Priya.
+5. **Failure alerting** — notify on generation failure. Currently silent; discovered a week late.
+
+Open: who gets failure alerts (recipients list? separate ops channel?), and "Thursday morning" — what hour / whose timezone.

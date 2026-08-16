@@ -1,0 +1,12 @@
+No rows. Nothing to build.
+
+Sorted:
+- onboarding: comprehension vs. want — open question you're holding, not an ask
+- ~50% drop at workspace step — context, no direction attached
+- Priya's positioning theory — context, unresolved
+- "look at churned accounts before we change anything" — your stated sequencing, and you closed with "no decisions today"
+- rest — thinking aloud
+
+No `requirements.md` created. Empty ledger beats an invented one.
+
+Ping me when you want the churn analysis run, or when a decision lands.

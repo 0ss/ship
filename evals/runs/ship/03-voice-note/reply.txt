@@ -1,0 +1,7 @@
+`+R1 +R2 +R3 +R4 +R5 · monday→thursday and pdf→xlsx taken as reversals, not separate asks`
+
+5 asks, 0 unclear — nothing to gate on.
+
+Blocker: repo is empty. No commits, no source, codedb index has 0 files. Every row targets an existing report pipeline (schedule, format, revenue query, recipients config, failure path) that isn't here. Can't slice tickets against code I can't read, and guessing a stack would build the wrong thing.
+
+Point me at the repo/dir with the report generator and I'll read it, slice tickets, and build all five.

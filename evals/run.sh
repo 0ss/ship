@@ -4,8 +4,14 @@
 #   ./evals/run.sh baseline     # no skill
 #   ./evals/run.sh ship         # SKILL.md appended to the system prompt
 #
-# --bare strips hooks, CLAUDE.md, plugins and auto-memory, so the only
-# difference between arms is the skill itself. Output lands in evals/runs/<arm>/.
+# Each run happens in a fresh empty git repo, so no project CLAUDE.md or
+# existing code leaks in. The only difference between arms is the skill.
+#
+# NOT clean-room: user-level hooks and settings still apply, because --bare
+# requires ANTHROPIC_API_KEY and most users are on OAuth. Both arms inherit the
+# same environment, so the comparison holds, but absolute numbers are only
+# comparable within one machine. Set ANTHROPIC_API_KEY and add --bare for a
+# clean-room run. Output lands in evals/runs/<arm>/.
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
@@ -21,14 +27,14 @@ sys=()
 
 run() { # run <workdir> <prompt> [session-id]
   local wd="$1" prompt="$2" sid="${3:-}"
-  local args=(-p --bare --model "$model" --permission-mode acceptEdits)
+  local args=(-p --model "$model" --permission-mode acceptEdits)
   [ -n "$sid" ] && args+=(--session-id "$sid")
-  (cd "$wd" && claude "${args[@]}" "${sys[@]}" "$prompt") 2>&1
+  (cd "$wd" && claude "${args[@]}" ${sys[@]+"${sys[@]}"} "$prompt") 2>&1
 }
 
 resume() { # resume <workdir> <session-id> <prompt>
-  (cd "$1" && claude -p --bare --model "$model" --permission-mode acceptEdits \
-    -r "$2" "${sys[@]}" "$3") 2>&1
+  (cd "$1" && claude -p --model "$model" --permission-mode acceptEdits \
+    -r "$2" ${sys[@]+"${sys[@]}"} "$3") 2>&1
 }
 
 collect() { # collect <workdir> <name> <transcript>
@@ -42,7 +48,7 @@ collect() { # collect <workdir> <name> <transcript>
 }
 
 # --- single-paste fixtures -------------------------------------------------
-for f in 01-meeting-transcript 03-voice-note 04-no-asks; do
+for f in 01-meeting-transcript 03-voice-note 04-no-asks 06-complaint-plus-features; do
   echo "$arm · $f"
   wd=$(mktemp -d); git -C "$wd" init -q
   reply=$(run "$wd" "$(cat "evals/fixtures/$f.md")")

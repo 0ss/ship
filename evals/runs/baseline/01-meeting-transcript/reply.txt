@@ -1,0 +1,13 @@
+**Asks**
+
+1. **Screener = hard stop.** Fails screen → no diligence spend, **no override**. (Reversed mid-meeting: warn-then-stop was agreed, then killed — override would get clicked every time.)
+2. **Sortable deals table.** Sort by date, amount, etc. Breaks past ~40 rows today.
+3. **CSV export** on deals page — **whole filtered set**, not visible rows.
+4. **Email the export file** instead of browser download (iPad users).
+5. **Audit log for screener rejections** — write the reason, readable later.
+
+**Parked**
+- "Table should look better" — Dan can't define it yet.
+- Caching — explicitly not this week.
+
+Ambiguity worth pinning: #3+#4 read as one flow (export → email), but nobody said whether download stays as fallback. Assuming email-only unless told otherwise.

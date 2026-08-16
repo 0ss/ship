@@ -1,0 +1,11 @@
+No code here. `/private/var/folders/.../tmp.g7Y5N4G0M5` is an empty git repo — no commits, no files, no remote, codedb index empty. Nothing to fix against.
+
+Point me at the real repo path and I'll go.
+
+Scope I parsed from your messages, for when you do:
+
+1. **Invite emails never send** — invited user gets nothing. Fix root cause (likely invite created but send never called / silently swallowed).
+2. **Invite expiry: 30 days** — supersedes the 7 you said first.
+3. **Inviter list** — who invited who.
+
+Dropped: login page mobile / off-screen button (you said forget it).

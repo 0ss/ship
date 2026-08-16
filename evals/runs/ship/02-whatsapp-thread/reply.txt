@@ -1,0 +1,11 @@
++R1 +R2 +R3 +R4 · R3 superseded (7d → 30d) · R2 deferred (parked 10:30)
+
+Blocker: repo is empty. Only `.git` + `codedb.snapshot`, no commits, codedb index has zero matches for invite/login/anything. Nothing to fix.
+
+R1/R3/R4 all assume an existing invite flow, user table, mailer. I'm not going to invent an app from scratch and call it "fixed invites" — wrong app, wasted build.
+
+Where's the code? Either:
+- **(a)** point me at the real repo path
+- **(b)** it's a fresh start and you want the invite feature built from zero — say what stack
+
+Ledger is on disk, survives a context wipe. Say the word and I build.

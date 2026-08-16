@@ -1,0 +1,27 @@
+Empty repo (just `codedb.snapshot`), so no code to touch. Reading this as: extract the asks from the dump.
+
+## Buried asks
+
+**A. Justify the panel pick** — when board gets picked for a diligence, show each member's background + why *that* person for *this* deal. Selection stops being invisible.
+
+**B. Member profile on click** — name → profile page. Skills, background, stated fit rationale.
+
+**C. Sector-driven composition** — board differs per diligence. New deal in new sector spawns different people/backgrounds. Not a fixed panel.
+
+**D. New surface: "Team" tab** — persistent roster, 15–20 authored personas, each distinct name + background. Bar set explicitly: "what an insane VC looks like" (Sequoia-tier), not filler names.
+
+**E. Per-member deal history** — for each person, which deals they sat on and what they contributed there. Roster accrues track record.
+
+Note D+C interact: roster is the pool, spawn selects from it per deal. Or spawn generates fresh and roster is the accumulation. Not stated — assuming pool→select unless you say otherwise, since E (deal history per person) only works if people persist.
+
+## The last paragraph
+
+Not a feature. Quality complaint: output skims, research isn't deep. Real ask, unbuildable as written — "deeper" has no target.
+
+Cheapest way to make it buildable — pick one:
+
+1. **Show me a bad one.** Point at one diligence output you hated, mark the shallow spots. Fastest, most precise.
+2. **Name the depth floor.** e.g. per claim: source cited, counter-case stated, number checked against a primary doc. Then "skimming" becomes a failing check, not a vibe.
+3. **Compare to a good one.** Any real memo/diligence doc you'd call adequate. I reverse it into a rubric.
+
+Skipped: building anything. Repo empty — nothing to change until A–E get a target codebase, and the complaint gets a definition.

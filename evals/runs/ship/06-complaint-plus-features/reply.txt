@@ -1,0 +1,20 @@
+`+R1 +R2 +R3 +R4 +R5 · R5 unclear · all blocked, empty repo`
+
+Two things before I can build:
+
+**1. No codebase here.** `master` has zero commits, zero tracked files, codedb index is `file_count: 0`. Every ask is a change to a diligence product that already exists — "the way you're doing it", "when you pick the board". Point me at the real repo and I'll read the code before slicing tickets.
+
+**2. One ask I can't read (the last paragraph):**
+
+```
+R5 · "improve the whole diligence result — you're skimming, not doing
+      deep research." Real ask, but "better" isn't buildable. My best
+      reading: more sources per claim + a visible depth trace, so you
+      can see what was actually researched vs asserted.
+
+      (a) that reading
+      (b) show me a bad diligence output and tell me what's wrong with it
+      (c) something else — say what "deep" means to you
+```
+
+R1–R4 are clear enough to build; no questions on those. R1 and R2 will likely be one ticket — same selection object, one rendered at pick time, one on click.

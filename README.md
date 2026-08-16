@@ -161,16 +161,30 @@ five hand-labelled fixtures: a transcript with a double reversal, a fifteen
 message thread, an unpunctuated voice note, a pure ramble whose correct output
 is an *empty* ledger, and a reversal that lands after the code already exists.
 
-measured today:
+2026-08-16, `claude-opus-5`, fresh empty repo per fixture. raw ledgers in
+[`evals/runs/`](evals/runs/).
+
+| | baseline (no skill) | ship |
+|---|---|---|
+| asks captured | reads well in chat | **22 / 22** |
+| asks invented | 0 | **0** |
+| ledgers on disk | **0 / 6** | **6 / 6** |
+| ramble → empty ledger | correct | correct |
+| reversal after shipping | left the stale row `shipped` | reopened it |
+
+baseline parses messy input well — worth saying plainly, it's why a skill here
+has to earn its place. what it doesn't do is persist anything. close the
+session and every ask is gone.
 
 | | always-loaded descriptions | idle cost |
 |---|---|---|
 | ship | 1 | ~133 tokens |
 | ship, repo with no ledger | 1 | ~133 tokens, hook silent |
 
-recall, precision and turns-to-done are **not published yet**. rubrics are in
-[`evals/`](evals/README.md), numbers aren't, because no run has been completed.
-they land with model, date and raw ledgers attached.
+**turns to done isn't measured yet.** these runs stop at the ledger — the
+fixtures use empty repos, so nothing was built. the headline metric needs a
+real codebase and is still outstanding. caveats and method in
+[`evals/`](evals/README.md).
 
 no invented numbers. that's the deal.
 

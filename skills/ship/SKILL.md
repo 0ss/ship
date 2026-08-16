@@ -40,12 +40,20 @@ Read any referenced file in full before writing rows from it.
 |---|---|
 | unrelated to every row | new row, next ID |
 | the same ask with more detail | merge the detail into that row |
+| a qualifier on an existing ask — a column it needs, a condition, a constraint, a thing to log | merges into that row. One ask with a condition is one row. |
 | a direct contradiction | row text is replaced, old text moves to `superseded` |
 | a contradiction of a row already `shipped` | same, **and** state returns to `open` |
 | impossible to interpret | row state `unclear`, banked for the gate |
+| already settled by the user — parked, postponed, "not this week" | row state `deferred`. Settled needs no question. |
 
 **Most recent wins, always.** The user reversing a reversal is just a newer
 statement. Resolve it and move on — never ask which version they meant.
+
+**`unclear` is rare.** It means you cannot tell *what the user wants* — "make
+it better", "improve the research". A row you understand but haven't designed
+yet is `open`: "alert someone when it fails" is a complete ask, and how to
+alert them is your job, not a question. Every needless `unclear` costs the user
+a turn at the gate, which is the one thing this skill exists to save.
 
 **IDs are permanent.** R7 stays R7 for the life of the repo. Evidence links to
 it. Never renumber, never reuse a retired ID.

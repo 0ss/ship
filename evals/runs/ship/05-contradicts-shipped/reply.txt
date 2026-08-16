@@ -1,0 +1,14 @@
+`R1 superseded (no override → waiver override, logged) · R3 +deal ID column · R1 R2 R3 shipped → open`
+
+Blocker before I slice tickets:
+
+**Repo is empty.** No source, no `tickets.md`, zero git commits — only `requirements.md`. The three `shipped` marks have no `verified` lines and nothing behind them. So "add an override to the hard stop" has no hard stop to add to.
+
+Two readings, materially different work:
+
+- **(a) Wrong directory** — the real screener lives elsewhere. Point me at it and I'll build R1/R3 against it.
+- **(b) Greenfield** — nothing exists yet, and R1–R3 means building the screener (deals table, budget gate, CSV export) from scratch. Say go and I'll slice it.
+
+Not guessing between them — (b) is a whole app, well past what "the hard stop is a problem" implies.
+
+Ledger's current, both new asks landed. One design note for whichever way it goes: the override log is an audit record — actor, reason, waiver ref, timestamp, append-only. Not a nullable `overridden_by` column on the deal.
