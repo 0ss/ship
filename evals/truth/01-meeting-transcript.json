@@ -1,0 +1,45 @@
+{
+  "fixture": "01-meeting-transcript.md",
+  "tests": ["recall", "precision", "recency", "unclear-detection"],
+  "asks": [
+    {
+      "id": "A1",
+      "ask": "screener hard-stops a failing deal before any diligence spend, no override",
+      "note": "reversed twice in the meeting: hard stop -> warn then stop -> hard stop. Final form is the ask."
+    },
+    {
+      "id": "A2",
+      "ask": "deals table sortable by date and amount"
+    },
+    {
+      "id": "A3",
+      "ask": "CSV export of the whole filtered set, not just visible rows"
+    },
+    {
+      "id": "A4",
+      "ask": "export is emailed to the user rather than downloaded",
+      "note": "buried in discussion, easy to miss"
+    },
+    {
+      "id": "A5",
+      "ask": "screener rejections write a readable record of the reason",
+      "note": "buried in discussion, easy to miss"
+    },
+    {
+      "id": "A6",
+      "ask": "the deals page should look better",
+      "expected_state": "unclear",
+      "note": "speaker says outright they do not know what they mean. Must be banked as unclear, never guessed into a confident row."
+    }
+  ],
+  "expected_superseded": [
+    "screener warns before stopping (reversed later in the same meeting)"
+  ],
+  "expected_deferred": [
+    "caching — explicitly 'not this week'"
+  ],
+  "must_not_invent": [
+    "any row about caching being built now",
+    "any row granting a screener override"
+  ]
+}

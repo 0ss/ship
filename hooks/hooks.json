@@ -1,0 +1,29 @@
+{
+  "description": "Keeps the ship ledger live across a session at the cost of one line per prompt, and stays completely silent in repos with no ledger.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/ledger-check.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/ledger-check.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "fixture": "04-no-asks.md",
+  "tests": ["precision", "restraint"],
+  "asks": [],
+  "expected_ledger": "empty",
+  "must_not_invent": [
+    "onboarding redesign",
+    "workspace step changes",
+    "churn analysis as a build task",
+    "positioning work",
+    "any row at all"
+  ],
+  "note": "The speaker states outright that there are no decisions. A framework that manufactures tickets from thinking-aloud is worse than no framework: it burns build time on work nobody asked for. Correct behaviour is to acknowledge and write nothing."
+}

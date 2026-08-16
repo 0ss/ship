@@ -1,0 +1,33 @@
+{
+  "fixture": "03-voice-note.md",
+  "tests": ["false-start-handling", "recall", "precision"],
+  "asks": [
+    {
+      "id": "A1",
+      "ask": "reports go out Thursday morning",
+      "note": "speaker says Monday, then rewrites to Thursday mid-sentence. Monday is a false start, not a superseded requirement."
+    },
+    {
+      "id": "A2",
+      "ask": "report format is xlsx so numbers can be copied out",
+      "note": "second false start: says PDF, rewrites to spreadsheet."
+    },
+    {
+      "id": "A3",
+      "ask": "trial accounts excluded from the revenue line"
+    },
+    {
+      "id": "A4",
+      "ask": "recipient list is editable in settings instead of hardcoded"
+    },
+    {
+      "id": "A5",
+      "ask": "failed report generation raises a visible alert",
+      "note": "arrives after the speaker has already said they are finished. Trailing asks are the most commonly dropped."
+    }
+  ],
+  "must_not_invent": [
+    "a row for Monday delivery",
+    "a row for PDF format"
+  ]
+}

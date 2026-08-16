@@ -1,0 +1,36 @@
+{
+  "fixture": "02-whatsapp-thread.md",
+  "tests": ["accretion", "split-ask-assembly", "recency", "deferral", "id-stability"],
+  "delivery": "one message per turn, 15 turns",
+  "asks": [
+    {
+      "id": "A1",
+      "ask": "invited users receive an invitation email",
+      "assembled_from": [2, 3, 4, 5, 6],
+      "note": "single ask split across five messages. Five separate rows is a failure; so is dropping any part of it."
+    },
+    {
+      "id": "A2",
+      "ask": "invites expire after 30 days",
+      "note": "stated as 7 days at 10:31, reversed to 30 days at 11:47. Most recent wins."
+    },
+    {
+      "id": "A3",
+      "ask": "a list showing who invited whom"
+    },
+    {
+      "id": "A4",
+      "ask": "login page button is off screen on mobile",
+      "expected_state": "deferred",
+      "note": "explicitly parked at 10:30. Must be kept as a row, not deleted."
+    }
+  ],
+  "expected_superseded": [
+    "invites expire after 7 days"
+  ],
+  "invariants": [
+    "row IDs assigned in early turns are unchanged by turn 15",
+    "final ledger is identical to the ledger produced by pasting all 15 lines at once",
+    "no question is asked before turn 15"
+  ]
+}

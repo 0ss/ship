@@ -1,0 +1,31 @@
+{
+  "fixture": "05-contradicts-shipped.md",
+  "tests": ["reopen-on-contradiction", "merge-vs-add", "id-stability", "no-blocking-question"],
+  "expected_transitions": [
+    {
+      "row": "R1",
+      "from": "shipped",
+      "to": "open",
+      "new_text": "screener stops before diligence spend, with a logged override recording who and why",
+      "superseded_entry": "no override",
+      "note": "A contradiction of shipped work must reopen the row. Leaving R1 shipped leaves wrong code in the repo."
+    },
+    {
+      "row": "R3",
+      "from": "shipped",
+      "to": "open",
+      "new_text": "CSV export of the whole filtered set, including the deal ID column",
+      "note": "Refinement rather than reversal: merges into R3, no superseded entry, no new row."
+    }
+  ],
+  "invariants": [
+    "no new row is created for the override — it belongs to R1",
+    "no new row is created for the deal ID column — it belongs to R3",
+    "R1 and R3 keep their IDs, so T1 and T2 evidence links stay valid",
+    "no clarifying question is asked — both statements are unambiguous"
+  ],
+  "must_not_invent": [
+    "a legal approval workflow",
+    "a waiver upload feature"
+  ]
+}

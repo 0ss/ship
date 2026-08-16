@@ -1,0 +1,21 @@
+{
+  "name": "ship",
+  "description": "Ship — turn mess into shipped software",
+  "owner": {
+    "name": "0ss",
+    "url": "https://github.com/0ss"
+  },
+  "plugins": [
+    {
+      "name": "ship",
+      "description": "Dump transcripts, chat threads and half-formed asks. Get shipped, verified software. One word, one ledger, one skill.",
+      "version": "0.1.0",
+      "source": "./",
+      "keywords": ["skills", "requirements", "transcripts", "tickets", "agentic"],
+      "author": {
+        "name": "0ss",
+        "url": "https://github.com/0ss"
+      }
+    }
+  ]
+}
