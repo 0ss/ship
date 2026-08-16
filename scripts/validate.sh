@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Everything CI checks, runnable locally: ./scripts/validate.sh
 set -uo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 
 fail=0
 ok()   { printf '  \033[32mok\033[0m   %s\n' "$1"; }

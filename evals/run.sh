@@ -13,7 +13,7 @@
 # comparable within one machine. Set ANTHROPIC_API_KEY and add --bare for a
 # clean-room run. Output lands in evals/runs/<arm>/.
 set -uo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 
 arm="${1:-}"
 [ "$arm" = baseline ] || [ "$arm" = ship ] || { echo "usage: $0 baseline|ship" >&2; exit 1; }
