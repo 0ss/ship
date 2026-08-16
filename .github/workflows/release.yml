@@ -1,0 +1,35 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: validate
+        run: ./scripts/validate.sh
+
+      - name: tag must match the manifest version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          manifest=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          if [ "$tag" != "$manifest" ]; then
+            echo "tag $tag does not match plugin.json version $manifest" >&2
+            exit 1
+          fi
+          echo "$tag"
+
+      - name: publish
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

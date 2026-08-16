@@ -1,59 +1,54 @@
-<div align="center">
-
 # 🚢 ship
 
-**Be as messy as you actually are.**
+[![ci](https://github.com/0ss/ship/actions/workflows/ci.yml/badge.svg)](https://github.com/0ss/ship/actions/workflows/ci.yml)
+[![license](https://img.shields.io/badge/license-MIT-black)](LICENSE)
 
-Paste the transcript. Send the voice note. Ramble across fifteen messages.
-Ship turns it into a requirements ledger, builds it, and proves it worked.
+be as messy as you actually are.
 
-*One word. One file. One skill.*
+paste the transcript. send the voice note. ramble across fifteen messages. ship
+turns it into a ledger, builds it, then proves it worked.
 
-</div>
+one word. one file. one skill.
 
----
+## 😖 the problem
 
-## 😖 The problem
+every agentic framework assumes you show up organised.
 
-Every agentic framework assumes you arrive organised.
+you don't. you've got a 40 minute transcript, a whatsapp thread where one idea
+is smeared across five messages, a voice note with no punctuation, and a thing
+you changed your mind about twice.
 
-You don't. You have a 40-minute meeting transcript, a WhatsApp thread where one
-idea is split across five messages, a voice note with no punctuation, and a
-thing you changed your mind about twice.
-
-So you clean it up first. You write the tickets. You file the issues. You run
-the planner, then the implementer, then the reviewer. Five skills, five
-approval gates, and you're the one holding it all together.
-
-**Ship deletes that job.**
+so you tidy it first. write the tickets. file the issues. run the planner, then
+the implementer, then the reviewer. five skills, five approval gates, and
+you're the glue.
 
 ```diff
 - /clarify → /to-spec → /to-tickets → /to-issues → /implement → /code-review
 + just talk
 ```
 
-## 🚀 Install
+## 🚀 install
 
 ```bash
 /plugin marketplace add 0ss/ship
 /plugin install ship@ship
 ```
 
-Then, once per repo:
+then once per repo:
 
 ```
 /ship
 ```
 
-That's the last time you type anything. Ship creates `requirements.md`, and
-from then on the file's existence turns the skill on by itself — every session,
-forever. Delete the file to turn it off.
+that's the last thing you type. ship writes `requirements.md`, and from then on
+the file existing is what turns the skill on — every session, forever. delete
+it to switch off.
 
-## 💬 What it actually looks like
+## 💬 what it looks like
 
 ```
 you   [pastes 800 words of meeting notes]
-ship  +R1 +R2 +R3 +R4 · R2 unclear, I'll ask at the end. keep going.
+ship  +R1 +R2 +R3 +R4 · R2 unclear, i'll ask at the end. keep going.
 
 you   oh also the export is broken
 ship  +R5
@@ -65,24 +60,24 @@ you   no wait weekly was right
 ship  R3 back to weekly.
 
 you   ok go
-ship  one question — R2 "make it cleaner": remove the sidebar? (y/n/other)
+ship  one question — R2 "make it cleaner": drop the sidebar? (y/n/other)
 
 you   y
 ship  building R1–R7...
 
       ✅ 6 shipped, evidence on each
-      ⚠️  R4 partial — the email path needs an SMTP key you haven't set
-      🔍 found an ask I'd missed in your meeting notes: "…and obviously it
-         needs to email them". added as R8, building it now.
+      ⚠️  R4 partial — email path needs an smtp key you haven't set
+      🔍 found an ask i'd missed in your notes: "…and obviously it needs to
+         email them". added as R8, building it.
 
       done? or keep going.
 ```
 
-You typed four things. Two of them were "ok go" and "y".
+four messages. two of them were "ok go" and "y".
 
-## 🧠 How it works
+## 🧠 how it works
 
-Every message you send runs the same four steps:
+every message you send runs the same four steps:
 
 ```
 1. read requirements.md from disk
@@ -91,29 +86,28 @@ Every message you send runs the same four steps:
 4. print one line so you can see it landed
 ```
 
-Then the work happens in three passes, none of which you name:
+then three passes, none of which you name:
 
 | pass | question | source of truth |
 |---|---|---|
-| **absorb** | what did you ask for? | your messages |
-| **build** | does it exist? | the codebase |
-| **prove** | is that true? | your original material, re-read |
+| absorb | what did you ask for? | your messages |
+| build | does it exist? | the codebase |
+| prove | is that true? | your original material, re-read |
 
-**Prove runs in a fresh subagent.** A verifier that watched itself write the
-code confirms its own inventory instead of checking it. So proving gets a
-clean head — and because it re-reads your *original* mess rather than the
-ledger, it catches asks the ledger missed.
+prove runs in a fresh subagent. a verifier that watched itself write the code
+just confirms its own inventory. so it gets a clean head, and it re-reads your
+original mess rather than the ledger — which is how it catches asks the ledger
+missed.
 
-## 📒 The ledger
+## 📒 the ledger
 
-One file, `requirements.md`, in your repo root. Human-readable, git-friendly,
-the entire state of the system.
+one file, repo root, human readable, git friendly. the whole state.
 
 ```markdown
-| #  | requirement                        | source          | covers | state   |
-|----|------------------------------------|-----------------|--------|---------|
-| R1 | hard stop before diligence spend   | voice-1 02:14   | T3     | shipped |
-| R2 | sortable table columns             | wa sat 21:03    | —      | unclear |
+| #  | requirement                       | source        | covers | state   |
+|----|-----------------------------------|---------------|--------|---------|
+| R1 | hard stop before diligence spend  | voice-1 02:14 | T3     | shipped |
+| R2 | sortable table columns            | wa sat 21:03  | —      | unclear |
 
 ## superseded
 - R1 "stop before spend" → "warn, then stop" → "hard stop" (sun 11:02)
@@ -122,117 +116,109 @@ the entire state of the system.
 - caching layer — my idea, nobody asked
 ```
 
-Row IDs are permanent. Evidence links to them, so R7 stays R7 forever.
+row ids are permanent. evidence points at them, so R7 stays R7 forever.
 
-## ⚖️ Conflicts resolve themselves
+## ⚖️ conflicts sort themselves out
 
-| what happened | what ship does |
+| you did this | ship does this |
 |---|---|
-| you contradict yourself | most recent wins, old version kept under `superseded` |
-| you contradict your contradiction | that's just newer. wins. |
-| you contradict **already-shipped code** | row reopens, code gets fixed next build |
-| you repeat yourself | merges into the existing row, no duplicate |
-| one ask spread over five messages | assembles into one row |
-| genuinely ambiguous | banked, asked **once**, at the pause |
+| contradicted yourself | newest wins, old text kept under `superseded` |
+| contradicted your contradiction | that's just newer. wins. |
+| contradicted **already shipped code** | row reopens, code gets fixed next build |
+| repeated yourself | merges into the existing row |
+| spread one ask over five messages | assembles into one row |
+| said something genuinely ambiguous | banked, asked once, at the pause |
 
-**No question ever interrupts you mid-flow.** If you're sending fifteen
-messages, a question after message three wrecks the dump. Questions wait until
-you stop.
+nothing interrupts you mid flow. if you're sending fifteen messages, a question
+after message three wrecks the dump. questions wait until you stop.
 
-## ✅ Three guarantees
+## ✅ three guarantees
 
-1. **Nothing you say is lost.** Every sentence becomes a row or is explicitly
-   marked noise. Never silently dropped.
-2. **Nothing is called done without evidence.** A row is `shipped` only with a
-   re-runnable check attached. No evidence means not shipped, and the prove
-   pass catches it.
-3. **Only you close it.** Ship reopens rows freely. It never decides you're
+1. **nothing you say is lost.** every sentence becomes a row or gets marked
+   noise. never silently dropped.
+2. **nothing is done without evidence.** `shipped` needs a re-runnable check
+   attached. no evidence, not shipped — and prove catches it.
+3. **only you close it.** ship reopens rows freely. it never decides you're
    finished.
 
-Each is measurable, and each has fixtures in [`evals/`](evals/).
+all three are measurable. fixtures in [`evals/`](evals/).
 
-## 📊 Benchmark
+## 📊 benchmark
 
-The headline metric is **turns to done** — how many times the human has to
-intervene. Every other framework optimises output quality; this one optimises
-how little you have to do, so that's what it must be judged on.
+headline metric is **turns to done** — how many times you have to step in.
+everything else in this space optimises output quality; this optimises how
+little you do, so judge it on that.
 
-Five hand-labelled fixtures ship with the repo: a meeting transcript with a
-double reversal, a fifteen-message chat thread, an unpunctuated voice note, a
-pure ramble whose correct output is an *empty* ledger, and a reversal that
-arrives after the code already exists.
+five hand-labelled fixtures ship with the repo: a transcript with a double
+reversal, a fifteen message thread, an unpunctuated voice note, a pure ramble
+whose correct output is an *empty* ledger, and a reversal that lands after the
+code already exists.
 
-Measured today:
+measured today:
 
-| | always-loaded descriptions | idle context cost |
+| | always-loaded descriptions | idle cost |
 |---|---|---|
-| **ship** | **1** | **~133 tokens** |
-| ship, in a repo with no ledger | 1 | ~133 tokens, hook silent |
+| ship | 1 | ~133 tokens |
+| ship, repo with no ledger | 1 | ~133 tokens, hook silent |
 
-Recall, precision and turns-to-done are **not yet published** — the fixtures
-and rubrics are in [`evals/`](evals/README.md), the numbers aren't, because no
-run has happened yet. They'll land with model, date and raw ledgers attached.
+recall, precision and turns-to-done are **not published yet**. rubrics are in
+[`evals/`](evals/README.md), numbers aren't, because no run has happened. they
+land with model, date and raw ledgers attached.
 
-No invented numbers. That's the deal.
+no invented numbers. that's the deal.
 
-## 🪶 Why it's cheap
+## 🪶 why it's cheap
 
-Frameworks in this space are criticised for cost, not correctness — plugin
-hooks injecting on every prompt have been measured filling
-[15–20% of the context window before you speak](https://github.com/anthropics/claude-code/issues/35713).
+frameworks here get criticised for cost, not correctness — hooks that fire on
+every prompt have been measured eating
+[15–20% of context before you speak](https://github.com/anthropics/claude-code/issues/35713).
 
-Ship spends **one** always-loaded description and **one line** per prompt, and
-that line only appears in repos that have a ledger. The skill body itself loads
-only when there's work to do. In every other repo on your machine, ship costs
-nothing.
+ship spends one always-loaded description and one line per prompt, and that
+line only shows up in repos that have a ledger. the skill body loads only when
+there's work. every other repo on your machine pays nothing.
 
-## 🤔 Why not just use a planning framework?
+## 🤔 why not a planning framework
 
-Different stage of the pipeline.
+different stage.
 
-Planning-first frameworks start from an idea you already hold and sharpen it
-through questioning. That's genuinely good, and if you arrive with a clean idea
-you should use one.
+planning-first tools start from an idea you're holding and sharpen it by
+questioning you. genuinely good. if you show up with a clean idea, use one.
 
-Ship starts one step earlier — from material you already produced and cannot
-face organising. It has no opinion about your idea. It just refuses to lose any
-part of it.
+ship starts a step earlier — from material you already made and can't face
+sorting. it has no opinion about your idea. it just won't lose any of it.
 
-They compose fine. Ship gets you a ledger; nothing stops you planning from it.
+they compose fine. get a ledger, plan from it.
 
-## 📁 What's in here
+## 📁 what's in here
 
 ```
 skills/ship/SKILL.md      the whole skill, ~170 lines
-hooks/                    two-line injector, silent without a ledger
+hooks/                    two line injector, silent without a ledger
 evals/fixtures/           five hand-labelled messy inputs
 evals/truth/              what a careful human would extract
-evals/context-cost.sh     measure any plugin's idle cost, including this one
+evals/context-cost.sh     measure any plugin's idle cost, this one included
+scripts/validate.sh       everything ci checks
 ```
 
-## ❓ FAQ
+## ❓ faq
 
-**Do I type `/ship` every session?**
-No. Once per repo, ever. After that the ledger turns it on.
+**type `/ship` every session?** no. once per repo, ever.
 
-**Can I break it by talking out of order?**
-No. There is no order. Rows have states; your messages move them.
+**can i break it by talking out of order?** no. there's no order. rows have
+states, your messages move them.
 
-**What if I dump while it's building?**
-Absorbed as usual. It finishes the ticket in hand, then picks up the change.
+**dump while it's building?** absorbed. it finishes the ticket in hand, then
+picks up the change.
 
-**What if my context dies mid-run?**
-The ledger is on disk with evidence per ticket. Next session resumes exactly
-where it stopped — anything without evidence gets rebuilt, anything with it is
-trusted.
+**context dies mid-run?** ledger's on disk with evidence per ticket. next
+session resumes — no evidence gets rebuilt, evidence gets trusted.
 
-**Does it work on a repo that already exists?**
-Yes. It reads the code a ticket touches before planning it.
+**existing repo?** yes. it reads the code a ticket touches before planning it.
 
-**What if I'm just thinking out loud?**
-Nothing gets built. That's [fixture 04](evals/fixtures/04-no-asks.md), and
-producing tickets from it counts as a failure.
+**just thinking out loud?** nothing gets built. that's
+[fixture 04](evals/fixtures/04-no-asks.md), and making tickets from it is
+scored as a failure.
 
-## 📄 License
+## 📄 license
 
 MIT
