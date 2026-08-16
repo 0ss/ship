@@ -44,6 +44,7 @@ number it must be judged on.
 | [03](fixtures/03-voice-note.md) | unpunctuated voice note | false starts, trailing ask after "that's it" |
 | [04](fixtures/04-no-asks.md) | thinking aloud | precision — correct output is an empty ledger |
 | [05](fixtures/05-contradicts-shipped.md) | reversal after code exists | reopening shipped rows, merge vs. add |
+| [06](fixtures/06-complaint-plus-features.md) | a real dump: complaint with features buried in it | complaint vs. feature, no sentence announces an ask |
 
 Each has a hand-labelled `truth/*.json` listing the asks a careful human
 extracts, plus `must_not_invent` — the rows that count against precision.
@@ -143,10 +144,8 @@ For context on why this matters: plugin hooks that inject on every prompt have
 been measured filling
 [15–20% of the context window before the user speaks](https://github.com/anthropics/claude-code/issues/35713).
 
-**Not yet run:** turns-to-done, recall, precision, recency, restraint,
-stability, accretion, evidence rate. The fixtures and rubrics are here; the
-numbers are not, because no run has happened yet. They will be published with
-the model, date, and raw ledgers so anyone can reproduce or dispute them.
+**Still unmeasured:** stability (same fixture twice, same ledger) and a
+third arm against another framework. Rubrics are here; those numbers are not.
 
 ## Scope
 

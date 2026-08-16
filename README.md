@@ -157,9 +157,10 @@ headline metric is **turns to done** — how many times you have to step in.
 everything else here optimises output quality; this optimises how little you
 do, so judge it on that.
 
-five hand-labelled fixtures: a transcript with a double reversal, a fifteen
+six hand-labelled fixtures: a transcript with a double reversal, a fifteen
 message thread, an unpunctuated voice note, a pure ramble whose correct output
-is an *empty* ledger, and a reversal that lands after the code already exists.
+is an *empty* ledger, a reversal that lands after the code already exists, and
+a real complaint with features buried inside it.
 
 2026-08-16, `claude-opus-5`, fresh empty repo per fixture. raw ledgers in
 [`evals/runs/`](evals/runs/).
@@ -224,10 +225,11 @@ they compose fine. get a ledger, plan from it.
 ## what's in here
 
 ```
-skills/ship/SKILL.md      the whole skill, ~170 lines
+skills/ship/SKILL.md      the whole skill, ~190 lines
 hooks/                    two line injector, silent without a ledger
-evals/fixtures/           five hand-labelled messy inputs
+evals/fixtures/           six hand-labelled messy inputs
 evals/truth/              what a careful human would extract
+evals/runs/               raw ledgers from the published run
 evals/run.sh              run the fixtures through an arm
 evals/context-cost.sh     measure any plugin's idle cost, this one included
 scripts/validate.sh       everything ci checks
