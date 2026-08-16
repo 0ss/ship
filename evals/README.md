@@ -91,15 +91,39 @@ anything. Close the session and every ask is gone. On fixture 05 it reasoned
 that the shipped row should stay shipped "until the new one lands", which
 leaves code in the repo that no longer matches what the user asked for.
 
+### End to end, on a real repo
+
+Same date, same model. A small Node invite service with a passing test suite,
+missing three things. The fifteen chat messages from fixture 02 fed one per
+turn, then `ok go`.
+
+| | |
+|---|---|
+| **turns to done** | **1** — fifteen messages of material, then "ok go". zero clarifying questions asked |
+| asks captured | 4/4, one assembled from five separate messages |
+| code written | mail module, 30-day expiry, inviter list |
+| tests | 3 added, one per requirement, **7/7 pass** |
+| unasked improvement | swapped `Math.random()` for `crypto.randomBytes` on the invite token |
+| rows marked shipped | **0** — the sandbox blocked the test runner, so nothing claimed evidence it did not have |
+
+That last row is the point. The work was done and the tests do pass when run by
+hand, but ship had no way to observe that, so it refused to write `shipped`.
+The first run of this test exposed a real gap — it invented the status
+`built, unverified (test runner blocked by sandbox)`, a state the ledger does
+not define. The skill now specifies what to do when a check cannot run: leave
+the row `open`, record `verified: blocked: <command>`, and surface the command
+in the report. The re-run behaved correctly and handed back two pastes to close
+the batch.
+
 **Honest caveats:**
 
 - **Row granularity is coarser than ground truth** on 01 and 06 — ship merged
   closely related asks (export + email delivery; board selection + sector
   variance) into single rows. Every ask is present in the text; the row count
   differs from `truth/`. Counted as captured, flagged here rather than buried.
-- **Turns to done is not measured yet.** These runs stop at the ledger; none
-  built code, because the fixtures run against empty repos. The headline metric
-  needs a real codebase and is still outstanding.
+- **Turns to done is measured once, on one repo.** One data point is a signal,
+  not a result. It needs more repos and more shapes of mess before it is a
+  number worth quoting as typical.
 - **Not clean-room.** `--bare` requires an API key, so user-level settings still
   applied. Both arms shared them. A user-level skill with overlapping vocabulary
   contaminated an earlier run of both arms; it was removed and both were re-run

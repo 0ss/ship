@@ -181,9 +181,20 @@ session and every ask is gone.
 | ship | 1 | ~133 tokens |
 | ship, repo with no ledger | 1 | ~133 tokens, hook silent |
 
-**turns to done isn't measured yet.** these runs stop at the ledger — the
-fixtures use empty repos, so nothing was built. the headline metric needs a
-real codebase and is still outstanding. caveats and method in
+end to end on a real node repo, fifteen messages fed one at a time then "ok go":
+
+| | |
+|---|---|
+| **turns to done** | **1** — zero clarifying questions |
+| asks captured | 4/4, one assembled from five messages |
+| tests written | 3, one per requirement, **7/7 pass** |
+| rows marked shipped | **0** — sandbox blocked the runner, so it claimed nothing |
+
+that last row is the point. it did the work, the tests pass by hand, but ship
+couldn't observe that — so it wrote `blocked: npm test` and handed the command
+back instead of claiming `shipped`.
+
+one repo is a signal, not a result. caveats and method in
 [`evals/`](evals/README.md).
 
 no invented numbers. that's the deal.

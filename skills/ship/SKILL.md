@@ -130,6 +130,18 @@ Per ticket: implement → run the real thing → read the output → write the
 `shipped` with an empty `verified` is **not shipped**. On resume, rebuild
 anything without evidence and trust anything with it.
 
+**When the check cannot run** — sandbox, missing key, no network — the row
+stays `open` and the ticket keeps the two status words it already has. Write
+the exact command that would prove it into `verified` prefixed with `blocked:`,
+and carry it into the report so the user can run it in one paste:
+
+```
+**verified:** blocked: `npm test` — sandbox denied the runner
+```
+
+Claiming a status the ledger does not define hides the gap. Naming the command
+hands it back.
+
 New material arriving mid-build is absorbed as usual. Finish the ticket in
 hand, then pick up the changed frontier.
 
@@ -156,6 +168,7 @@ From the files, never from memory. Bad news first.
 ledger    18 asks · 14 shipped · 2 partial · 2 open
 shipped   T3 T4 T5      how each was verified
 partial   T6            what is missing
+blocked   T7            `npm test` — run this and I'll close it
 found     <bugs hit on the way>
 next      <the one thing you would do next>
 ```
