@@ -54,34 +54,41 @@ it to switch off.
 
 ## what it looks like
 
-```
-you   [pastes 800 words of meeting notes]
-ship  +R1 +R2 +R3 +R4 · R2 unclear, i'll ask at the end. keep going.
+not a mockup. this is the real output of the run in
+[`evals/`](evals/README.md) — fifteen chat messages fed one at a time into a
+node repo, then `ok go`.
 
-you   oh also the export is broken
-ship  +R5
+the ledger it wrote:
 
-you   [pastes a screenshot transcript]
-ship  +R6 +R7 · R3 superseded — you said weekly, this says daily. taking daily.
+```markdown
+| # | requirement                                        | source          | covers | state    |
+|---|----------------------------------------------------|-----------------|--------|----------|
+| R1 | invited person gets an email — today they get nothing and have to chase | chat 10:02–10:04 | T1 | open |
+| R2 | login page not ugly on mobile — button is off screen | chat 10:11–10:12 | —    | deferred |
+| R3 | invites expire after 30 days                        | chat 10:31 → 11:47 | T1  | open     |
+| R4 | list of who invited who                             | chat 14:02      | T1     | open     |
 
-you   no wait weekly was right
-ship  R3 back to weekly.
-
-you   ok go
-ship  one question — R2 "make it cleaner": drop the sidebar? (y/n/other)
-
-you   y
-ship  building R1–R7...
-
-      6 shipped, evidence on each
-      R4 partial — email path needs an smtp key you haven't set
-      found an ask i'd missed in your notes: "…and obviously it needs to
-      email them". added as R8, building it.
-
-      done? or keep going.
+## superseded
+- R3 expiry "7 days" (10:31) → "30 days" (11:47, "7 is too short people are on holiday")
 ```
 
-four messages. two of them were "ok go" and "y".
+R1 was assembled from five separate messages. R3 reversed itself an hour later.
+R2 was parked, so it was kept, not dropped.
+
+then what it said back:
+
+```
+ledger    4 asks · 0 shipped · 3 open (code written, unverified) · 1 deferred
+blocked   T1  `npm test`  — sandbox denied the runner; run it and I'll close R1/R3/R4
+
+found     createInvite is now async — breaking for callers. Only caller was the test.
+next      run node --test; then wire a real mail transport for R1
+uncommitted — holding the commit until the suite is green
+```
+
+it wrote the code and three tests. it did **not** say shipped, because the
+sandbox blocked the test runner and it had no evidence. it handed back the
+command instead.
 
 ## how it works
 
