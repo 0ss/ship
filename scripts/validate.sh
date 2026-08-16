@@ -28,8 +28,12 @@ mver=$(python3 -c "import json;print(json.load(open('.claude-plugin/marketplace.
 [ "$pver" = "$mver" ] && ok "version $pver matches in both manifests" \
   || bad "version mismatch: plugin.json=$pver marketplace.json=$mver"
 
-hookpath=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json')).get('hooks',''))")
-[ -f "${hookpath#./}" ] && ok "hooks path resolves: $hookpath" || bad "hooks path does not exist: $hookpath"
+# hooks/hooks.json is auto-discovered. Declaring it in the manifest as well
+# duplicate-loads it and the whole plugin fails to load.
+hookdecl=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json')).get('hooks',''))")
+[ -f hooks/hooks.json ] && ok "hooks/hooks.json present for auto-discovery" || bad "hooks/hooks.json missing"
+[ -z "$hookdecl" ] && ok "manifest does not redeclare the auto-discovered hooks file" \
+  || bad "plugin.json declares hooks='$hookdecl' — auto-discovery already loads hooks/hooks.json, this breaks plugin load"
 
 head_ "skills"
 # Limits are Anthropic's: name <=64 chars kebab-case with no reserved words,

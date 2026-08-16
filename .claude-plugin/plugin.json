@@ -19,6 +19,5 @@
     "workflow",
     "agentic",
     "verification"
-  ],
-  "hooks": "./hooks/hooks.json"
+  ]
 }
