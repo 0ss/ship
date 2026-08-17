@@ -9,7 +9,7 @@
     {
       "name": "ship",
       "description": "Dump transcripts, chat threads and half-formed asks. Get shipped, verified software. One word, one ledger, one skill.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "source": "./",
       "keywords": [
         "skills",

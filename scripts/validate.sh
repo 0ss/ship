@@ -74,9 +74,9 @@ tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
 out=$(cd "$tmp" && bash "$OLDPWD/hooks/ledger-check.sh")
 [ -z "$out" ] && ok "silent with no ledger (zero context cost)" || bad "spoke with no ledger: $out"
 
-printf '| # | r | s | c | state |\n|---|---|---|---|---|\n| R1 | a | b | T1 | shipped |\n| R2 | c | d | - | open |\n| R3 | e | f | - | unclear |\n' > "$tmp/requirements.md"
+printf '| # | r | s | c | state |\n|---|---|---|---|---|\n| R1 | a | b | T1 | shipped |\n| R2 | c | d | - | open |\n| R3 | e | f | - | unclear |\n| R4 | g | h | T2 | built |\n' > "$tmp/requirements.md"
 out=$(cd "$tmp" && bash "$OLDPWD/hooks/ledger-check.sh")
-[[ "$out" == *"1 open"* && "$out" == *"1 unclear"* && "$out" == *"1 shipped"* ]] \
+[[ "$out" == *"1 open"* && "$out" == *"1 unclear"* && "$out" == *"1 built"* && "$out" == *"1 shipped"* ]] \
   && ok "counts correctly with a ledger" || bad "wrong counts: $out"
 
 head_ "evals"

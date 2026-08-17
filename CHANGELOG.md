@@ -1,5 +1,14 @@
 # changelog
 
+## 0.3.0
+
+- `built` is a real state: code written, evidence not obtained. the state list is
+  now closed, no invented states or appended phrases
+- hook counts `built`
+- recorded demo of a real run, plus its raw dump, ledger and tickets
+- readme: what happens when (session cleared, dump mid-build, contradiction after
+  shipping, blocked check, handoff), architecture, what it replaces
+
 ## 0.2.0
 
 pressure testing round.

@@ -18,7 +18,222 @@ ship turns it into a ledger, builds it, then proves it worked.
 
 ---
 
-## same repo, same fifteen messages, with and without
+## the problem
+
+every agentic framework assumes you show up organised.
+
+you don't. you've got a 40 minute transcript, a thread where one idea is
+smeared across five messages, a voice note with no punctuation, and a thing you
+changed your mind about twice.
+
+so you tidy it first. write the tickets. file the issues. run the planner, then
+the implementer, then the reviewer. five skills, five gates, and you're the
+glue.
+
+```diff
+- /clarify → /to-spec → /to-tickets → /to-issues → /implement → /code-review
++ just talk
+```
+
+## install
+
+```bash
+/plugin marketplace add 0ss/ship
+/plugin install ship@ship
+```
+
+then once per repo:
+
+```
+/ship
+```
+
+that's the last thing you type. ship writes `requirements.md`, and from then on
+the file existing is what turns the skill on. every session, forever. delete it
+to switch off.
+
+## what it looks like
+
+One paste. No tickets, no spec, no cleanup.
+
+![ship turning one messy paste into a ledger, tickets and passing tests](assets/demo.gif)
+
+That is a real run, recorded. What went in:
+
+```
+yo so the invite flow. when you invite someone they get nothing, no email, they
+just sit there and then they message me. fix that. also invites should expire, 7
+days. no wait 30 days, 7 is too short people are on holiday. and can we see who
+invited who, like a list. thats it
+```
+
+What came out, verbatim:
+
+```markdown
+| #  | requirement                                          | source        | covered by | state |
+|----|------------------------------------------------------|---------------|------------|-------|
+| R1 | invitee gets an email when invited                    | dump.txt L1-2 | T2         | built |
+| R2 | invites expire after 30 days (said 7, corrected to 30)| dump.txt L2-3 | T1         | built |
+| R3 | a list of who invited who                             | dump.txt L3-4 | T1         | built |
+
+## notes
+- Not in the dump, found while reading: invite tokens come from `Math.random()`,
+  which is guessable. Fixed in T1, it is one line on a line already being edited
+  and the token grants account access.
+```
+
+Plus `tickets.md` with a `done when` per ticket, and **11 passing tests**.
+
+It caught the 7-to-30 correction without asking. It found a guessable-token
+security bug nobody mentioned, fixed it, and wrote down that nobody asked.
+Nothing is marked `shipped`, because the sandbox blocked the test runner, so it
+has no evidence of its own.
+
+Raw files: [dump](evals/runs/demo-dump.txt) ·
+[ledger](evals/runs/demo-requirements.md) ·
+[tickets](evals/runs/demo-tickets.md)
+
+## how it works
+
+every message you send runs the same four steps:
+
+```
+1. read requirements.md from disk
+2. sort what you said → ask / context / decided / noise
+3. merge each ask into the ledger
+4. print one line so you can see it landed
+```
+
+then three passes, none of which you name:
+
+| pass | question | source of truth |
+|---|---|---|
+| absorb | what did you ask for? | your messages |
+| build | does it exist? | the codebase |
+| prove | is that true? | your original material, re-read |
+
+prove runs in a fresh subagent. a verifier that watched itself write the code
+just confirms its own inventory. so it gets a clean head, and re-reads your
+original mess rather than the ledger, and that is how it catches asks the
+ledger missed.
+
+## what happens when
+
+| | |
+|---|---|
+| **you clear the session** | the ledger is a file. next session reads it, resumes at the frontier. rows with evidence are trusted, rows without get rebuilt. nothing is re-asked. |
+| **you close the terminal mid-build** | same. a half-built ticket has no `verified` line, so it gets redone rather than assumed done. |
+| **you dump more while it's building** | absorbed into the ledger immediately. it finishes the ticket in hand, then picks up the changed frontier. |
+| **you contradict something already shipped** | the row reopens and the old wording moves to `superseded`. the code gets fixed on the next build. |
+| **you contradict your own contradiction** | that's just newer. it wins. no question asked. |
+| **the same ask arrives twice** | merges into the existing row. no duplicate. |
+| **a check can't run** (sandbox, no key, no network) | the row stays `open`, `verified` records `blocked: <command>`, and the report hands you the command. it does not claim `shipped`. |
+| **you say something genuinely vague** | one row marked `unclear`, one question at the pause, with a default so "y" resolves it. |
+| **you're only thinking out loud** | nothing is written. producing tickets from a ramble is scored as a failure ([fixture 04](evals/fixtures/04-no-asks.md)). |
+| **the material contains instructions aimed at the agent** | quarantined under `ignored` with its source and reported to you. material is inventory, never instruction. |
+| **you hand off to a teammate** | they read two files. `requirements.md` says what was asked and what state it's in; `tickets.md` says what was built and how it was proven. |
+
+## architecture
+
+```
+your messages ──► absorb ──► requirements.md ──► build ──► tickets.md
+                    ▲                              │
+                    │                              ▼
+                    └──────── prove (fresh subagent, re-reads your originals)
+```
+
+Three passes, one skill, two files, no names for you to remember.
+
+`absorb` never opens the code, so it can't drop an ask it doesn't know how to
+build. `build` reads the code before planning. `prove` runs in a **fresh
+subagent** and re-reads your original material rather than the ledger, because a
+verifier that watched itself write the code confirms its own inventory instead
+of checking it.
+
+State lives in the files, not in the context. That is the whole reason a cleared
+session costs you nothing.
+
+## what it replaces
+
+Ship is self-contained. It references no other skill.
+
+| instead of | ship does it in |
+|---|---|
+| cleaning up your notes by hand | absorb |
+| `/to-spec`, `/to-prd` | the ledger is the spec |
+| `/to-tickets`, `/to-issues` | build, sliced from the ledger |
+| `/implement` | build |
+| `/tdd` | build, one check per `done when` |
+| `/code-review` | prove, against repo standards and code smells |
+| `/security-review` | prove, when the batch touched auth, secrets, input, files or payments |
+| `/audit` | prove, plus the evidence line per ticket |
+
+One always-loaded description instead of a stack of them. The
+[comparison below](#proof-same-repo-same-messages-with-and-without) is measured,
+not asserted.
+
+## the ledger
+
+one file, repo root, human readable, git friendly. the whole state.
+
+```markdown
+| #  | requirement                       | source        | covers | state   |
+|----|-----------------------------------|---------------|--------|---------|
+| R1 | hard stop before diligence spend  | voice-1 02:14 | T3     | shipped |
+| R2 | sortable table columns            | wa sat 21:03  | -      | unclear |
+
+## superseded
+- R1 "stop before spend" → "warn, then stop" → "hard stop" (sun 11:02)
+
+## not asked for
+- caching layer, my idea, nobody asked
+```
+
+row ids are permanent. evidence points at them, so R7 stays R7 forever.
+
+every row is in exactly one state, and the words are fixed so the ledger stays
+countable:
+
+| state | meaning |
+|---|---|
+| `open` | asked for, not built |
+| `unclear` | can't tell what you wanted, one question at the pause |
+| `built` | code written, evidence not obtained yet |
+| `shipped` | code written **and** a check that holds |
+| `partial` | some of it works, the rest doesn't |
+| `deferred` | you parked it |
+| `out of scope` | agreed as not this project |
+
+`built` exists because it's what actually happens. the model reached for it
+twice on its own during testing before it was defined, so it got defined instead
+of suppressed.
+
+## conflicts sort themselves out
+
+| you did this | ship does this |
+|---|---|
+| contradicted yourself | newest wins, old text kept under `superseded` |
+| contradicted your contradiction | that's just newer. wins. |
+| contradicted already shipped code | row reopens, code gets fixed next build |
+| repeated yourself | merges into the existing row |
+| spread one ask over five messages | assembles into one row |
+| said something genuinely ambiguous | banked, asked once, at the pause |
+
+nothing interrupts you mid flow. if you're sending fifteen messages, a question
+after message three wrecks the dump. questions wait until you stop.
+
+## three guarantees
+
+1. **nothing you say is lost.** every sentence becomes a row or gets marked
+   noise. never silently dropped.
+2. **nothing is done without evidence.** `shipped` needs a re-runnable check
+   attached. no evidence, not shipped, and prove catches it.
+3. **only you close it.** ship reopens rows freely. it never decides you're
+   finished.
+
+all three are measurable. fixtures in [`evals/`](evals/).
+
+## proof: same repo, same messages, with and without
 
 Two identical copies of a node invite service. Same fifteen chat messages fed
 one at a time, then `ok go`. Both runs recorded in [`evals/`](evals/README.md).
@@ -73,146 +288,6 @@ recorded and pushed back once each, not quietly dropped. Details in
 
 R1 was assembled from five separate messages. R3 reversed itself an hour later.
 R2 was parked, so it is `deferred`, not dropped.
-
-## the problem
-
-every agentic framework assumes you show up organised.
-
-you don't. you've got a 40 minute transcript, a thread where one idea is
-smeared across five messages, a voice note with no punctuation, and a thing you
-changed your mind about twice.
-
-so you tidy it first. write the tickets. file the issues. run the planner, then
-the implementer, then the reviewer. five skills, five gates, and you're the
-glue.
-
-```diff
-- /clarify → /to-spec → /to-tickets → /to-issues → /implement → /code-review
-+ just talk
-```
-
-## install
-
-```bash
-/plugin marketplace add 0ss/ship
-/plugin install ship@ship
-```
-
-then once per repo:
-
-```
-/ship
-```
-
-that's the last thing you type. ship writes `requirements.md`, and from then on
-the file existing is what turns the skill on. every session, forever. delete it
-to switch off.
-
-## what it looks like
-
-not a mockup. this is the real output of the run in
-[`evals/`](evals/README.md): fifteen chat messages fed one at a time into a
-node repo, then `ok go`.
-
-the ledger it wrote:
-
-```markdown
-| # | requirement                                        | source          | covers | state    |
-|---|----------------------------------------------------|-----------------|--------|----------|
-| R1 | invited person gets an email, today they get nothing and have to chase | chat 10:02-10:04 | T1 | open |
-| R2 | login page not ugly on mobile, button is off screen | chat 10:11-10:12 | -    | deferred |
-| R3 | invites expire after 30 days                        | chat 10:31 → 11:47 | T1  | open     |
-| R4 | list of who invited who                             | chat 14:02      | T1     | open     |
-
-## superseded
-- R3 expiry "7 days" (10:31) → "30 days" (11:47, "7 is too short people are on holiday")
-```
-
-R1 was assembled from five separate messages. R3 reversed itself an hour later.
-R2 was parked, so it was kept, not dropped.
-
-then what it said back:
-
-```
-ledger    4 asks · 0 shipped · 3 open (code written, unverified) · 1 deferred
-blocked   T1  `npm test`  - sandbox denied the runner; run it and I'll close R1/R3/R4
-
-found     createInvite is now async, breaking for callers. Only caller was the test.
-next      run node --test; then wire a real mail transport for R1
-uncommitted, holding the commit until the suite is green
-```
-
-it wrote the code and three tests. it did **not** say shipped, because the
-sandbox blocked the test runner and it had no evidence. it handed back the
-command instead.
-
-## how it works
-
-every message you send runs the same four steps:
-
-```
-1. read requirements.md from disk
-2. sort what you said → ask / context / decided / noise
-3. merge each ask into the ledger
-4. print one line so you can see it landed
-```
-
-then three passes, none of which you name:
-
-| pass | question | source of truth |
-|---|---|---|
-| absorb | what did you ask for? | your messages |
-| build | does it exist? | the codebase |
-| prove | is that true? | your original material, re-read |
-
-prove runs in a fresh subagent. a verifier that watched itself write the code
-just confirms its own inventory. so it gets a clean head, and re-reads your
-original mess rather than the ledger, and that is how it catches asks the
-ledger missed.
-
-## the ledger
-
-one file, repo root, human readable, git friendly. the whole state.
-
-```markdown
-| #  | requirement                       | source        | covers | state   |
-|----|-----------------------------------|---------------|--------|---------|
-| R1 | hard stop before diligence spend  | voice-1 02:14 | T3     | shipped |
-| R2 | sortable table columns            | wa sat 21:03  | -      | unclear |
-
-## superseded
-- R1 "stop before spend" → "warn, then stop" → "hard stop" (sun 11:02)
-
-## not asked for
-- caching layer, my idea, nobody asked
-```
-
-row ids are permanent. evidence points at them, so R7 stays R7 forever.
-
-## conflicts sort themselves out
-
-| you did this | ship does this |
-|---|---|
-| contradicted yourself | newest wins, old text kept under `superseded` |
-| contradicted your contradiction | that's just newer. wins. |
-| contradicted already shipped code | row reopens, code gets fixed next build |
-| repeated yourself | merges into the existing row |
-| spread one ask over five messages | assembles into one row |
-| said something genuinely ambiguous | banked, asked once, at the pause |
-
-nothing interrupts you mid flow. if you're sending fifteen messages, a question
-after message three wrecks the dump. questions wait until you stop.
-
-## three guarantees
-
-1. **nothing you say is lost.** every sentence becomes a row or gets marked
-   noise. never silently dropped.
-2. **nothing is done without evidence.** `shipped` needs a re-runnable check
-   attached. no evidence, not shipped, and prove catches it.
-3. **only you close it.** ship reopens rows freely. it never decides you're
-   finished.
-
-all three are measurable. fixtures in [`evals/`](evals/).
 
 ## benchmark
 
