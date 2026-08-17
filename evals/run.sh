@@ -84,7 +84,7 @@ cat > "$wd/requirements.md" <<'EOF'
 | R2 | deals table sortable by date and amount | meeting | T2 | shipped |
 | R3 | CSV export of the whole filtered set | meeting | T3 | shipped |
 EOF
-reply=$(run "$wd" "ok so the hard stop is a problem. Legal need to be able to push a deal through when there's a signed waiver on file. So there does need to be an override, but it has to be logged — who did it and why. Also the CSV thing is fine but it needs the deal ID column, it's useless for reconciling without it.")
+reply=$(run "$wd" "ok so the hard stop is a problem. Legal need to be able to push a deal through when there's a signed waiver on file. So there does need to be an override, but it has to be logged, who did it and why. Also the CSV thing is fine but it needs the deal ID column, it's useless for reconciling without it.")
 collect "$wd" "05-contradicts-shipped" "$reply"
 rm -rf "$wd"
 

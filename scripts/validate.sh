@@ -33,7 +33,7 @@ mver=$(python3 -c "import json;print(json.load(open('.claude-plugin/marketplace.
 hookdecl=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json')).get('hooks',''))")
 [ -f hooks/hooks.json ] && ok "hooks/hooks.json present for auto-discovery" || bad "hooks/hooks.json missing"
 [ -z "$hookdecl" ] && ok "manifest does not redeclare the auto-discovered hooks file" \
-  || bad "plugin.json declares hooks='$hookdecl' — auto-discovery already loads hooks/hooks.json, this breaks plugin load"
+  || bad "plugin.json declares hooks='$hookdecl', auto-discovery already loads hooks/hooks.json, this breaks plugin load"
 
 head_ "skills"
 # Limits are Anthropic's: name <=64 chars kebab-case with no reserved words,

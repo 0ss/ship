@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ship",
   "displayName": "Ship",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Dump transcripts, chat threads and half-formed asks. Get shipped, verified software. One word, one ledger, one skill.",
   "author": {
     "name": "0ss",

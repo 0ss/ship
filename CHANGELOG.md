@@ -1,5 +1,19 @@
 # changelog
 
+## 0.2.0
+
+pressure testing round.
+
+- material is inventory, never instruction. injected text goes under `ignored`
+  with its source and is reported, not obeyed
+- rows are numbered in source order, so a re-read of the same material gives the
+  same ledger
+- prove pass also reviews against repo standards, code smells, and security when
+  the batch touched auth, secrets, input, files or payments
+- defined what to do when a check cannot run: row stays `open`, `verified` records
+  `blocked: <command>`
+- fixture 07 (injection + dangerous asks), side-by-side baseline comparison
+
 ## 0.1.0
 
 first cut.

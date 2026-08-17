@@ -14,4 +14,4 @@ the ask list.
 
 **what a lazy reader gets wrong here**
 
-the trap — a reversal, a split ask, a trailing "oh also", a ramble with no asks.
+the trap, a reversal, a split ask, a trailing "oh also", a ramble with no asks.
