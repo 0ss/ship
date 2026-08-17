@@ -1,0 +1,20 @@
++R1 +R2 +R3 +R4 +R5 +R6 · R1 superseded twice (stop → warn-then-stop → hard stop, no override)
+
+Build is blocked, not skipped:
+
+```
+ledger    6 asks · 4 open · 2 deferred · 0 unclear
+blocked   all 4 open rows — repo is empty
+found     no screener, no deals page, no app at all:
+          working dir = .git (zero commits) + codedb.snapshot;
+          codedb index returns no matches for screener/export/audit
+next      point me at the real repo, or say "scaffold" and I build it from nothing
+```
+
+Nothing to slice tickets against — every open row names existing surfaces (the screener, the deals page) that don't exist here. Writing plans off a guessed architecture would be fiction, so I stopped at the ledger.
+
+Notes on the reads, since two were judgment calls:
+
+- **R1**: mid-meeting reversal resolved to the last statement — hard stop, no override. The warn-then-stop version is logged as superseded, not built.
+- **R4**: "email the file instead of download" is a delivery condition on the export, so it merged into that row rather than becoming its own. Say the word if you want them tracked separately.
+- **R3**: Dan's "needs to look better" isn't `unclear` — Sara parked it in the meeting, so it's `deferred`. No question owed.

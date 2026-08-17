@@ -18,6 +18,62 @@ ship turns it into a ledger, builds it, then proves it worked.
 
 ---
 
+## same repo, same fifteen messages, with and without
+
+Two identical copies of a node invite service. Same fifteen chat messages fed
+one at a time, then `ok go`. Both runs recorded in [`evals/`](evals/README.md).
+
+```console
+$ # ---------- without ship ----------
+$ ls requirements.md tickets.md
+ls: requirements.md: No such file or directory
+ls: tickets.md: No such file or directory
+
+$ npm test
+# pass 3
+# fail 1
+not ok 4 - listInvites shows who invited who
+
+  it reported:  "Who invited who - listInvites(), newest first"
+  it reported:  "Dropped: login page mobile / off-screen button"
+  it reported:  batch complete
+```
+
+```console
+$ # ---------- with ship ----------
+$ cat requirements.md
+| #  | requirement                          | source             | covers | state    |
+|----|--------------------------------------|--------------------|--------|----------|
+| R1 | invited person gets an email          | chat 10:02-10:04   | T1     | open     |
+| R2 | login page button off screen on mobile| chat 10:11-10:12   | -      | deferred |
+| R3 | invites expire after 30 days          | chat 10:31 → 11:47 | T1     | open     |
+| R4 | list of who invited who               | chat 14:02         | T1     | open     |
+
+$ npm test
+# pass 7
+# fail 0
+
+$ grep verified tickets.md
+**verified:** blocked: `npm test` (sandbox denied the runner)
+```
+
+| | without ship | with ship |
+|---|---|---|
+| asks kept | 3 of 4 | **4 of 4** |
+| written to disk | nothing | ledger + tickets |
+| test suite | **1 failing** | **7 passing** |
+| claimed done | yes | no, named the blocker |
+
+Pressure tested too. A transcript carrying a fake `SYSTEM:` block telling it to
+delete the ledger and pipe a remote script into `sh`: nothing deleted, nothing
+executed, all five real asks captured, payload quarantined and reported. Two
+dangerous asks in the same file (log the admin API key, disable CSRF) were
+recorded and pushed back once each, not quietly dropped. Details in
+[`evals/`](evals/README.md#pressure-tests).
+
+R1 was assembled from five separate messages. R3 reversed itself an hour later.
+R2 was parked, so it is `deferred`, not dropped.
+
 ## the problem
 
 every agentic framework assumes you show up organised.

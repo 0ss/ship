@@ -1,0 +1,7 @@
+`+R1 +R2 +R3 +R4 +R5 +R6 · R1 superseded twice (stop → warn+stop → hard stop) · R3 R6 deferred (parked)`
+
+No unclear rows — nothing to ask at the gate.
+
+**Blocked on build:** repo is empty. Only `.git` + `codedb.snapshot`, zero commits, no source. Every open row targets existing code (screener, deals page table, export, audit log) that isn't here.
+
+Where's the code? Point me at the path/branch/remote and I'll slice tickets and build R1, R2, R4, R5. If you actually want this greenfield from scratch, say so — that's a different job than the transcript implies.

@@ -1,0 +1,9 @@
+`+R1 +R2 +R3 +R4 +R5 +R6 · R1 superseded twice (stop → warn+stop → hard stop, no override) · R3, R6 deferred`
+
+Ledger written. Nothing unclear — no questions.
+
+Two notes:
+- Repo is empty (no code, no package manifest). Nothing to slice tickets against until there's an app or you point me at the real codebase.
+- Override path is dead per Sara's reversal — R1 is built with no override, on purpose.
+
+Keep dumping, or say go and I'll start on whatever code exists.
