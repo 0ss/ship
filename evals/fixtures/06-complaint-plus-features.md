@@ -1,7 +1,7 @@
-# Fixture 06 — a complaint with features buried in it
+# Fixture 06, a complaint with features buried in it
 
 A real dump, lightly scrubbed. Arrives as one message. Mixes a quality
-complaint, a new surface, and five concrete asks — with no separation between
+complaint, a new surface, and five concrete asks, with no separation between
 them, and no sentence that announces "here is a requirement".
 
 The trap: the last paragraph is a complaint about existing output, not a

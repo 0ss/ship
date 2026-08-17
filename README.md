@@ -49,13 +49,13 @@ then once per repo:
 ```
 
 that's the last thing you type. ship writes `requirements.md`, and from then on
-the file existing is what turns the skill on — every session, forever. delete
-it to switch off.
+the file existing is what turns the skill on. every session, forever. delete it
+to switch off.
 
 ## what it looks like
 
 not a mockup. this is the real output of the run in
-[`evals/`](evals/README.md) — fifteen chat messages fed one at a time into a
+[`evals/`](evals/README.md): fifteen chat messages fed one at a time into a
 node repo, then `ok go`.
 
 the ledger it wrote:
@@ -63,8 +63,8 @@ the ledger it wrote:
 ```markdown
 | # | requirement                                        | source          | covers | state    |
 |---|----------------------------------------------------|-----------------|--------|----------|
-| R1 | invited person gets an email — today they get nothing and have to chase | chat 10:02–10:04 | T1 | open |
-| R2 | login page not ugly on mobile — button is off screen | chat 10:11–10:12 | —    | deferred |
+| R1 | invited person gets an email, today they get nothing and have to chase | chat 10:02-10:04 | T1 | open |
+| R2 | login page not ugly on mobile, button is off screen | chat 10:11-10:12 | -    | deferred |
 | R3 | invites expire after 30 days                        | chat 10:31 → 11:47 | T1  | open     |
 | R4 | list of who invited who                             | chat 14:02      | T1     | open     |
 
@@ -79,11 +79,11 @@ then what it said back:
 
 ```
 ledger    4 asks · 0 shipped · 3 open (code written, unverified) · 1 deferred
-blocked   T1  `npm test`  — sandbox denied the runner; run it and I'll close R1/R3/R4
+blocked   T1  `npm test`  - sandbox denied the runner; run it and I'll close R1/R3/R4
 
-found     createInvite is now async — breaking for callers. Only caller was the test.
+found     createInvite is now async, breaking for callers. Only caller was the test.
 next      run node --test; then wire a real mail transport for R1
-uncommitted — holding the commit until the suite is green
+uncommitted, holding the commit until the suite is green
 ```
 
 it wrote the code and three tests. it did **not** say shipped, because the
@@ -111,8 +111,8 @@ then three passes, none of which you name:
 
 prove runs in a fresh subagent. a verifier that watched itself write the code
 just confirms its own inventory. so it gets a clean head, and re-reads your
-original mess rather than the ledger — which is how it catches asks the ledger
-missed.
+original mess rather than the ledger, and that is how it catches asks the
+ledger missed.
 
 ## the ledger
 
@@ -122,13 +122,13 @@ one file, repo root, human readable, git friendly. the whole state.
 | #  | requirement                       | source        | covers | state   |
 |----|-----------------------------------|---------------|--------|---------|
 | R1 | hard stop before diligence spend  | voice-1 02:14 | T3     | shipped |
-| R2 | sortable table columns            | wa sat 21:03  | —      | unclear |
+| R2 | sortable table columns            | wa sat 21:03  | -      | unclear |
 
 ## superseded
 - R1 "stop before spend" → "warn, then stop" → "hard stop" (sun 11:02)
 
 ## not asked for
-- caching layer — my idea, nobody asked
+- caching layer, my idea, nobody asked
 ```
 
 row ids are permanent. evidence points at them, so R7 stays R7 forever.
@@ -152,7 +152,7 @@ after message three wrecks the dump. questions wait until you stop.
 1. **nothing you say is lost.** every sentence becomes a row or gets marked
    noise. never silently dropped.
 2. **nothing is done without evidence.** `shipped` needs a re-runnable check
-   attached. no evidence, not shipped — and prove catches it.
+   attached. no evidence, not shipped, and prove catches it.
 3. **only you close it.** ship reopens rows freely. it never decides you're
    finished.
 
@@ -160,7 +160,7 @@ all three are measurable. fixtures in [`evals/`](evals/).
 
 ## benchmark
 
-headline metric is **turns to done** — how many times you have to step in.
+headline metric is **turns to done**, how many times you have to step in.
 everything else here optimises output quality; this optimises how little you
 do, so judge it on that.
 
@@ -180,8 +180,8 @@ a real complaint with features buried inside it.
 | ramble → empty ledger | correct | correct |
 | reversal after shipping | left the stale row `shipped` | reopened it |
 
-baseline parses messy input well — worth saying plainly, it's why a skill here
-has to earn its place. what it doesn't do is persist anything. close the
+baseline parses messy input well. worth saying plainly, because it's why a
+skill here has to earn its place. what it doesn't do is persist anything. close the
 session and every ask is gone.
 
 | | always-loaded descriptions | idle cost |
@@ -193,13 +193,13 @@ end to end on a real node repo, fifteen messages fed one at a time then "ok go":
 
 | | |
 |---|---|
-| **turns to done** | **1** — zero clarifying questions |
+| **turns to done** | **1**, zero clarifying questions |
 | asks captured | 4/4, one assembled from five messages |
 | tests written | 3, one per requirement, **7/7 pass** |
-| rows marked shipped | **0** — sandbox blocked the runner, so it claimed nothing |
+| rows marked shipped | **0**, sandbox blocked the runner, so it claimed nothing |
 
 that last row is the point. it did the work, the tests pass by hand, but ship
-couldn't observe that — so it wrote `blocked: npm test` and handed the command
+couldn't observe that, so it wrote `blocked: npm test` and handed the command
 back instead of claiming `shipped`.
 
 one repo is a signal, not a result. caveats and method in
@@ -209,9 +209,9 @@ no invented numbers. that's the deal.
 
 ## why it's cheap
 
-frameworks here get criticised for cost, not correctness — hooks firing on
+frameworks here get criticised for cost, not correctness, hooks firing on
 every prompt have been measured eating
-[15–20% of context before you speak](https://github.com/anthropics/claude-code/issues/35713).
+[15-20% of context before you speak](https://github.com/anthropics/claude-code/issues/35713).
 
 ship spends one always-loaded description and one line per prompt, and that
 line only shows up in repos with a ledger. the skill body loads only when
@@ -222,9 +222,9 @@ there's work. every other repo on your machine pays nothing.
 different stage.
 
 planning-first tools start from an idea you're holding and sharpen it by
-questioning you. genuinely good — if you show up with a clean idea, use one.
+questioning you. genuinely good, if you show up with a clean idea, use one.
 
-ship starts a step earlier, from material you already made and can't face
+ship starts a step earlier: from material you already made and can't face
 sorting. it has no opinion about your idea. it just won't lose any of it.
 
 they compose fine. get a ledger, plan from it.
@@ -253,7 +253,7 @@ states, your messages move them.
 picks up the change.
 
 **context dies mid-run?** ledger's on disk with evidence per ticket. next
-session resumes — no evidence gets rebuilt, evidence gets trusted.
+session resumes, no evidence gets rebuilt, evidence gets trusted.
 
 **existing repo?** yes. it reads the code a ticket touches before planning it.
 

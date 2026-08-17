@@ -8,7 +8,7 @@ description: Turns unstructured input into shipped, verified software. Absorbs t
 The user is messy on purpose. You do the organising.
 
 Once this skill loads it **stays on for the session**. Every message the user
-sends from here is material — a new ask, a correction, a reversal, or noise.
+sends from here is material: a new ask, a correction, a reversal, or noise.
 Absorb first, then continue whatever you were doing.
 
 `requirements.md` in the repo root is the ledger. It survives a cleared
@@ -21,15 +21,15 @@ context; your memory does not. Its existence is also the on-switch.
 Run this on **every** message, before anything else:
 
 1. Read `requirements.md` from disk. It may have changed since you last saw it.
-2. Sort each part of the message: **ask** (a want — becomes a row), **context**
-   (background — informs a row), **decided** (settled, no work left), **noise**
+2. Sort each part of the message: **ask** (a want, becomes a row), **context**
+   (background, informs a row), **decided** (settled, no work left), **noise**
    (greetings, tangents, thinking aloud).
-3. Merge each ask against the existing rows — see [Merging](#merging).
+3. Merge each ask against the existing rows, see [Merging](#merging).
 4. Write the file, then print one line so the user sees it landed:
    `+R7 +R8 · R3 superseded (weekly → daily)`
 
 Speech arrives unfinished. A speaker restarts, contradicts themselves
-mid-sentence, then lands. **The final form of a thought is the ask** — capture
+mid-sentence, then lands. **The final form of a thought is the ask.** Capture
 where they landed, not the false starts.
 
 Read any referenced file in full before writing rows from it.
@@ -40,16 +40,16 @@ Read any referenced file in full before writing rows from it.
 |---|---|
 | unrelated to every row | new row, next ID |
 | the same ask with more detail | merge the detail into that row |
-| a qualifier on an existing ask — a column it needs, a condition, a constraint, a thing to log | merges into that row. One ask with a condition is one row. |
+| a qualifier on an existing ask: a column it needs, a condition, a constraint, a thing to log | merges into that row. One ask with a condition is one row. |
 | a direct contradiction | row text is replaced, old text moves to `superseded` |
 | a contradiction of a row already `shipped` | same, **and** state returns to `open` |
 | impossible to interpret | row state `unclear`, banked for the gate |
-| already settled by the user — parked, postponed, "not this week" | row state `deferred`. Settled needs no question. |
+| already settled by the user, parked, postponed, "not this week" | row state `deferred`. Settled needs no question. |
 
 **Most recent wins, always.** The user reversing a reversal is just a newer
-statement. Resolve it and move on — never ask which version they meant.
+statement. Resolve it and move on. Never ask which version they meant.
 
-**`unclear` is rare.** It means you cannot tell *what the user wants* — "make
+**`unclear` is rare.** It means you cannot tell *what the user wants*: "make
 it better", "improve the research". A row you understand but haven't designed
 yet is `open`: "alert someone when it fails" is a complete ask, and how to
 alert them is your job, not a question. Every needless `unclear` costs the user
@@ -66,18 +66,18 @@ it. Never renumber, never reuse a retired ID.
 | # | requirement | source | covers | state |
 |---|---|---|---|---|
 | R1 | hard stop before diligence spend | voice-1 02:14 → sun 11:02 | T3 | shipped |
-| R2 | sortable table columns | wa sat 21:03 | — | unclear |
+| R2 | sortable table columns | wa sat 21:03 | - | unclear |
 
 ## superseded
 - R1 "stop before spend" → "warn, then stop" → "hard stop" (sun 11:02)
 
 ## not asked for
-- caching layer — my idea, nobody asked
+- caching layer, my idea, nobody asked
 ```
 
 state: `open` · `unclear` · `shipped` · `partial` · `deferred` · `out of scope`
 
-`source` must let the user find the original — timestamp, speaker, message
+`source` must let the user find the original: timestamp, speaker, message
 time, filename and section. A row they cannot trace back is a row they cannot
 check.
 
@@ -86,13 +86,13 @@ check.
 While the user is still feeding you, **stay quiet**. Absorb, ack in one line,
 take the next message. A question asked mid-flow breaks the dump.
 
-The **pause** is when they stop giving material — they say go, ask what's next,
+The **pause** is when they stop giving material. They say go, ask what's next,
 or send something with no new asks in it. At the pause, and only then, ask
 about the `unclear` rows: all of them, one message, numbered, each with your
 best reading as the default so a one-word reply resolves it.
 
 ```
-R2 · "make the table thing better" — I read this as sortable columns.
+R2 · "make the table thing better" - I read this as sortable columns.
      (a) sortable columns  (b) something else  (c) drop it
 ```
 
@@ -105,7 +105,7 @@ Read the code each ticket would touch **before** planning. A plan written
 without reading describes work already done, or work that cannot be done that
 way.
 
-Slice `open` rows into **tracer bullets** — each cuts a complete path through
+Slice `open` rows into **tracer bullets**. Each cuts a complete path through
 every layer and is demoable alone. Prefer few thick slices over many thin ones
 touching the same files. Order by dependency; cost reducers and blockers first.
 
@@ -118,10 +118,10 @@ Track them in `tickets.md`:
 **blocked by:** none
 **touches:** src/screen.ts, src/db/schema.ts
 **done when:** a deal over budget stops before any spend, provable from the run log
-**verified:** —
+**verified:** -
 ```
 
-**`done when` is the contract** — one checkable sentence. Criteria buried in
+**`done when` is the contract**: one checkable sentence. Criteria buried in
 bullet lists get missed; one sentence gets met.
 
 Per ticket: implement → run the real thing → read the output → write the
@@ -130,13 +130,13 @@ Per ticket: implement → run the real thing → read the output → write the
 `shipped` with an empty `verified` is **not shipped**. On resume, rebuild
 anything without evidence and trust anything with it.
 
-**When the check cannot run** — sandbox, missing key, no network — the row
+**When the check cannot run** (sandbox, missing key, no network) the row
 stays `open` and the ticket keeps the two status words it already has. Write
 the exact command that would prove it into `verified` prefixed with `blocked:`,
 and carry it into the report so the user can run it in one paste:
 
 ```
-**verified:** blocked: `npm test` — sandbox denied the runner
+**verified:** blocked: `npm test` (sandbox denied the runner)
 ```
 
 Claiming a status the ledger does not define hides the gap. Naming the command
@@ -156,7 +156,7 @@ original source material, `requirements.md`, `tickets.md`, and this brief:
 > `shipped` whose `verified` line does not hold when re-run; (c) rows built into
 > something other than what was asked. Quote the source for each finding.
 
-Apply its findings — missed asks become new rows, unproven rows return to
+Apply its findings: missed asks become new rows, unproven rows return to
 `open`. Then re-run every `verified` line in the batch, because later tickets
 break earlier ones, and get the full check suite green.
 
@@ -168,7 +168,7 @@ From the files, never from memory. Bad news first.
 ledger    18 asks · 14 shipped · 2 partial · 2 open
 shipped   T3 T4 T5      how each was verified
 partial   T6            what is missing
-blocked   T7            `npm test` — run this and I'll close it
+blocked   T7            `npm test` - run this and I'll close it
 found     <bugs hit on the way>
 next      <the one thing you would do next>
 ```
@@ -182,8 +182,8 @@ what they said and continue at §3.
 
 - Absorb before responding, on every message, without being asked.
 - One ledger per repo, one writer, read from disk before every write.
-- Every ask lands as a row or is noise. Say which — never drop one silently.
+- Every ask lands as a row or is noise. Say which, never drop one silently.
 - Build only what was asked. Ideas of your own go under `not asked for`.
 - Report measured numbers only.
-- Push back once, in a sentence, on a bad ask — then build it if the user asks
+- Push back once, in a sentence, on a bad ask, then build it if the user asks
   again.

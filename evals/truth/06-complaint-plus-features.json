@@ -12,7 +12,7 @@
     },
     {
       "id": "A3",
-      "ask": "board composition varies by sector — members are chosen per deal from what the deal needs"
+      "ask": "board composition varies by sector, members are chosen per deal from what the deal needs"
     },
     {
       "id": "A4",
@@ -28,16 +28,16 @@
     },
     {
       "id": "A7",
-      "ask": "diligence output goes deeper — less skimming, more real research",
+      "ask": "diligence output goes deeper, less skimming, more real research",
       "expected_state": "unclear",
-      "note": "A complaint about existing output, not a feature. Still an ask. Too vague to build, so it belongs at the gate — 'deeper' has no done-when until the user says what would satisfy them."
+      "note": "A complaint about existing output, not a feature. Still an ask. Too vague to build, so it belongs at the gate, 'deeper' has no done-when until the user says what would satisfy them."
     }
   ],
   "invariants": [
     "the closing complaint produces a row, rather than being discarded as venting",
     "that row is unclear, rather than guessed into a confident requirement",
     "'this is an insane idea' and \"let's call it team\" collapse into one Team tab row, not two",
-    "no row is invented for Sequoia — it is a reference point, not an ask"
+    "no row is invented for Sequoia, it is a reference point, not an ask"
   ],
   "must_not_invent": [
     "integrating with Sequoia",

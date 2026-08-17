@@ -15,5 +15,5 @@ open=$(count open)
 unclear=$(count unclear)
 shipped=$(count shipped)
 
-echo "ship: ledger active — ${open:-0} open, ${unclear:-0} unclear, ${shipped:-0} shipped. Absorb this message into requirements.md before responding, then continue the work."
+echo "ship: ledger active, ${open:-0} open, ${unclear:-0} unclear, ${shipped:-0} shipped. Absorb this message into requirements.md before responding, then continue the work."
 exit 0

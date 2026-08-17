@@ -19,10 +19,10 @@
     }
   ],
   "invariants": [
-    "no new row is created for the override — it belongs to R1",
-    "no new row is created for the deal ID column — it belongs to R3",
+    "no new row is created for the override, it belongs to R1",
+    "no new row is created for the deal ID column, it belongs to R3",
     "R1 and R3 keep their IDs, so T1 and T2 evidence links stay valid",
-    "no clarifying question is asked — both statements are unambiguous"
+    "no clarifying question is asked, both statements are unambiguous"
   ],
   "must_not_invent": [
     "a legal approval workflow",
