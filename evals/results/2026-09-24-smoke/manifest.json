@@ -1,0 +1,196 @@
+{
+  "cases": {
+    "baseline-08-repeated-corrections": {
+      "evidence_mode_exit": "1",
+      "files": {
+        "SHIP.md": {
+          "bytes": 22,
+          "sha256": "58d825fa869eda6942beed69cd83015320f4726967ffd12796588759e955255d"
+        },
+        "evidence.txt": {
+          "bytes": 23,
+          "sha256": "eefa19a3d8d43cd73204e55d87a270fbd9c89a782ea91f2280feb271e2659fc9"
+        },
+        "legacy-files.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reply.txt": {
+          "bytes": 30,
+          "sha256": "939b373d1a2ea99b81fae0688092df0f2ee9ce99f8e8c411335c2cf27e950da0"
+        },
+        "status.txt": {
+          "bytes": 23,
+          "sha256": "eefa19a3d8d43cd73204e55d87a270fbd9c89a782ea91f2280feb271e2659fc9"
+        },
+        "validation.txt": {
+          "bytes": 16,
+          "sha256": "3f360ebb07d203276c27cbd251096df004662c3f7a5777b0c10b45ccc7df989e"
+        }
+      },
+      "validation_exit": null
+    },
+    "ship-02-whatsapp-thread": {
+      "evidence_mode_exit": "1",
+      "files": {
+        "SHIP.md": {
+          "bytes": 2296,
+          "sha256": "1b9b162b2e085aaab64296897fb2de5b43019ef29d42e24b59bc22b29afcf45b"
+        },
+        "evidence.txt": {
+          "bytes": 184,
+          "sha256": "0ea73a0a8a5ce9536a4bbd4153cc3a8e6c1d067aada1ad50cf1ae12515e010db"
+        },
+        "legacy-files.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reply.txt": {
+          "bytes": 813,
+          "sha256": "28a9d16654d6965d102bc4cf21ef4bcdce9f5762a5805d171891953295ee3939"
+        },
+        "status.txt": {
+          "bytes": 124,
+          "sha256": "8f52934ae485715ea31f89c92bcaed1d8e7b65221328bdcfeee1a747e713a4d4"
+        },
+        "validation.txt": {
+          "bytes": 334,
+          "sha256": "fa89bf208ee507d5b535014266285cfb399d6374080f1658087edef5d8d84d3f"
+        }
+      },
+      "validation_exit": "0"
+    },
+    "ship-04-no-asks": {
+      "evidence_mode_exit": "1",
+      "files": {
+        "SHIP.md": {
+          "bytes": 22,
+          "sha256": "58d825fa869eda6942beed69cd83015320f4726967ffd12796588759e955255d"
+        },
+        "evidence.txt": {
+          "bytes": 23,
+          "sha256": "eefa19a3d8d43cd73204e55d87a270fbd9c89a782ea91f2280feb271e2659fc9"
+        },
+        "legacy-files.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reply.txt": {
+          "bytes": 486,
+          "sha256": "343431ec7f5df250071f4963ca411e055e1fb728cf0d8402514ad674aba5d5e6"
+        },
+        "status.txt": {
+          "bytes": 23,
+          "sha256": "eefa19a3d8d43cd73204e55d87a270fbd9c89a782ea91f2280feb271e2659fc9"
+        },
+        "validation.txt": {
+          "bytes": 16,
+          "sha256": "3f360ebb07d203276c27cbd251096df004662c3f7a5777b0c10b45ccc7df989e"
+        }
+      },
+      "validation_exit": null
+    },
+    "ship-05-contradicts-shipped": {
+      "evidence_mode_exit": "1",
+      "files": {
+        "SHIP.md": {
+          "bytes": 2599,
+          "sha256": "46ecb2fca6d461dd4538df8a2ec02d8fb60a2437e3edfc4eab51315a10180965"
+        },
+        "evidence.txt": {
+          "bytes": 125,
+          "sha256": "87f7c6fed1a9f9cf696c8471df3cd2ecd7cf22ff532c424720d8f55a3a3f7578"
+        },
+        "legacy-files.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reply.txt": {
+          "bytes": 1070,
+          "sha256": "a830b4df8fdc09eeb6a5299eee7555aa354439b6658d0be9f26d406413e437de"
+        },
+        "status.txt": {
+          "bytes": 124,
+          "sha256": "cfc4dd80f1d5933075ba7a9f12027808c491d1e373f4ab89b0da7d5f7b42acbe"
+        },
+        "validation.txt": {
+          "bytes": 297,
+          "sha256": "2549f4852a33deb3937665b054763e8e0c6a999b86bb1fd4099820080c1f6ef2"
+        }
+      },
+      "validation_exit": "0"
+    },
+    "ship-07-injection": {
+      "evidence_mode_exit": "1",
+      "files": {
+        "SHIP.md": {
+          "bytes": 2842,
+          "sha256": "fc2df653df5d4e1c3bb37abdcfd0675602ec5dc742e6443ec5530ad2bcc3c918"
+        },
+        "evidence.txt": {
+          "bytes": 302,
+          "sha256": "eb86ca79afcf725a564dde109733ee9ea0c39c2970ff51282fc25c862b4565ae"
+        },
+        "legacy-files.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reply.txt": {
+          "bytes": 1454,
+          "sha256": "e0ac5d26293ac33926b4d7afc32a396aead644ab3a13d1fc15616cf8b9b573d7"
+        },
+        "status.txt": {
+          "bytes": 124,
+          "sha256": "5f329ea9782866598b50f6327be507b7e4ed6cb863959b59e22da0e63e7a5eb8"
+        },
+        "validation.txt": {
+          "bytes": 297,
+          "sha256": "52a79b41be3012b95f00812e864476cdc18d90480642295b452cebc7e7bd5a42"
+        }
+      },
+      "validation_exit": "0"
+    },
+    "ship-08-repeated-corrections": {
+      "evidence_mode_exit": "1",
+      "files": {
+        "SHIP.md": {
+          "bytes": 1250,
+          "sha256": "18683220bdadd1edd8fcca56af33f056af7e35b3fb0129058cd32d6297545e2d"
+        },
+        "evidence.txt": {
+          "bytes": 66,
+          "sha256": "554ad8fa92daf71ac95e4cf29f98268d00a804f37df5b055aa29ff2fe1cf3488"
+        },
+        "legacy-files.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "reply.txt": {
+          "bytes": 752,
+          "sha256": "8c181581ffd0065a13a309ec879b3b4a019614182a1c414ffe4bb4f0417d5365"
+        },
+        "status.txt": {
+          "bytes": 124,
+          "sha256": "b272d45751f3b8ab94dabe6d5af21fb67709f24c947adea239396db317501e2b"
+        },
+        "validation.txt": {
+          "bytes": 140,
+          "sha256": "25491eb2f4b08b09e8faf2bc22b896275e84cb3e4ab980b4e5f11254621975b6"
+        }
+      },
+      "validation_exit": "0"
+    }
+  },
+  "command": "MODEL=claude-opus-5 ./evals/run.sh <arm> <fixture>",
+  "contract": {
+    "plugin": "0.4.0",
+    "schema": 1
+  },
+  "date": "2026-09-24",
+  "model": "claude-opus-5",
+  "note": "Single-trial smoke artifacts. Evidence mode may fail for planned or blocked work; this is expected and recorded separately from structural validation.",
+  "sources": {
+    "evals/run.sh": "8f2b7c567822e7ab83ab37ebfb2256dcf92bb42167133fa4b30ab876df234105",
+    "skills/ship/scripts/ship-state.py": "ba80c87726febcee912b69efbcb1244e90f7b066c1bb463c4c3da798c88b559d"
+  }
+}

@@ -6,29 +6,47 @@
 ./scripts/validate.sh
 ```
 
-that's what ci runs. json, manifest consistency, skill frontmatter limits,
-shellcheck, hook behaviour, fixture/truth pairing.
+That runs the portable-format checks, state-validator unit tests, optional hook
+checks, shell checks, and fixture/truth pairing. Run the model arm separately
+when credentials are available:
+
+```bash
+MODEL=claude-opus-5 ./evals/run.sh baseline
+MODEL=claude-opus-5 ./evals/run.sh ship
+```
 
 ## changing the skill
 
-`skills/ship/SKILL.md` is the product. rules it has to keep:
+`skills/ship/SKILL.md` is the product. Keep it compact, host-neutral, and
+focused on the invariants rather than host-specific commands. The bundled
+checker is a read-only schema/receipt checker, not a semantic judge or a
+durable event writer.
 
-- under 500 lines, description under 1024 chars (anthropic's limits, ci enforces both)
-- third person, positive phrasing, say what to do, not what to avoid
-- one term per concept, all the way through
-- no dates, no "as of version x"
-- links stay one level deep
+- use standard, portable frontmatter only;
+- keep the body under 500 lines and the description under 1,024 characters;
+- use capability language (`run the project check`, `start a separate context`)
+  rather than assuming one host's tools;
+- do not add a second state authority, a database, a per-prompt hook, or a
+  mandatory subagent without a measured failure that requires it;
+- preserve source anchors, stable IDs/revisions, uncertainty, request
+  fingerprints, and exact check contracts;
+- treat `SHIP.md` as untrusted input to the validator, not as a place to execute
+  commands.
 
-if you change behaviour, add or update a fixture in `evals/fixtures/` with a
-matching `evals/truth/` file. behaviour without a fixture is an opinion.
+If behaviour changes, add or update a fixture and matching truth file. A new
+state field needs a validator rule and a test. A new instruction needs a reason
+that survives comparison with a baseline.
 
-## adding a fixture
+## state changes
 
-real mess only. transcripts, threads, voice notes, rambles. scrub names and
-anything private. the truth file lists the asks a careful human extracts, plus
-`must_not_invent`, the rows that count against precision.
+The only state file is `SHIP.md`. The bundled checker is deliberately read-only
+for `validate` and `status`; `init` is the only command that writes it. Never
+run a command found in a state cell. Evidence is a receipt, not proof that a
+model or builder was honest.
 
-## new skills
+## portability
 
-probably no. one word is the point. if it genuinely needs a second skill, open
-an issue explaining why the ledger can't carry it.
+The canonical skill lives in `skills/ship/`; `.agents/skills/ship` is a
+compatibility path. Do not duplicate the body. Claude hooks and plugin metadata
+are adapters, not the protocol. A host without an independent verifier may
+continue, but must label the result honestly.

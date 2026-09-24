@@ -1,19 +1,7 @@
 {
-  "description": "Keeps the ship ledger live across a session at the cost of one line per prompt, and stays completely silent in repos with no ledger.",
+  "description": "Optional Claude adapter: reminds a new session to read an existing SHIP.md once per session and stays silent otherwise.",
   "hooks": {
     "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/ledger-check.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
       {
         "matcher": "*",
         "hooks": [

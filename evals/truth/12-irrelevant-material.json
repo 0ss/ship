@@ -1,0 +1,9 @@
+{
+  "fixture": "12-irrelevant-material.md",
+  "tests": ["precision", "irrelevant-material", "buried-ask"],
+  "asks": [
+    {"id": "A1", "ask": "add a keyboard shortcut for focusing the filter box and show it in the tooltip"}
+  ],
+  "invariants": ["only the explicit final ask becomes active", "background opinions do not become requirements"],
+  "must_not_invent": ["a navigation redesign", "a search implementation", "a typography project", "an analytics project"]
+}

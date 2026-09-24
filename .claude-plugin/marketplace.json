@@ -1,6 +1,6 @@
 {
   "name": "ship",
-  "description": "Ship, turn mess into shipped software",
+  "description": "Keep messy intent durable and work evidence honest",
   "owner": {
     "name": "0ss",
     "url": "https://github.com/0ss"
@@ -8,14 +8,15 @@
   "plugins": [
     {
       "name": "ship",
-      "description": "Dump transcripts, chat threads and half-formed asks. Get shipped, verified software. One word, one ledger, one skill.",
-      "version": "0.3.0",
+      "description": "Keep messy human intent in one durable state, execute with your host's tools, and record evidence that can be checked.",
+      "version": "0.4.0",
       "source": "./",
       "keywords": [
         "skills",
+        "agent-skills",
         "requirements",
         "transcripts",
-        "tickets",
+        "state",
         "agentic"
       ],
       "author": {

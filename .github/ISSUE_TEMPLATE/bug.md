@@ -8,14 +8,14 @@ labels: bug
 
 paste the messages, in the order you sent them.
 
-**what the ledger did**
+**what the state did**
 
-paste `requirements.md`.
+paste `SHIP.md`.
 
 **what it should have done**
 
-which row is missing, invented, or wrong.
+which requirement, transition, or evidence row is missing, invented, or wrong.
 
 **model + version**
 
-e.g. opus 5, ship 0.1.0
+e.g. opus 5, ship 0.4.0

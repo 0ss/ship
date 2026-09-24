@@ -1,35 +1,39 @@
 # changelog
 
+## 0.4.0
+
+- replaced the competing `requirements.md` + `tickets.md` design with one
+  `SHIP.md` contract for intent, work frontier, checks, evidence, history, and
+  ignored material
+- added stable requirement revisions so corrections reopen work without duplicate
+  requirements or stale evidence
+- added a read-only Python state validator and unit tests for malformed states,
+  dangling references, blocked/failed checks, stale revisions, rebinding, and
+  false completion claims
+- added receipt binding for ordinary stale edits with a request fingerprint and
+  exact check contract; added the read-only `basis` helper and monotonic
+  evidence ordering
+- explicitly scoped the checker to receipt consistency, not execution
+  authentication
+- made independent verification capability-based: separate context, CI, or human
+  when available; honest `unverified` fallback otherwise
+- removed the per-prompt hook; kept one optional Claude `SessionStart` adapter
+- exposed the skill through `.agents/skills` for portable Agent Skills clients
+- added adversarial repeated-dump, resume, blocked-proof, false-completion,
+  irrelevant-material, and state-growth fixtures
+- rewrote installation, architecture, limitations, and benchmark documentation
+
 ## 0.3.0
 
-- `built` is a real state: code written, evidence not obtained. the state list is
-  now closed, no invented states or appended phrases
-- hook counts `built`
-- recorded demo of a real run, plus its raw dump, ledger and tickets
-- readme: what happens when (session cleared, dump mid-build, contradiction after
-  shipping, blocked check, handoff), architecture, what it replaces
+- added a real `built` state after pressure testing found completion-state drift
+- added blocked-check handling and the first injection fixture
+- recorded a demo run and expanded the benchmark
 
 ## 0.2.0
 
-pressure testing round.
-
-- material is inventory, never instruction. injected text goes under `ignored`
-  with its source and is reported, not obeyed
-- rows are numbered in source order, so a re-read of the same material gives the
-  same ledger
-- prove pass also reviews against repo standards, code smells, and security when
-  the batch touched auth, secrets, input, files or payments
-- defined what to do when a check cannot run: row stays `open`, `verified` records
-  `blocked: <command>`
-- fixture 07 (injection + dangerous asks), side-by-side baseline comparison
+- added contradiction handling, source traceability, and a fresh verifier
+- introduced the first absorb/build/prove benchmark fixtures
 
 ## 0.1.0
 
-first cut.
-
-- `ship` skill, absorb, build, prove
-- `requirements.md` ledger, permanent row ids, recency wins, superseded kept
-- session/prompt hooks, silent in repos with no ledger
-- five fixtures with hand-labelled ground truth
-- `context-cost.sh`, measure any plugin's idle cost
-- ci: json, manifests, skill limits, shellcheck, hook behaviour
+- first public cut

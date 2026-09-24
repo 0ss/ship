@@ -6,12 +6,9 @@ already exists.
 
 ---
 
-**Setup state** — assume the ledger holds, from fixture 01:
-
-```
-| R1 | screener hard-stops before diligence spend, no override | meeting | T1 | shipped |
-| R3 | CSV export of the whole filtered set                    | meeting | T2 | shipped |
-```
+The runner copies the prior state from `evals/setups/05-SHIP.md` before sending
+this message. That state represents work that was previously implemented and
+proved against an older requirement wording.
 
 **New message, three days later:**
 

@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ship",
   "displayName": "Ship",
-  "version": "0.3.0",
-  "description": "Dump transcripts, chat threads and half-formed asks. Get shipped, verified software. One word, one ledger, one skill.",
+  "version": "0.4.0",
+  "description": "Keep messy human intent in one durable state, execute with your host's tools, and record evidence that can be checked.",
   "author": {
     "name": "0ss",
     "url": "https://github.com/0ss"
@@ -13,9 +13,10 @@
   "license": "MIT",
   "keywords": [
     "skills",
+    "agent-skills",
     "requirements",
     "transcripts",
-    "tickets",
+    "state",
     "workflow",
     "agentic",
     "verification"

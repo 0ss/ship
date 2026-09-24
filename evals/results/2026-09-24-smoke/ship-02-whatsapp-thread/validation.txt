@@ -1,0 +1,6 @@
+R1@1 · blocked · invitee receives an invitation email when invited
+R2@1 · deferred · login page mobile layout, button pushed off screen
+R3@2 · blocked · invites expire after 30 days
+R4@1 · blocked · a list showing which user invited which invitee
+R5@1 · unclear · locate the application code the invite flow lives in
+exit=0

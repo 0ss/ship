@@ -1,0 +1,3 @@
+R1@2 · blocked · normal cards stay neutral, selected card uses the brand color
+R2@1 · deferred · CSV export of the filtered list
+exit=0

@@ -1,0 +1,12 @@
+State updated, validates clean.
+
+Both closed requirements reopened at revision 2 — old work/evidence stays pinned to `@1` and does not count as proof for the new behavior:
+
+- **R1@2** — hard stop stays the default; signed waiver on file permits override; every override logs actor + reason.
+- **R3@2** — CSV export gains deal ID column.
+
+New checks defined (`C3`, `C4`) with observable done_when.
+
+**Blocked:** no screener or export code in this repo. Only `SHIP.md` and `scripts/ship-state.py`, and no commits — `git:setup1` in the old evidence points at nothing reachable. Can't implement or prove either slice from here. Where does the screener live?
+
+One note on the override, since it's the audit trail Legal will lean on: free-text "who and why" alone is weak. Store the waiver's identifier (document/agreement ID) as a required field alongside the reason, reject an override with an empty reason, and make the log append-only — an editable override log fails the reconciliation it exists for. Recorded as part of C3; say the word if you want it looser.

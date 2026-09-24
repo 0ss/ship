@@ -1,0 +1,12 @@
+State recorded in `SHIP.md`. Validates clean.
+
+**Got 4 asks + 1 blocker:**
+
+- **R1 · active** — invite sends no email. Root ask.
+- **R3 · active, revised** — invites expire. You said 7d at 10:31, then 30d at 11:47. Recorded 30, old revision retired.
+- **R4 · active** — list of who invited who.
+- **R2 · deferred** — mobile login button off screen. You parked it at 10:30. Parked, not deleted.
+
+**Blocker:** this repo is empty. No commits, no source — just `scripts/ship-state.py` and `codedb.snapshot`. Nothing to wire an email into. All three work rows are blocked on that, checks have no command yet.
+
+**One question:** where's the app? Point me at the repo/path and I'll take R1 first — mail transport called once on invite, failure surfaces instead of swallowing. Expiry and the list follow.

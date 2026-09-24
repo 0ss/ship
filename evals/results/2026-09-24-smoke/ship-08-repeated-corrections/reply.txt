@@ -1,0 +1,10 @@
+SHIP.md written, validates clean.
+
+**State**
+- **R1@2 active** — normal cards neutral, brand color only on selected. Day-3 message is the same ask → recorded as a `decision` history row, no second requirement, no duplicate card row.
+- **R2@1 deferred** — CSV export of filtered list, parked until next month. Not deleted.
+- History: H1 correction (R1@1→R1@2, blue-everywhere reverted), H2 defer, H3 restate.
+
+**Blocker (real):** repo has no app source — only `.git`, `codedb.snapshot`, `scripts/ship-state.py`. W1 is `blocked`; no Checks row invented since there's no runner to name. No evidence, nothing claimed as done.
+
+Next frontier: point me at the card component (or the repo it lives in) and W1 becomes a one-slice change + one check.

@@ -1,0 +1,16 @@
+{
+  "fixture": "13-many-dumps.md",
+  "tests": ["many-dumps", "dedupe", "correction", "state-growth"],
+  "delivery": "12 separate messages",
+  "asks": [
+    {"id": "A1", "ask": "send the current-month report automatically by email", "expected_state": "active"},
+    {"id": "A2", "ask": "notify the operator when report generation fails", "expected_state": "deferred"}
+  ],
+  "invariants": [
+    "the report email remains one requirement despite repetition",
+    "the current-month qualifier replaces the previous-month qualifier",
+    "the parked operator notification is not dropped",
+    "active state does not grow with the number of repeated messages"
+  ],
+  "must_not_invent": ["a scheduler redesign", "a second report-email requirement", "an operator notification implementation"]
+}
