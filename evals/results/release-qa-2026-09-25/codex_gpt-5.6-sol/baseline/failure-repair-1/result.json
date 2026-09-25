@@ -1,0 +1,42 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "baseline",
+ "scenario": "failure-repair",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "arabic": true,
+  "visible_tests": true
+ },
+ "secs": 43,
+ "state_bytes": 0,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 35,
+   "killed": false,
+   "usage": {
+    "input_tokens": 159197,
+    "cached_input_tokens": 139136,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1067,
+    "reasoning_output_tokens": 72
+   },
+   "reply": "Fixed [app/display.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-failure-repair-dj7v6amc/app/display.py:1) to truncate Unicode characters directly instead of discarding non-ASCII bytes.\n\n`python3 -m unittest discover -v`: all 4 tests pass, including the Arabic regression test.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

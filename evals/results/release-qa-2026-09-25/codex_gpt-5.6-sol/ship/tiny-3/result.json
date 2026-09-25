@@ -1,0 +1,46 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "ship",
+ "scenario": "tiny",
+ "trial": 3,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "visible_tests": true
+ },
+ "secs": 34,
+ "state_bytes": 0,
+ "activated": false,
+ "routing_correct": true,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-sol",
+   "secs": 27,
+   "killed": false,
+   "usage": {
+    "input_tokens": 115382,
+    "cached_input_tokens": 105856,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 545,
+    "reasoning_output_tokens": 19
+   },
+   "reply": "Updated `app/pricing.py`: Pro plan price is now **15**.\n\nTests: `python3 -m unittest` — **3 passed**.",
+   "state_bytes": 0,
+   "state_after": null,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

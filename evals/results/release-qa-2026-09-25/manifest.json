@@ -1,0 +1,18 @@
+{
+  "base_commit": "7ca147a379712b4231acb03f039581235604bfb1",
+  "skill_sha256": "44a874d1273d4cb903988acc936eefdb71592e85c071ea12855fa58da1c6ab91",
+  "judge": "codex:gpt-5.6-luna",
+  "models": [
+    "codex:gpt-5.6-sol",
+    "codex:gpt-5.6-luna"
+  ],
+  "arms": {
+    "ship": ".",
+    "baseline": ""
+  },
+  "memory": "fresh Codex session per sessions entry; no Claude auto-memory",
+  "scope": "release QA; 15 matched scenarios per arm per Codex model, with separate repetitions and one model swap",
+  "adjudications": "adjudications.json corrects two question/done labels against raw replies",
+  "infrastructure": "Claude Haiku dense-long timed out without a reply; unscored artifact under infrastructure/; OpenCode Go returned provider quota 429",
+  "note": "The short false-done trap checks the limiter object; false-done-end-to-end separately checks InviteService integration. Raw replies and ledgers are retained."
+}

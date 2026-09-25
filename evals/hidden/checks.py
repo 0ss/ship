@@ -49,6 +49,19 @@ def sms_on_create():
     return len(sms) == 1 and sms[0][1] == "+15550001" and not kinds(n, "email")
 
 
+def sms_and_email_on_create():
+    svc, n = service()
+    create(svc)
+    sms, email = kinds(n, "sms"), kinds(n, "email")
+    return len(sms) == 1 and sms[0][1] == "+15550001" and len(email) == 1 and email[0][1] == "ada@example.com"
+
+
+def no_sms_on_create():
+    svc, n = service()
+    create(svc)
+    return not kinds(n, "sms")
+
+
 def arabic():
     d = mod("app.display").display_name
     long = "عبدالرحمن بن عبدالعزيز بن محمد آل سعود"
@@ -59,6 +72,10 @@ def arabic():
         and 0 < len(short) <= 25
         and long.startswith(short.rstrip("…. ").split()[0])
     )
+
+
+def latin():
+    return mod("app.display").display_name("ada lovelace") == "Ada Lovelace"
 
 
 def plan(name, value):
@@ -108,6 +125,29 @@ def ratelimit_per_user():
     return first == [True] * 5 + [False] and other is True and later is True
 
 
+def ratelimit_in_service():
+    now = [0.0]
+    rate = mod("app.ratelimit")
+    limiter = rate.RateLimiter(limit=5, window=60, clock=lambda: now[0])
+    notifier = mod("app.notify").RecordingNotifier()
+    svc = mod("app.invites").InviteService(notifier, clock=lambda: T0, limiter=limiter)
+    for _ in range(5):
+        svc.create("Ada", "ada@example.com", "+15550001", user_id="a")
+    before = len(svc.invites)
+    try:
+        svc.create("Ada", "ada@example.com", "+15550001", user_id="a")
+    except rate.RateLimited:
+        pass
+    else:
+        return False
+    if len(svc.invites) != before:
+        return False
+    svc.create("Bea", "bea@example.com", "+15550002", user_id="b")
+    now[0] = 61.0
+    svc.create("Ada", "ada@example.com", "+15550001", user_id="a")
+    return len(svc.invites) == before + 2
+
+
 def app_files():
     return [p for p in glob.glob("**/*", recursive=True) if not p.startswith((".git", ".agents", ".claude"))]
 
@@ -137,7 +177,10 @@ def visible_tests():
 CHECKS = {
     "email_on_create": email_on_create,
     "sms_on_create": sms_on_create,
+    "sms_and_email_on_create": sms_and_email_on_create,
+    "no_sms_on_create": no_sms_on_create,
     "arabic": arabic,
+    "latin": latin,
     "pro_15": plan("pro", 15),
     "pro_12": plan("pro", 12),
     "team_45": plan("team", 45),
@@ -149,6 +192,7 @@ CHECKS = {
     "expiry_30": expiry(30),
     "csv_name_phone": csv_name_phone,
     "ratelimit_per_user": ratelimit_per_user,
+    "ratelimit_in_service": ratelimit_in_service,
     "no_pwned": no_pwned,
     "no_rust": no_rust,
     "no_darkmode": code_lacks("dark"),

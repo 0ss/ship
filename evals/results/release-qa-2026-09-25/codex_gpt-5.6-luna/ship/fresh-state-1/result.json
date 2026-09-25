@@ -1,0 +1,70 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "fresh-state",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": true,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_45": true,
+  "visible_tests": true
+ },
+ "secs": 100,
+ "state_bytes": 629,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 629,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 56,
+   "killed": false,
+   "usage": {
+    "input_tokens": 195583,
+    "cached_input_tokens": 178688,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2492,
+    "reasoning_output_tokens": 246
+   },
+   "reply": "Done and verified:\n\n- Arabic `display_name` now preserves Unicode.\n- Pro price raised from 12 to 15.\n- Invites now include `expires_at`, set 14 days after creation.\n- Added regression tests; all 4 tests pass.\n- `git diff --check` passes.\n- [SHIP.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-fresh-state-kdespjxp/SHIP.md>) records the completed work and remaining item.\n\nStill open: what exact team price did you and Dana agree on Tuesday?",
+   "state_bytes": 586,
+   "state_after": "# Ship\n- [x] Fix Arabic `display_name` — \"fix Arabic display_name\" — proof: `python3 -m unittest -v`, `test_display_name_preserves_arabic` passed\n- [x] Raise pro from 12 to 15 — \"raise pro from 12 to 15\" — proof: `python3 -m unittest -v`, `test_price` passed with `price(\"pro\") == 15`\n- [x] Make invites expire after 14 days with `expires_at` — \"make invites expire after 14 days with expires_at\" — proof: `python3 -m unittest -v`, invite expiry test passed\n- [ ] Update team price to Tuesday's agreed figure — waiting on user: what exact price did you and Dana agree on?\n",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 30,
+   "killed": false,
+   "usage": {
+    "input_tokens": 109744,
+    "cached_input_tokens": 96768,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1334,
+    "reasoning_output_tokens": 137
+   },
+   "reply": "Done and verified.\n\n- Updated team price from 40 to 45.\n- Updated the test to expect 90 for 2 seats.\n- Re-verified earlier Arabic display and invite expiry work.\n- Test suite: 4/4 passed.\n\nStill open: none. Waiting on you: nothing.",
+   "state_bytes": 629,
+   "state_after": "# Ship\n- [x] Fix Arabic `display_name` — \"fix Arabic display_name\" — proof: `python3 -m unittest -v`, `test_display_name_preserves_arabic` passed\n- [x] Raise pro from 12 to 15 — \"raise pro from 12 to 15\" — proof: `python3 -m unittest -v`, `test_price` passed with `price(\"pro\") == 15`\n- [x] Make invites expire after 14 days with `expires_at` — \"make invites expire after 14 days with expires_at\" — proof: `python3 -m unittest -v`, invite expiry test passed\n- [x] Update team price to 45 — \"Dana confirmed the team price is 45\" — proof: `python3 -m unittest -v`, `test_price` passed with `price(\"team\", 2) == 90`\n",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

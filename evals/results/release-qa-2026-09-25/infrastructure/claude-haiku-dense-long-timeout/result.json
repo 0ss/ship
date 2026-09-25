@@ -1,0 +1,46 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "ship",
+ "scenario": "dense-long",
+ "trial": 1,
+ "complete": false,
+ "recall": 0.2,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": false,
+  "team_45": false,
+  "free_0": true,
+  "email_on_create": false,
+  "sms_and_email_on_create": false,
+  "arabic": false,
+  "latin": true,
+  "expiry_7": false,
+  "expiry_7_method": false,
+  "csv_name_phone": false,
+  "visible_tests": true
+ },
+ "secs": 3347,
+ "state_bytes": 0,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "claude-haiku-4-5-20251001",
+   "secs": 3347,
+   "killed": true,
+   "usage": {},
+   "reply": "",
+   "state_bytes": 0,
+   "state_after": null,
+   "judge": {}
+  }
+ ]
+}

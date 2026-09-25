@@ -1,0 +1,63 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "ship",
+ "scenario": "mid-run",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "arabic": true,
+  "expiry_14": true,
+  "visible_tests": true
+ },
+ "secs": 113,
+ "state_bytes": 643,
+ "max_state_bytes": 643,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 46,
+   "killed": false,
+   "usage": {
+    "input_tokens": 244856,
+    "cached_input_tokens": 231808,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1885,
+    "reasoning_output_tokens": 270
+   },
+   "reply": "Implemented the Pro plan price increase from 12 to 15 in [pricing.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-mid-run-8kmidktw/app/pricing.py:1).\n\nAdded regression coverage in [test_app.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-mid-run-8kmidktw/tests/test_app.py:22) and tracked completion in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-mid-run-8kmidktw/SHIP.md:1).\n\nDone: `python3 -m unittest -v` — all 4 tests passed.  \nStill open: Nothing.  \nWaiting on you: Nothing.",
+   "state_bytes": 194,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 52,
+   "killed": false,
+   "usage": {
+    "input_tokens": 467655,
+    "cached_input_tokens": 448000,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4261,
+    "reasoning_output_tokens": 572
+   },
+   "reply": "All three changes are complete:\n\n- Pro plan price is 15 in [pricing.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-mid-run-8kmidktw/app/pricing.py:1).\n- Arabic names are preserved and safely truncated by Unicode characters in [display.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-mid-run-8kmidktw/app/display.py:1).\n- Invites receive an `expires_at` timestamp exactly 14 days after `created_at` in [invites.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-mid-run-8kmidktw/app/invites.py:6).\n\nDone: All 6 tests pass; compilation and diff checks pass.  \nStill open: Nothing.  \nWaiting on you: Nothing.",
+   "state_bytes": 643,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "host": "codex:gpt-5.6-sol>gpt-5.6-luna",
+ "arm": "baseline",
+ "scenario": "model-swap",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 75,
+ "state_bytes": 0,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 29,
+   "killed": false,
+   "usage": {
+    "input_tokens": 154745,
+    "cached_input_tokens": 144512,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 888,
+    "reasoning_output_tokens": 102
+   },
+   "reply": "Saved everything in [HANDOFF.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-model-swap-bq314dfc/HANDOFF.md).\n\nFinal requirements captured:\n\n- Pro: 12 → 15\n- Invites expire after 14 days via `expires_at`\n- Fix Arabic names blanking in `display_name`\n- Team stays at 40\n\nNo product code was changed.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 32,
+   "killed": false,
+   "usage": {
+    "input_tokens": 110972,
+    "cached_input_tokens": 96768,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1426,
+    "reasoning_output_tokens": 133
+   },
+   "reply": "Built everything from yesterday’s handoff.\n\nChanges:\n- Pro plan: 15\n- Team plan remains 40\n- Invites now expire after 14 days with `expires_at`\n- Arabic display names are preserved\n- Added regression tests\n\nValidation: all 4 tests pass.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

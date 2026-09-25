@@ -1,0 +1,43 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "baseline",
+ "scenario": "blocker-plus",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": true,
+ "tests_green": true,
+ "checks": {
+  "arabic": true,
+  "pro_12": true,
+  "visible_tests": true
+ },
+ "secs": 45,
+ "state_bytes": 0,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 38,
+   "killed": false,
+   "usage": {
+    "input_tokens": 160387,
+    "cached_input_tokens": 148992,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1317,
+    "reasoning_output_tokens": 294
+   },
+   "reply": "Fixed Arabic `display_name` handling and added regression coverage. All 4 tests pass.\n\nWhat was the agreed pro plan price, including currency?",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

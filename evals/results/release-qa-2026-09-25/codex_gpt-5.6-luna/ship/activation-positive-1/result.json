@@ -1,0 +1,55 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "activation-positive",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 72,
+ "state_bytes": 1179,
+ "activated": true,
+ "routing_correct": true,
+ "max_state_bytes": 1179,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 65,
+   "killed": false,
+   "usage": {
+    "input_tokens": 229752,
+    "cached_input_tokens": 207104,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3566,
+    "reasoning_output_tokens": 400
+   },
+   "reply": "Implemented all actionable asks:\n\n- Pricing: free 0, pro 15, team 45\n- Email and SMS notifications on invite creation\n- Arabic-safe `display_name` with Latin title-casing preserved\n- 7-day invite expiry and `is_expired(now)`\n- `InviteService.export_csv()` with name/phone columns\n- Added focused tests using `RecordingNotifier`\n\nVerification: `python3 -m unittest -v` → **5 tests passed**.",
+   "state_bytes": 1179,
+   "state_after": "# Ship\n- [x] Update pricing: pro 15/seat, team 45/seat, free remains 0 — \"make pro 15... team 45... leave free at zero\" — proof: `python3 -m unittest -v`, 5 passed\n- [x] Invite creation emails invitee via `notifier.send_email` — \"email the invitee's email address\" — proof: notification test passed\n- [x] Invite creation texts invitee via `notifier.send_sms` — \"text the invitee's phone\" — proof: notification test passed\n- [x] Preserve Arabic names in `display_name` without breaking Latin title-casing — \"Arabic names on the guest list are blank\" — proof: display-name tests passed\n- [x] Set `expires_at` exactly 7 days after `created_at` and add `invite.is_expired(now)` — \"invites need an expires_at...\" — proof: expiry assertions passed\n- [x] Add `InviteService.export_csv()` with only name and phone columns, one row per invite — \"InvoiceService isn't the right place\" — proof: CSV test passed\n- [x] Keep changes in Python and use the fake notifier in tests — \"small Python edits... fake notifier\" — proof: implementation uses existing `RecordingNotifier`\n- [x] Run tests — \"please run the tests\" — proof: `python3 -m unittest -v`, 5 passed\n",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

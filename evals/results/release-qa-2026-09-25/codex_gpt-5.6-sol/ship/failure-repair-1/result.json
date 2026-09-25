@@ -1,0 +1,42 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "ship",
+ "scenario": "failure-repair",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "arabic": true,
+  "visible_tests": true
+ },
+ "secs": 54,
+ "state_bytes": 187,
+ "max_state_bytes": 187,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 47,
+   "killed": false,
+   "usage": {
+    "input_tokens": 207995,
+    "cached_input_tokens": 195200,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1564,
+    "reasoning_output_tokens": 182
+   },
+   "reply": "Fixed `display_name` to truncate Unicode characters directly instead of discarding non-ASCII bytes. Arabic names now survive while Latin title-casing remains intact.\n\nDone: `python3 -m unittest discover -v` — all 4 tests passed.  \nStill open: nothing.  \nWaiting on you: nothing.",
+   "state_bytes": 187,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

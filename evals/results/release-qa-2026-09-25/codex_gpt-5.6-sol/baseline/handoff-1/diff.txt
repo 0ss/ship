@@ -1,0 +1,8 @@
+ app/display.py    |  3 +--
+ app/invites.py    | 12 ++++++++++--
+ app/pricing.py    |  2 +-
+ tests/test_app.py | 19 ++++++++++++++++++-
+ 4 files changed, 30 insertions(+), 6 deletions(-)
+
+untracked:
+HANDOFF.md

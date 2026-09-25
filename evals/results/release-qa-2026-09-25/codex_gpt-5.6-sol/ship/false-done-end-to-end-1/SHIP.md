@@ -1,0 +1,2 @@
+# Ship
+- [x] Invite creation rate limiting works end to end: at most 5 creations per user per 60 seconds; `InviteService.create` accepts keyword `user_id`; `InviteService.__init__` accepts injected keyword `limiter`; blocked creation raises `RateLimited` without adding an invite; users have independent quotas; a user can create again after 60 seconds — proof: `python3 -m unittest -v` ran 8 tests, all passed; `git diff --check` passed

@@ -1,0 +1,64 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "baseline",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 70,
+ "state_bytes": 0,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 17,
+   "killed": false,
+   "usage": {
+    "input_tokens": 33013,
+    "cached_input_tokens": 26112,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 391,
+    "reasoning_output_tokens": 56
+   },
+   "reply": "Captured in [HANDOFF_NOTES.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-handoff-q8_yen2_/HANDOFF_NOTES.md).\n\nFinal decisions recorded:\n\n- Pro: 12 → 15\n- Invites expire after 14 days; add `expires_at`\n- Team remains 40\n- Fix Arabic names being blanked from `display_name`",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 36,
+   "killed": false,
+   "usage": {
+    "input_tokens": 110698,
+    "cached_input_tokens": 96768,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1420,
+    "reasoning_output_tokens": 179
+   },
+   "reply": "Morning. Built all items from yesterday:\n\n- Pro plan: 15\n- Team plan: remains 40\n- Invites now expire after 14 days with `expires_at`\n- Arabic/non-Latin display names are preserved correctly\n- Existing tests and additional handoff checks pass: 3 tests passed.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

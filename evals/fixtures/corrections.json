@@ -1,0 +1,5 @@
+[
+  "On invite creation send an email to the invitee with notifier.send_email.",
+  "Actually legal changed their mind. SMS only now, notifier.send_sms to the invite's phone, no email.",
+  "Final correction: email only after all. notifier.send_email to the invitee's email; remove the SMS call. Finish and verify the final behavior."
+]

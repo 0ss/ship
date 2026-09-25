@@ -1,0 +1,1 @@
+Two things: Arabic names come out blank in display_name, fix that. You can choose the helper name, test style, and whether to make the small fix in place or extract a function. Also update the pro plan price to whatever Dana and I agreed on Tuesday's call. That price isn't recorded in this repository. Work on the name bug now; ask me only for the agreed price.

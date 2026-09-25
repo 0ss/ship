@@ -1,0 +1,51 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "ship",
+ "scenario": "dense",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 94,
+ "state_bytes": 1188,
+ "max_state_bytes": 1188,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 87,
+   "killed": false,
+   "usage": {
+    "input_tokens": 350617,
+    "cached_input_tokens": 312064,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4583,
+    "reasoning_output_tokens": 559
+   },
+   "reply": "Implemented all actual asks:\n\n- Updated prices: Free `0`, Pro `15`, Team `45` per seat.\n- Invite creation sends email and SMS through the supplied notifier.\n- Preserved Arabic names while retaining Latin title-casing.\n- Added seven-day `expires_at` and `is_expired(now)`.\n- Added `InviteService.export_csv()` with only `name,phone`.\n- Added focused tests and maintained [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-dense-4il_7qgb/SHIP.md).\n\nDone: `python3 -m unittest -v` — 6 tests passed. Compilation and diff checks also passed.\n\nStill open: none.\n\nWaiting on you: nothing.",
+   "state_bytes": 1188,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -54,9 +54,9 @@ def graded(wd, names):
 
 # The seed is the benchmark's before-state. If anyone "fixes" it in place, every
 # scoring scenario silently degenerates, so pin the grader's view of it.
-BEFORE_TRUE = ["pro_12", "team_40", "free_0", "visible_tests",
+BEFORE_TRUE = ["pro_12", "team_40", "free_0", "latin", "no_sms_on_create", "visible_tests",
                "no_pwned", "no_rust", "no_darkmode", "no_csv"]
-BEFORE_FALSE = ["pro_15", "team_45", "email_on_create", "sms_on_create",
+BEFORE_FALSE = ["pro_15", "team_45", "email_on_create", "sms_on_create", "sms_and_email_on_create",
                 "expiry_7", "expiry_7_method", "expiry_14", "expiry_30",
                 "arabic", "csv_name_phone", "ratelimit_per_user"]
 
@@ -76,12 +76,21 @@ finally:
 wd = Path(tempfile.mkdtemp(prefix="ship-bench-ovl-"))
 try:
     shutil.copytree(EVALS / "seed", wd, dirs_exist_ok=True)
-    for name in overlays:
-        shutil.copytree(EVALS / "overlays" / name, wd, dirs_exist_ok=True)
+    shutil.copytree(EVALS / "overlays" / "false-done", wd, dirs_exist_ok=True)
     res = graded(wd, ["visible_tests", "ratelimit_per_user"])
     check(res.get("visible_tests") is True, "false-done overlay ships passing tests")
     check(res.get("ratelimit_per_user") is False,
           "false-done overlay ships an unmet per-user requirement")
+finally:
+    shutil.rmtree(wd, ignore_errors=True)
+
+wd = Path(tempfile.mkdtemp(prefix="ship-bench-repair-"))
+try:
+    shutil.copytree(EVALS / "seed", wd, dirs_exist_ok=True)
+    shutil.copytree(EVALS / "overlays" / "failure-repair", wd, dirs_exist_ok=True)
+    res = graded(wd, ["visible_tests", "arabic"])
+    check(res == {"visible_tests": False, "arabic": False},
+          "failure-repair overlay starts with a failing check")
 finally:
     shutil.rmtree(wd, ignore_errors=True)
 

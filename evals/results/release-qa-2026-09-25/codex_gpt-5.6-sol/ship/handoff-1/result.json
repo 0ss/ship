@@ -1,0 +1,64 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "ship",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 99,
+ "state_bytes": 632,
+ "max_state_bytes": 632,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 24,
+   "killed": false,
+   "usage": {
+    "input_tokens": 93618,
+    "cached_input_tokens": 77696,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 858,
+    "reasoning_output_tokens": 109
+   },
+   "reply": "Saved the durable handoff in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-handoff-v7krbuc5/SHIP.md).\n\nDone: Captured and verified the notes. No implementation code changed.\n\nStill open:\n\n- Pro price: 12 → 15\n- Invites: add `expires_at`, expiring after 14 days\n- Fix Arabic names blanking `display_name`\n\nDropped: Team price change; it stays at 40.\n\nWaiting on you: Nothing.",
+   "state_bytes": 391,
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 61,
+   "killed": false,
+   "usage": {
+    "input_tokens": 238664,
+    "cached_input_tokens": 222720,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3040,
+    "reasoning_output_tokens": 305
+   },
+   "reply": "Implemented everything from yesterday.\n\nDone:\n\n- Pro price updated from 12 to 15; Team remains 40.\n- Invites now include `expires_at`, exactly 14 days after creation.\n- Arabic names are preserved by `display_name`.\n- Added regression tests and updated [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-handoff-v7krbuc5/SHIP.md).\n\nProof: `python3 -m unittest -v` — 4 tests passed. `git diff --check` also passed.\n\nStill open: nothing.\n\nWaiting on you: nothing.",
+   "state_bytes": 632,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

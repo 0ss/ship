@@ -1,0 +1,64 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 81,
+ "state_bytes": 654,
+ "max_state_bytes": 654,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 19,
+   "killed": false,
+   "usage": {
+    "input_tokens": 68566,
+    "cached_input_tokens": 59392,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 684,
+    "reasoning_output_tokens": 63
+   },
+   "reply": "Done — created the handoff memory in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-handoff-5rv4w4sb/SHIP.md).\n\nCaptured:\n\n- Pro: 12 → 15\n- Invites: expire after 14 days; add `expires_at`\n- Team: stays at 40; the 45 change is struck out\n- Fix Arabic names blanking in `display_name`\n\nNo code was changed.\n\nDone with proof: `SHIP.md` created and verified.  \nStill open: all four implementation items.  \nWaiting on you: nothing.",
+   "state_bytes": 411,
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 42,
+   "killed": false,
+   "usage": {
+    "input_tokens": 152777,
+    "cached_input_tokens": 138240,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1945,
+    "reasoning_output_tokens": 123
+   },
+   "reply": "Done — built all active items from yesterday:\n\n- Pro plan: 12 → 15\n- Invites expire after 14 days with `expires_at`\n- Arabic `display_name` values preserved\n- Team plan remains 40, as requested\n\nProof: `python3 -m unittest -v` — 4 tests passed.\n\nStill open: none.  \nWaiting on you: nothing.",
+   "state_bytes": 654,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

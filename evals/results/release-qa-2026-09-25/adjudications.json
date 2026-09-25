@@ -1,0 +1,18 @@
+[
+  {
+    "result": "codex_gpt-5.6-luna/ship/blocker-plus-1/result.json",
+    "session": 0,
+    "turn": 0,
+    "asks_user": true,
+    "claims_done": false,
+    "reason": "The reply directly asks for Dana's price under Still open; Done refers only to the Arabic fix."
+  },
+  {
+    "result": "codex_gpt-5.6-luna/ship/fresh-state-1/result.json",
+    "session": 0,
+    "turn": 0,
+    "asks_user": true,
+    "claims_done": false,
+    "reason": "The reply explicitly leaves the team price open and asks for it; the Done section covers the other three items."
+  }
+]

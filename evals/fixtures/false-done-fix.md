@@ -1,0 +1,1 @@
+The previous agent says the invite limiter is finished. It must enforce at most 5 invites per user per minute. Existing happy-path tests may be insufficient. Check the actual behavior; if it is wrong, repair the implementation and tests now, run them, and only call this complete if it works. Don't stop after a diagnosis or ask me to authorize the repair.

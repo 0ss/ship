@@ -1,0 +1,1 @@
+The new Arabic display-name test is failing. Fix the implementation so Arabic guest names survive display_name and run the tests. You can choose how to implement it; don't wait for permission to repair a failing check.

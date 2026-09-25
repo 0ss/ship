@@ -1,0 +1,55 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "activation-positive",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 89,
+ "state_bytes": 993,
+ "activated": true,
+ "routing_correct": true,
+ "max_state_bytes": 993,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 82,
+   "killed": false,
+   "usage": {
+    "input_tokens": 246489,
+    "cached_input_tokens": 224256,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3739,
+    "reasoning_output_tokens": 336
+   },
+   "reply": "Implemented all actionable asks.\n\nDone:\n\n- Pro: 15/seat; Team: 45/seat; Free remains 0.\n- Invite creation sends email and SMS via fake notifier.\n- Arabic names preserved; Latin title-casing retained.\n- Expiry set to 7 days; added `is_expired(now)`.\n- Added `InviteService.export_csv()` with `name,phone` columns.\n- Updated tests and kept changes Python-only.\n\nProof: `python3 -m unittest -v` → 5 tests passed; compileall passed.\n\nStill open: none. Waiting on you: nothing.",
+   "state_bytes": 993,
+   "state_after": "# Ship\n- [x] update pro pricing to 15 per seat; keep free at zero — proof: `python3 -m unittest -v` (5 tests passed)\n- [x] update team pricing to 45 per seat — proof: `python3 -m unittest -v` (5 tests passed)\n- [x] send invite email via `notifier.send_email` on creation — proof: notifier assertions passed\n- [x] send invite SMS via `notifier.send_sms` on creation — proof: notifier assertions passed\n- [x] preserve Arabic display names without breaking Latin title-casing — proof: Arabic and Latin display tests passed\n- [x] set invite expiry exactly 7 days after creation and add `invite.is_expired(now)` — proof: expiry boundary tests passed\n- [x] use the fake notifier in tests; do not integrate a provider — proof: tests use `RecordingNotifier`, all passed\n- [x] add `InviteService.export_csv()` with only name and phone columns, one row per invite — proof: CSV output test passed\n- [x] keep implementation in Python — proof: `python3 -m compileall -q app tests` passed\n",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

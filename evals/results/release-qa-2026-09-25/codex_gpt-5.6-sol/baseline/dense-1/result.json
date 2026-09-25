@@ -1,0 +1,51 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "baseline",
+ "scenario": "dense",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 64,
+ "state_bytes": 0,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 57,
+   "killed": false,
+   "usage": {
+    "input_tokens": 176852,
+    "cached_input_tokens": 161536,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2851,
+    "reasoning_output_tokens": 486
+   },
+   "reply": "Implemented all concrete asks:\n\n- Pricing: Free `0`, Pro `15/seat`, Team `45/seat`\n- Invite creation sends both email and SMS via the existing notifier\n- Unicode/Arabic names are preserved; Latin title-casing remains\n- Invites expire exactly seven days after creation\n- Added `invite.is_expired(now)`\n- Added `InviteService.export_csv()` with only `name` and `phone`\n- Added regression tests for all changes\n\nValidation: all 6 tests pass, compilation succeeds, and the diff has no whitespace errors.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

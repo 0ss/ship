@@ -1,0 +1,63 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "mid-run",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "arabic": true,
+  "expiry_14": true,
+  "visible_tests": true
+ },
+ "secs": 118,
+ "state_bytes": 554,
+ "max_state_bytes": 554,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 66,
+   "killed": false,
+   "usage": {
+    "input_tokens": 206824,
+    "cached_input_tokens": 190720,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1541,
+    "reasoning_output_tokens": 168
+   },
+   "reply": "Implemented the Pro plan price increase from 12 to 15.\n\n- Updated `app/pricing.py`\n- Added regression test in `tests/test_app.py`\n- Verified: all 4 tests pass\n\nDone with proof. Nothing remains open.",
+   "state_bytes": 162,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 35,
+   "killed": false,
+   "usage": {
+    "input_tokens": 336082,
+    "cached_input_tokens": 313088,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2991,
+    "reasoning_output_tokens": 272
+   },
+   "reply": "Finished all three changes:\n\n- Pro plan price: `15`\n- Arabic names preserved in `display_name`\n- Invites now include `expires_at` set 14 days after creation\n- Added regression tests\n\nVerified: all 6 tests pass.",
+   "state_bytes": 554,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

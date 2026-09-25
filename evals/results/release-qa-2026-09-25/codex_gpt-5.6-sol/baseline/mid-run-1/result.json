@@ -1,0 +1,63 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "baseline",
+ "scenario": "mid-run",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "arabic": true,
+  "expiry_14": true,
+  "visible_tests": true
+ },
+ "secs": 95,
+ "state_bytes": 0,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 48,
+   "killed": false,
+   "usage": {
+    "input_tokens": 155897,
+    "cached_input_tokens": 145152,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1181,
+    "reasoning_output_tokens": 82
+   },
+   "reply": "Raised the Pro plan price from 12 to 15 in [app/pricing.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-mid-run-j3yr2itx/app/pricing.py:1).\n\nAdded a regression test in [tests/test_app.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-mid-run-j3yr2itx/tests/test_app.py:20).\n\nAll 3 tests pass.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 32,
+   "killed": false,
+   "usage": {
+    "input_tokens": 269444,
+    "cached_input_tokens": 254080,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2633,
+    "reasoning_output_tokens": 248
+   },
+   "reply": "Completed all three changes:\n\n- Pro plan price increased from 12 to 15.\n- Arabic names now display correctly using Unicode-safe truncation.\n- Invites now receive `expires_at`, exactly 14 days after `created_at`.\n- Added regression coverage for each behavior.\n\nAll 4 tests pass, and the diff passes whitespace validation.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "baseline",
+ "scenario": "dense-long",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 80,
+ "state_bytes": 0,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 71,
+   "killed": false,
+   "usage": {
+    "input_tokens": 275138,
+    "cached_input_tokens": 238592,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3134,
+    "reasoning_output_tokens": 503
+   },
+   "reply": "Implemented all concrete asks:\n\n- Pro: 15/seat; Team: 45/seat; Free remains 0.\n- Invite creation sends email and SMS through the fake notifier.\n- Arabic names are preserved; Latin names still title-case.\n- Added 7-day `expires_at` and `is_expired(now)`.\n- Added `InviteService.export_csv()` with only `name,phone`.\n- Added/updated tests.\n\nValidation: `python3 -m unittest` — 6 tests passed.",
+   "state_bytes": 0,
+   "state_after": null,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

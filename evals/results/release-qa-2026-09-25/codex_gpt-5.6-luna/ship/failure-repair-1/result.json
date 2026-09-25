@@ -1,0 +1,42 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "failure-repair",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "arabic": true,
+  "visible_tests": true
+ },
+ "secs": 47,
+ "state_bytes": 231,
+ "max_state_bytes": 231,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 40,
+   "killed": false,
+   "usage": {
+    "input_tokens": 216400,
+    "cached_input_tokens": 197888,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1606,
+    "reasoning_output_tokens": 186
+   },
+   "reply": "Fixed `display_name` to truncate Unicode characters safely, preserving Arabic names while retaining Latin title-casing.\n\nTests: `python3 -m unittest discover -v` — 4 passed, including the Arabic regression test.\n\nDone with proof; still open: none; waiting on you: nothing.",
+   "state_bytes": 231,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

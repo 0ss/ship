@@ -1,0 +1,55 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "dense-long",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 59,
+ "state_bytes": 904,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 904,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 52,
+   "killed": false,
+   "usage": {
+    "input_tokens": 99114,
+    "cached_input_tokens": 84736,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3054,
+    "reasoning_output_tokens": 328
+   },
+   "reply": "Implemented the actionable asks:\n\n- Updated Pro to 15/seat, Team to 45/seat, Free remains 0.\n- Preserved Arabic names while retaining Latin title-casing.\n- Added email and SMS notifications on invite creation.\n- Added 7-day expiry and `is_expired(now)`.\n- Added `InviteService.export_csv()` with only name/phone columns.\n- Added focused tests and updated the stale pricing expectation.\n\nTests: `5 passed`; `git diff --check` clean.\n\nFiles: [app/invites.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-dense-long-lwz86720/app/invites.py), [app/display.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-dense-long-lwz86720/app/display.py), [app/pricing.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-dense-long-lwz86720/app/pricing.py), [tests/test_app.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-dense-long-lwz86720/tests/test_app.py)\n\nDone with proof. Still open: none. Waiting on you: nothing.",
+   "state_bytes": 904,
+   "state_after": "# Ship\n- [x] Set pro pricing to 15 per seat and team pricing to 45 per seat; keep free at zero. Proof: `python3 -m unittest -v` passed pricing assertions.\n- [x] Preserve Arabic names in `display_name` without breaking Latin title-casing. Proof: test suite passed Arabic and Latin display-name assertions.\n- [x] On invite creation, send email via `notifier.send_email` and SMS via `notifier.send_sms` to the invitee's phone; use the fake notifier in tests. Proof: test suite passed `RecordingNotifier` assertions.\n- [x] Set invite `expires_at` exactly 7 days after `created_at` and add `invite.is_expired(now)`. Proof: test suite passed boundary expiry assertions.\n- [x] Add `InviteService.export_csv()` with only name and phone columns, one row per invite. Proof: test suite passed exact CSV output assertion.\n- [ ] Keep changes as small Python edits; do not migrate languages or add unrelated features.\n",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

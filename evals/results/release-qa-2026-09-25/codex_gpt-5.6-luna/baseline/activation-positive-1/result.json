@@ -1,0 +1,55 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "baseline",
+ "scenario": "activation-positive",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 58,
+ "state_bytes": 0,
+ "activated": false,
+ "routing_correct": null,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-luna",
+   "secs": 50,
+   "killed": false,
+   "usage": {
+    "input_tokens": 186982,
+    "cached_input_tokens": 166656,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2557,
+    "reasoning_output_tokens": 351
+   },
+   "reply": "Implemented the actionable asks:\n\n- Updated pricing: free 0, pro 15, team 45.\n- Added email and SMS notifications on invite creation.\n- Preserved Arabic display names while retaining Latin title-casing.\n- Added 7-day invite expiry and `is_expired(now)`.\n- Added `InviteService.export_csv()` with only `name` and `phone` columns.\n- Updated and expanded tests.\n\nAll 6 tests pass, and `git diff --check` is clean.",
+   "state_bytes": 0,
+   "state_after": null,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

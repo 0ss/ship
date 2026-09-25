@@ -1,0 +1,8 @@
+ app/invites.py          | 10 ++++++++--
+ app/ratelimit.py        | 16 ++++++++++++----
+ tests/test_app.py       | 49 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ tests/test_ratelimit.py | 15 +++++++++++++++
+ 4 files changed, 83 insertions(+), 7 deletions(-)
+
+untracked:
+SHIP.md

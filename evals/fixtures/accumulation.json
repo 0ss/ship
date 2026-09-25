@@ -1,0 +1,9 @@
+[
+  "Send invite emails using notifier.send_email; add CSV export of invite names and phone numbers, and make invites expire after 7 days with expires_at.",
+  "Legal says no email; change invite creation to SMS on the invite phone instead. Drop CSV for now.",
+  "Arabic names are blank in display_name; fix them. Keep working on SMS and expiry.",
+  "Also raise pro from 12 to 15. Team stays at 40.",
+  "New decision: expiry should be 14 days, not 7. Keep the earlier fixes.",
+  "Finance needs the CSV after all. Restore export_csv with only name and phone columns.",
+  "That's the final scope. Finish and check all current asks; don't bring email or 7-day expiry back."
+]

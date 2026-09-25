@@ -1,0 +1,4 @@
+[
+  "Raise the pro plan to 15 and add InviteService.export_csv() for invite name and phone.",
+  "Drop the CSV export entirely, we don't want it. Keep and finish the pro price change."
+]

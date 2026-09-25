@@ -1,0 +1,51 @@
+{
+ "host": "codex:gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "dense",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 82,
+ "state_bytes": 817,
+ "max_state_bytes": 817,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 75,
+   "killed": false,
+   "usage": {
+    "input_tokens": 273044,
+    "cached_input_tokens": 250624,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3841,
+    "reasoning_output_tokens": 465
+   },
+   "reply": "Implemented all actionable asks:\n\n- Updated Pro to 15 and Team to 45; Free remains 0.\n- Invite creation sends email and SMS via the fake notifier.\n- Preserved Arabic names while retaining Latin title-casing.\n- Added seven-day expiry and `is_expired(now)`.\n- Added `InviteService.export_csv()` with name and phone columns.\n- Added/updated tests.\n\nProof: `python3 -m unittest -v` — 5 tests passed; `git diff --check` clean.\n\nDone. Still open: none. Waiting on you: nothing.",
+   "state_bytes": 817,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

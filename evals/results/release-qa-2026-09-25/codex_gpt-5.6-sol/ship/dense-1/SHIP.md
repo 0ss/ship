@@ -1,0 +1,11 @@
+# Ship
+- [x] Pro plan costs 15 per seat — proof: `python3 -m unittest -v`, 6 tests OK incl. pro price
+- [x] Team plan costs 45 per seat — proof: `python3 -m unittest -v`, 6 tests OK incl. team price
+- [x] Free plan remains zero — proof: `python3 -m unittest -v`, 6 tests OK incl. free price
+- [x] Creating an invite emails the invitee email via `notifier.send_email` — proof: notifier recording assertion passed
+- [x] Creating an invite independently texts the invitee phone via `notifier.send_sms` — proof: notifier recording assertion passed
+- [x] `display_name` preserves Arabic names while retaining Latin title-casing — proof: Arabic and Latin display tests passed
+- [x] Every invite has `expires_at` exactly seven days after `created_at` — proof: exact datetime assertion passed
+- [x] Invite provides `is_expired(now)` — proof: before-expiry false and boundary true assertions passed
+- [x] `InviteService.export_csv()` returns only name and phone columns, one row per invite — proof: exact two-row CSV assertion passed
+- [x] Changes remain small Python edits and use the test fake notifier — proof: `compileall` and full unittest suite passed; no provider added

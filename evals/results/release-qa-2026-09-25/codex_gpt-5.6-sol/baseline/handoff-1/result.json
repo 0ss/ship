@@ -1,0 +1,64 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "baseline",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 138,
+ "state_bytes": 0,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 40,
+   "killed": false,
+   "usage": {
+    "input_tokens": 155649,
+    "cached_input_tokens": 145536,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1074,
+    "reasoning_output_tokens": 124
+   },
+   "reply": "Saved the corrected requirements in [HANDOFF.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-handoff-7lt2hx9b/HANDOFF.md).\n\nNo product code was changed. The note clearly records:\n\n- Pro: 12 → 15\n- Invite expiry: 14 days with `expires_at`\n- Fix Arabic `display_name`\n- Team stays at 40; discard the proposed 45 change",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 84,
+   "killed": false,
+   "usage": {
+    "input_tokens": 332100,
+    "cached_input_tokens": 313856,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3873,
+    "reasoning_output_tokens": 472
+   },
+   "reply": "Implemented yesterday’s full handoff:\n\n- Pro price increased to 15; Team remains 40 in [pricing.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-handoff-7lt2hx9b/app/pricing.py:1).\n- Invites now include `expires_at`, exactly 14 days after creation in [invites.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-handoff-7lt2hx9b/app/invites.py:5).\n- Arabic display names are preserved and truncated safely by Unicode characters in [display.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-handoff-7lt2hx9b/app/display.py:1).\n- Added regression coverage in [test_app.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-handoff-7lt2hx9b/tests/test_app.py:16).\n\nVerification: all 7 tests pass, compilation succeeds, and `git diff --check` is clean.",
+   "state_bytes": 0,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

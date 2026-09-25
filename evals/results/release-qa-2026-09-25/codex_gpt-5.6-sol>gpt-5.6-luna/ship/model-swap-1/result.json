@@ -1,0 +1,66 @@
+{
+ "host": "codex:gpt-5.6-sol>gpt-5.6-luna",
+ "arm": "ship",
+ "scenario": "model-swap",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 99,
+ "state_bytes": 624,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 624,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 28,
+   "killed": false,
+   "usage": {
+    "input_tokens": 93384,
+    "cached_input_tokens": 84736,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 734,
+    "reasoning_output_tokens": 50
+   },
+   "reply": "Saved everything in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-model-swap-2e5utsnb/SHIP.md).\n\nDone: requirements preserved and corrections reconciled.  \nStill open: Pro price 15, invite expiry 14 days with `expires_at`, Arabic `display_name` fix.  \nDropped: Team price change; it stays at 40.  \nWaiting on you: Nothing. No coding started.",
+   "state_bytes": 382,
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 55,
+   "killed": false,
+   "usage": {
+    "input_tokens": 197255,
+    "cached_input_tokens": 179712,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2786,
+    "reasoning_output_tokens": 171
+   },
+   "reply": "Done — all open items from yesterday are implemented.\n\n- Pro price: 12 → 15; Team remains 40.\n- Invites now include `expires_at` set to 14 days after creation.\n- Arabic `display_name` values are preserved.\n- Added regression tests.\n\nProof: `python3 -m unittest -v` — 5 tests passed.",
+   "state_bytes": 624,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

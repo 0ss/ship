@@ -1,0 +1,70 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "baseline",
+ "scenario": "fresh-state",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": true,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_45": true,
+  "visible_tests": true
+ },
+ "secs": 117,
+ "state_bytes": 0,
+ "activated": null,
+ "routing_correct": null,
+ "max_state_bytes": 0,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-sol",
+   "secs": 53,
+   "killed": false,
+   "usage": {
+    "input_tokens": 140347,
+    "cached_input_tokens": 119808,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2101,
+    "reasoning_output_tokens": 226
+   },
+   "reply": "Implemented and verified:\n\n- Arabic `display_name` now preserves Unicode and truncates by characters.\n- Pro price increased from 12 to 15.\n- Invites now include `expires_at`, set 14 days after `created_at`.\n- Added regression tests; all 5 pass.\n- Added [HANDOFF.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-fresh-state-aqres5ye/HANDOFF.md) for tomorrow’s agent.\n- Team price remains 40 pending your answer.\n\nWhat team price did you and Dana agree on Tuesday?",
+   "state_bytes": 0,
+   "state_after": null,
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "model": "gpt-5.6-sol",
+   "secs": 46,
+   "killed": false,
+   "usage": {
+    "input_tokens": 165464,
+    "cached_input_tokens": 152320,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1567,
+    "reasoning_output_tokens": 150
+   },
+   "reply": "Finished and verified all open work.\n\n- Team price updated to **45 per seat** in [app/pricing.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-fresh-state-aqres5ye/app/pricing.py:1).\n- Two-seat test now expects **90**.\n- Confirmed earlier Unicode display-name, pro pricing, and 14-day invite-expiry changes.\n- Updated [HANDOFF.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-baseline-fresh-state-aqres5ye/HANDOFF.md:1); no remaining TODOs found.\n- All 5 tests pass.\n- Compilation and `git diff --check` pass.",
+   "state_bytes": 0,
+   "state_after": null,
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

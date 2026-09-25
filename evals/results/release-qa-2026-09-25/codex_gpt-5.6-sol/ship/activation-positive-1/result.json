@@ -1,0 +1,55 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "ship",
+ "scenario": "activation-positive",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "team_45": true,
+  "free_0": true,
+  "email_on_create": true,
+  "sms_and_email_on_create": true,
+  "arabic": true,
+  "latin": true,
+  "expiry_7": true,
+  "expiry_7_method": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 84,
+ "state_bytes": 925,
+ "activated": true,
+ "routing_correct": true,
+ "max_state_bytes": 925,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "model": "gpt-5.6-sol",
+   "secs": 77,
+   "killed": false,
+   "usage": {
+    "input_tokens": 252703,
+    "cached_input_tokens": 235264,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4133,
+    "reasoning_output_tokens": 652
+   },
+   "reply": "Implemented all actionable asks:\n\n- Pricing: free `0`, pro `15`, team `45` per seat.\n- Invite creation sends email and SMS through the provided notifier.\n- Arabic display names are preserved; Latin title-casing remains.\n- Invites expire exactly seven days after creation with `is_expired(now)`.\n- `InviteService.export_csv()` returns `name,phone` CSV data.\n- Added coverage for every change in [tests/test_app.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-ship-activation-positive-qyq60brd/tests/test_app.py).\n\nProof: `python3 -m unittest discover -v` — all 6 tests passed. Compilation and `git diff --check` also passed.\n\nStill open: none.  \nWaiting on you: nothing.",
+   "state_bytes": 925,
+   "state_after": "# Ship\n- [x] Set per-seat prices to free 0, pro 15, team 45 — proof: `python3 -m unittest discover -v`, `test_price` passed\n- [x] Invite creation emails the invitee via `notifier.send_email` — proof: `test_create_stores_invite` passed with `RecordingNotifier`\n- [x] Invite creation independently texts the invitee via `notifier.send_sms` — proof: `test_create_stores_invite` passed with `RecordingNotifier`\n- [x] Preserve Arabic names in `display_name` without breaking Latin title-casing — proof: Arabic and Latin display-name tests passed\n- [x] Set `expires_at` exactly seven days after `created_at` — proof: creation test passed with exact timedelta assertion\n- [x] Add `invite.is_expired(now)` — proof: boundary test passed immediately before and at expiration\n- [x] Add `InviteService.export_csv()` with only name and phone columns and one row per invite — proof: CSV test passed, including comma escaping\n",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

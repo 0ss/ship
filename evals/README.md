@@ -26,6 +26,19 @@ size, and recovery. `activation.json` adds positive and near-miss routing
 prompts. `bench_integrity.py` verifies the seed remains a real before-state
 and the false-done trap remains armed.
 
+## Final release QA (2026-09-25)
+
+`results/release-qa-2026-09-25/` contains a 15-scenario matched Codex matrix
+(Sol and Luna, Ship and baseline), a model swap and repeat trials, raw turn
+replies, ledgers, and `adjudications.json`. The long noisy dump has 109 lines
+with its CSV request at line 66. The end-to-end rate-limit variant tests
+service integration; the original false-done check covers only the limiter
+object. Two reply-judge labels were corrected against raw text.
+
+Claude Haiku's long-dump attempt timed out without a reply; its unscored
+artifact is under `infrastructure/`. OpenCode Go returned a provider quota
+error. Neither host supplies cross-family evidence in this run.
+
 ## Run
 
 ```bash
