@@ -16,21 +16,37 @@ Claude Code:
 /plugin install ship@ship
 ```
 
-Invoke `/ship` once, then talk normally. For other agents, install
-[`skills/ship`](skills/ship) in your host's skill directory. The repository also
-provides `.agents/skills/ship`.
+For other agents, copy [`skills/ship`](skills/ship) into your agent's skill
+directory (for example, `.agents/skills/ship` in your project).
 
-## How it works
+## Use it
+
+In your project, send the agent:
+
+```text
+/ship Here's the messy version: invite guests by email, fix Arabic names on
+the guest list, and export a CSV. Oh wait—legal says SMS only, not email.
+Finish it and run the checks.
+```
+
+Keep talking normally: `Forget the CSV export. Make invites expire after 14 days.`
+Ship updates the same checklist and works on the latest asks. In a new chat or
+with another model, say: `Read SHIP.md and finish what's still open.`
+
+The file in your project will look like:
 
 ```markdown
 # Ship
 - [ ] Send invite SMS — "legal says SMS only" (was: email)
 - [x] Show Arabic names — proof: `python3 -m unittest` passed
 - ~~CSV export~~ — dropped: "forget the CSV thing"
+- [ ] Expire invites after 14 days
 ```
 
-Only verified work gets checked off. Ship uses your agent's existing tools; it
-doesn't require a service or runtime dependency. [See the benchmark and its
-limits](evals/README.md), or run `./scripts/validate.sh` locally.
+For non-Claude agents, use the same prompt without `/ship`: `Use the ship skill.
+Here's the messy version: ...` Ship uses your agent's existing tools; only
+observed working results get checked off. No service or runtime dependency.
+
+[Benchmark and limits](evals/README.md) · Verify this repo: `./scripts/validate.sh`
 
 MIT licensed.
