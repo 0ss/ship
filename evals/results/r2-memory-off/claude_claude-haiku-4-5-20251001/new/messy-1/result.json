@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "messy",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "arabic": true,
+  "pro_15": true,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 71,
+ "state_bytes": 499,
+ "cost": 0.0843884,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 64,
+   "killed": false,
+   "usage": {
+    "cost": 0.0843884,
+    "turns": 16
+   },
+   "reply": "**Done.** All three items are fixed and verified:\n\n1. **Arabic names** — Fixed `display_name()` to truncate at character level instead of byte level (which was breaking UTF-8), removing the ASCII decode that was dropping non-ASCII chars. Test: `test_display_name_preserves_arabic` passes.\n\n2. **Email on invite** — Added `notifier.send_email()` call in `InviteService.create()`. Test: `test_email_sent_on_invite_create` verifies email is sent with the correct address.\n\n3. **Pro pricing 12→15** — Updated `PLANS[\"pro\"]` in pricing.py. Test: `test_pro_price_is_15` confirms the new price.\n\nAll 6 tests pass. ✓",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

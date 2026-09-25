@@ -1,2 +1,0 @@
-active=5 unclear=0 deferred=0 out-of-scope=0 closed=0 blocked=5 failed=0 unknown=0 stale=0 check-passed=0 bytes=2842
-exit=0

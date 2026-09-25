@@ -1,0 +1,7 @@
+ app/invites.py    | 9 +++++++--
+ app/pricing.py    | 2 +-
+ tests/test_app.py | 8 +++++++-
+ 3 files changed, 15 insertions(+), 4 deletions(-)
+
+untracked:
+SHIP.md

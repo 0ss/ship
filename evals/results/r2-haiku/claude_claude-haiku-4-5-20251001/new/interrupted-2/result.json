@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "interrupted",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 92,
+ "state_bytes": 403,
+ "cost": 0.1325948,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 55,
+   "killed": false,
+   "usage": {
+    "cost": 0.0944996,
+    "turns": 20
+   },
+   "reply": "Done. All four tasks complete with proof:\n\n1. **Email on invite create** — `test_create_sends_email` verifies `notifier.send_email()` is called with the invitee's email\n2. **Pro plan is 15** — `test_price_pro_is_15` confirms the price\n3. **Arabic names fixed** — `test_display_name_arabic` shows Arabic text renders correctly (changed `.decode(\"ascii\"` to `.decode(\"utf-8\"`)\n4. **Invites expire after 7 days** — `test_invite_expires_after_7_days` and `test_invite_is_expired_check` verify `expires_at` property and `is_expired()` method\n\nAll 8 tests pass.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 24,
+   "killed": false,
+   "usage": {
+    "cost": 0.0380952,
+    "turns": 5
+   },
+   "reply": "Perfect! Everything is verified and complete:\n\n**Done (with proof):**\n- ✅ invite sends email to invitee on create — `test_create_sends_email` passes\n- ✅ pro plan price is 15, not 12 — `test_price_pro_is_15` passes  \n- ✅ Arabic names show in full in display_name — `test_display_name_arabic` passes\n- ✅ invites expire after 7 days with is_expired check — both `test_invite_expires_after_7_days` and `test_invite_is_expired_check` pass\n\nAll 8 tests passing. Changes are in `app/display.py`, `app/invites.py`, `app/pricing.py`, and `tests/test_app.py`. Ready to commit when you want.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,4 @@
+[
+  "few things for the invite service:\n- creating an invite should email the invitee (notifier.send_email, to the invite's email)\n- pro plan is 15 now, not 12\n- Arabic names come out blank in display_name, fix\n- invites expire after 7 days: expires_at on the invite plus an is_expired(now) method\n\ngo",
+  "sorry, my laptop died mid-way. where were we? keep going."
+]

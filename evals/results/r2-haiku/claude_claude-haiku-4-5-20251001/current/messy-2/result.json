@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "current",
+ "scenario": "messy",
+ "trial": 2,
+ "complete": false,
+ "recall": 0.25,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": false,
+  "arabic": false,
+  "pro_15": false,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 33,
+ "state_bytes": 1534,
+ "cost": 0.0393545,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 26,
+   "killed": false,
+   "usage": {
+    "cost": 0.0393545,
+    "turns": 3
+   },
+   "reply": "**Parsed and logged.** Three concrete work asks:\n\n1. **R1** — Arabic guest names vanishing in guest list (display_name bug)\n2. **R2** — Email invitees when invite is created\n3. **R3** — Update pro tier pricing from $12 → $15\n\nEverything else is noise or deferred (dark mode is explicitly not this sprint, CSV export is \"maybe one day\").\n\n**Next:** I'll explore the codebase to find where these live, then work through them. Which should I tackle first, or do you want me to go in order?",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

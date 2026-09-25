@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 115,
+ "state_bytes": 578,
+ "cost": 0.4331378,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 17,
+   "killed": false,
+   "usage": {
+    "cost": 0.212995,
+    "turns": 3
+   },
+   "reply": "Saved to `SHIP.md` — nothing lost. No code touched, as requested.\n\n**Still open:**\n- pro plan price 12 → 15\n- invites expire after 14 days via `expires_at` field\n- `display_name` blanking Arabic names\n\n**Struck:** team plan to 45 (Omar reverted, staying at 40)\n\nPick it up tomorrow — just point the fresh session at this repo and it'll read `SHIP.md` first.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 76,
+   "killed": false,
+   "usage": {
+    "cost": 0.22014280000000003,
+    "turns": 14
+   },
+   "reply": "Done (with proof): all three open items from yesterday are built and verified — pro plan is $15, invites carry `expires_at` at +14 days, and the Arabic-name bug (bytes-truncate + ASCII-decode was blanking non-Latin names) is fixed. `python3 -m unittest -v` → 6/6 pass. Nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "interrupted",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 86,
+ "state_bytes": 474,
+ "cost": 0.2783412,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 51,
+   "killed": false,
+   "usage": {
+    "cost": 0.2002942,
+    "turns": 15
+   },
+   "reply": "All four done, proven by `python3 -m unittest -v` (7/7 pass):\n\n- **Email on create**: `InviteService.create` now calls `notifier.send_email(invite.email, ...)` — `app/invites.py:29`\n- **Pro plan → 15**: `app/pricing.py:1`\n- **Arabic names fixed**: `display_name` was encoding to UTF-8 then decoding as `ascii` with `errors=\"ignore\"`, silently dropping every non-ASCII byte. Now it slices/titles the string directly — `app/display.py`\n- **7-day expiry**: `Invite` gained `expires_at` (set on create) and `is_expired(now)` — `app/invites.py`\n\nNothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 22,
+   "killed": false,
+   "usage": {
+    "cost": 0.078047,
+    "turns": 3
+   },
+   "reply": "All 7 tests pass, matching what SHIP.md already claims. Nothing was left broken by the crash — all four items were already implemented and verified before the laptop died:\n\n- [x] invite creation emails the invitee\n- [x] pro plan price is 15\n- [x] Arabic names preserved in `display_name`\n- [x] invites expire after 7 days (`expires_at` + `is_expired`)\n\nEverything in SHIP.md is done, with proof (just re-ran `python3 -m unittest -v` — 7/7 ok). Nothing open, nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

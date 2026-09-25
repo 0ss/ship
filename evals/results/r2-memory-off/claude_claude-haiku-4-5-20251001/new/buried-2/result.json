@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "buried",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "team_45": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 66,
+ "state_bytes": 296,
+ "cost": 0.0805817,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 59,
+   "killed": false,
+   "usage": {
+    "cost": 0.0805817,
+    "turns": 13
+   },
+   "reply": "Done. Both asks from the team chat are complete and tested:\n\n✅ **Pricing updated** — team plan price changed from 40 to 45 per month  \n✅ **Invite expiration** — invites now expire after 7 days, with `expires_at` property and `is_expired(now)` method\n\nAll 5 tests pass including the new expiration tests. SHIP.md updated with proof.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

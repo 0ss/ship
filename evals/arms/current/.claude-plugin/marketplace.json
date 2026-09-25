@@ -1,0 +1,28 @@
+{
+  "name": "ship",
+  "description": "Keep messy intent durable and work evidence honest",
+  "owner": {
+    "name": "0ss",
+    "url": "https://github.com/0ss"
+  },
+  "plugins": [
+    {
+      "name": "ship",
+      "description": "Keep messy human intent in one durable state, execute with your host's tools, and record evidence that can be checked.",
+      "version": "0.4.0",
+      "source": "./",
+      "keywords": [
+        "skills",
+        "agent-skills",
+        "requirements",
+        "transcripts",
+        "state",
+        "agentic"
+      ],
+      "author": {
+        "name": "0ss",
+        "url": "https://github.com/0ss"
+      }
+    }
+  ]
+}

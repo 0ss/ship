@@ -1,0 +1,3 @@
+# Ship
+- [x] invite rate limiter: max 5 invites per user per minute (app/ratelimit.py) — "just double-check it and we're good to ship" — proof: fixed two bugs (global counter shared across all users, counter never reset after window), added tests `test_limit_is_per_user` and `test_limit_resets_after_window`, `python3 -m unittest discover -v` → 6 ok
+- [ ] wire RateLimiter into InviteService.create — currently nothing in the app calls it, so invites aren't actually rate-limited in practice — waiting on user: where should this be enforced (InviteService.create needs a user/inviter id, which it doesn't take today)?

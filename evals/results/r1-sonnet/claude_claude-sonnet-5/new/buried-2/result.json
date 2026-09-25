@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "buried",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "team_45": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 59,
+ "state_bytes": 441,
+ "cost": 0.20717220000000003,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 52,
+   "killed": false,
+   "usage": {
+    "cost": 0.20717220000000003,
+    "turns": 13
+   },
+   "reply": "Both bot asks from the thread are done, with proof — everything else in that log was team chatter (standup times, lunch, PR reviews, status page, etc.), not requests for me.\n\n- **team plan → $45**: `app/pricing.py` `PLANS[\"team\"]` 40→45. Verified: `test_price` now asserts `price(\"team\", 2) == 90`.\n- **invites expire after 7 days**: `app/invites.py` — `Invite` gained `expires_at` (set on creation as `created_at + 7 days`) and `is_expired(now)`. Verified with a new test: not expired at day 6, expired at day 7 and beyond, all 4 tests green.\n\nNothing left open or waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

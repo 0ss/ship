@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "buried",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "team_45": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 70,
+ "state_bytes": 320,
+ "cost": 0.1024555,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 65,
+   "killed": false,
+   "usage": {
+    "cost": 0.1024555,
+    "turns": 17
+   },
+   "reply": "Done. Both tasks complete with passing tests:\n\n1. **Team pricing updated to 45** — changed `PLANS[\"team\"]` from 40 to 45, test_price now verifies 45 * 2 = 90\n2. **Invite expiration added** — Invite now has `expires_at` field (7 days from creation) and `is_expired(now)` method, new test confirms expiry works correctly\n\nAll 4 tests passing.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "host": "codex:gpt-5.6-sol",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 224,
+ "state_bytes": 491,
+ "cost": 0,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 34,
+   "killed": false,
+   "usage": {
+    "input_tokens": 93632,
+    "cached_input_tokens": 84864,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 826,
+    "reasoning_output_tokens": 96
+   },
+   "reply": "Captured in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-new-handoff-xszqbtog/SHIP.md).\n\n- Done: Durable handoff created and verified.\n- Still open: Pro price $15; invites expire after 14 days via `expires_at`; fix Arabic `display_name`.\n- Dropped: Team price increase; remains $40.\n- Waiting on you: Nothing.\n\nNo product code was changed.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 108,
+   "killed": false,
+   "usage": {
+    "input_tokens": 213157,
+    "cached_input_tokens": 198656,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2713,
+    "reasoning_output_tokens": 212
+   },
+   "reply": "Built everything from yesterday:\n\n- Pro plan: $12 → $15; Team remains $40.\n- Invites now include `expires_at`, set 14 days after creation.\n- Arabic names are preserved by Unicode-safe character truncation.\n- Added regression tests and updated [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-new-handoff-xszqbtog/SHIP.md).\n\nDone: 5 tests pass; compilation and `git diff --check` pass.  \nStill open: nothing.  \nWaiting on you: nothing.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

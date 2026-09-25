@@ -1,0 +1,6 @@
+ app/invites.py    | 11 +++++++++--
+ app/pricing.py    |  2 +-
+ tests/test_app.py | 10 +++++++++-
+ 3 files changed, 19 insertions(+), 4 deletions(-)
+
+untracked:

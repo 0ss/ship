@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "current",
+ "scenario": "messy",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "arabic": true,
+  "pro_15": true,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 97,
+ "state_bytes": 2666,
+ "cost": 0.1221543,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 90,
+   "killed": false,
+   "usage": {
+    "cost": 0.1221543,
+    "turns": 19
+   },
+   "reply": "## Summary\n\nAll three standup items are done and tested ✓\n\n**R1: Display name bug** — Fixed by decoding UTF-8 to string first, then truncating at character level (not byte level). Arabic names like \"محمد علي\" are now preserved.\n\n**R2: Email on invite** — InviteService.create() now calls notifier.send_email() with the invite email, friendly subject/body.\n\n**R3: Pricing update** — Pro tier updated from $12 → $15.\n\nAll tests pass. Next: commit this work, then the five deferred/noise items stay parked in the Ignored section for future reference.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

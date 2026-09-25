@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "baseline",
+ "scenario": "handoff",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 105,
+ "state_bytes": 0,
+ "cost": 0.24204219999999999,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 24,
+   "killed": false,
+   "usage": {
+    "cost": 0.082341,
+    "turns": 4
+   },
+   "reply": "Saved. Final list for next session:\n\n1. Pro plan: 12 → 15\n2. Invites expire after **14 days** (corrected from 7) — add `expires_at` to invite\n3. Team plan: stays at **40** (the 45 change is dead, per Omar)\n4. Bug: `display_name` blanks out Arabic names\n\nNothing coded — pick it up fresh tomorrow.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 43,
+   "killed": false,
+   "usage": {
+    "cost": 0.1597012,
+    "turns": 16
+   },
+   "reply": "All tests pass. Summary of what was built from yesterday's brain dump:\n\n- **Pro price**: `app/pricing.py` — `12 → 15`; team stays at 40 (the 45 idea was left dead, per Omar's reversal).\n- **Invite expiry**: `app/invites.py` — added `expires_at` on `Invite`, set to `created_at + 14 days`.\n- **Arabic `display_name` bug**: `app/display.py` — root cause was encoding to UTF-8 bytes, truncating by byte count, then `decode(\"ascii\", errors=\"ignore\")`, which silently dropped every non-ASCII byte (blanking Arabic and any other non-Latin name). Fixed by slicing the string directly by character count instead of round-tripping through ASCII.\n\nAdded tests for all three; full suite (6 tests) passes. Nothing committed yet — let me know if you want it committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

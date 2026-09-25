@@ -1,0 +1,115 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "baseline",
+ "scenario": "pivot",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "sms_on_create": true,
+  "arabic": true,
+  "expiry_30": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 233,
+ "state_bytes": 0,
+ "cost": 1.7816965999999996,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 51,
+   "killed": false,
+   "usage": {
+    "cost": 0.1270112,
+    "turns": 10
+   },
+   "reply": "All tests pass.\n\nChanges in `app/invites.py`:\n- `Invite` gains `expires_at`, set to `created_at + 7 days` on creation.\n- `create()` now calls `self.notifier.send_email(...)` to the invite's email.\n- Added `InviteService.export_csv()` returning CSV text with all invites.\n\nAdded test coverage for the email send, expiry, and CSV export in `tests/test_app.py`.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 28,
+   "killed": false,
+   "usage": {
+    "cost": 0.20324479999999998,
+    "turns": 6
+   },
+   "reply": "All tests pass. Switched to `notifier.send_sms(phone, ...)` instead of email, and removed `export_csv()` entirely — kept the 7-day `expires_at` field.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 2,
+   "secs": 44,
+   "killed": false,
+   "usage": {
+    "cost": 0.27656179999999997,
+    "turns": 6
+   },
+   "reply": "All tests pass. The bug: `display_name` truncated by UTF-8 byte count and then decoded as ASCII with `errors=\"ignore\"`, which silently discarded every non-ASCII byte — so Arabic (or any non-Latin) names came out blank, and could also split multi-byte characters mid-sequence. Fixed by truncating the string by characters directly instead of round-tripping through bytes/ASCII.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 3,
+   "secs": 19,
+   "killed": false,
+   "usage": {
+    "cost": 0.32319919999999996,
+    "turns": 4
+   },
+   "reply": "Done — expiry is now 30 days, and all tests pass.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 4,
+   "secs": 29,
+   "killed": false,
+   "usage": {
+    "cost": 0.3979809999999999,
+    "turns": 6
+   },
+   "reply": "Added `InviteService.export_csv()` back with just `name` and `phone` columns. All tests pass.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 5,
+   "secs": 23,
+   "killed": false,
+   "usage": {
+    "cost": 0.4536985999999999,
+    "turns": 4
+   },
+   "reply": "Committed as `a68b2bf`. Final state:\n\n- **SMS on create**: `notifier.send_sms(phone, ...)` fires when an invite is created.\n- **30-day expiry**: `Invite.expires_at` set to `created_at + 30 days`.\n- **CSV export**: `InviteService.export_csv()` returns name/phone only.\n- **Arabic name fix**: `display_name` no longer round-trips through UTF-8→ASCII, so non-Latin names render correctly.\n\nAll 7 tests pass, working tree is clean.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

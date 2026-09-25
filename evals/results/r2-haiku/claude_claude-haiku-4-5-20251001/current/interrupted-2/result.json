@@ -1,0 +1,49 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "current",
+ "scenario": "interrupted",
+ "trial": 2,
+ "complete": false,
+ "recall": 0.75,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": false,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 134,
+ "state_bytes": 1624,
+ "cost": 0.09077299999999999,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 75,
+   "killed": true,
+   "usage": {},
+   "reply": "",
+   "judge": {}
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 46,
+   "killed": false,
+   "usage": {
+    "cost": 0.09077299999999999,
+    "turns": 2
+   },
+   "reply": "Found your SHIP.md. You had 4 requirements in progress:\n\n**Active work:**\n- **R1** (W1): Pro plan price should be 15 (not 12)\n- **R2** (W2): Arabic names should not display as blank\n- **R3** (W3): Invites need `expires_at` field and `is_expired()` method\n- **R4** (W4): Invites should email when created\n\nAll work is in `planned` status — checks are defined but haven't run yet. I can see `app/display.py`, `app/invites.py`, and `app/pricing.py` have uncommitted changes, so you started editing before the laptop died.\n\n**Two issues with the SHIP state itself:**\n1. **C2's test looks wrong** — it's checking `display_name('محمد') == 'محمد'.title()`, but `.title()` on Arabic text won't work as intended. Should just verify the name isn't blank.\n2. **C3 and C4 use `npm test`**, but this looks like a Python project. Should use `pytest` or a Python test runner instead.\n\nWant me to fix those checks and then run through the work, or do you want to tell me more about the project setup first?",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

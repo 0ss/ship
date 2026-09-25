@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 93,
+ "state_bytes": 371,
+ "cost": 0.1252247,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 23,
+   "killed": false,
+   "usage": {
+    "cost": 0.0302791,
+    "turns": 3
+   },
+   "reply": "Done. SHIP.md is saved with your four items:\n\n- **pro plan price** 12 → 15\n- **invites** expire after 14 days (expires_at field)\n- ~~team plan to 45~~ struck (Omar keeping it at 40)\n- **display_name** Arabic names blanking issue\n\nReady for tomorrow's fresh session. 👍",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 57,
+   "killed": false,
+   "usage": {
+    "cost": 0.0949456,
+    "turns": 17
+   },
+   "reply": "Done. Built all three open items from yesterday:\n\n1. **pro plan price 12 → 15** — changed `app/pricing.py`, verified `price('pro')` returns 15\n2. **invites expire after 14 days** — added `expires_at` field to `Invite`, set to `created_at + timedelta(days=14)` in `create()`\n3. **Arabic names fix** — removed UTF-8 byte-slicing, now slices characters properly; \"محمد علي\" displays correctly\n\nAll tests pass. SHIP.md updated with proof. Everything complete.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

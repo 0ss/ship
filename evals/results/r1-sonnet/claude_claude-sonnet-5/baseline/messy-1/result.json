@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "baseline",
+ "scenario": "messy",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "arabic": true,
+  "pro_15": true,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 60,
+ "state_bytes": 0,
+ "cost": 0.14136759999999998,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 50,
+   "killed": false,
+   "usage": {
+    "cost": 0.14136759999999998,
+    "turns": 14
+   },
+   "reply": "Arabic names now render correctly, and Latin names still title-case as before.\n\nSummary of what I did, and what I deliberately left alone:\n\n**Fixed:**\n- `app/display.py` — `display_name` was round-tripping through ASCII (`encode(\"utf-8\")` → `decode(\"ascii\", errors=\"ignore\")`), which silently dropped every non-Latin character — that's why Arabic names went blank. Now it slices/title-cases the string directly. Verified against `'محمد أحمد'`.\n- `app/invites.py` — `InviteService.create` now calls `self.notifier.send_email(email, ...)` with a friendly subject/body when an invite is created.\n- `app/pricing.py` — `pro` plan bumped from 12 to 15; `team` untouched.\n\nAll 3 existing tests still pass.\n\n**Skipped on purpose** (not sprint work): Rust rewrite (joke), dark mode (Priya's opinion, not scoped), CSV export (idea, not now). SMS outage story and coffee machine aren't tasks. Let me know if you want a test added for the Arabic-name case or the invite email, since none currently cover that.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

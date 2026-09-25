@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "messy",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "arabic": true,
+  "pro_15": true,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 66,
+ "state_bytes": 520,
+ "cost": 0.08575910000000002,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 59,
+   "killed": false,
+   "usage": {
+    "cost": 0.08575910000000002,
+    "turns": 16
+   },
+   "reply": "Done. All three asks fixed and verified:\n\n1. **Arabic names** — Removed the broken UTF-8→ASCII decode that was stripping Arabic characters. Now `display_name(\"محمد علي\")` returns the full name intact.\n\n2. **Invite emails** — Added `notifier.send_email()` call in `InviteService.create()` with a friendly subject and body. Email sends immediately when invite is created.\n\n3. **Pro pricing** — Updated from $12 to $15 in `PLANS` dict. `price(\"pro\")` now returns 15.\n\nAll existing tests pass; manual verification confirms each fix works.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

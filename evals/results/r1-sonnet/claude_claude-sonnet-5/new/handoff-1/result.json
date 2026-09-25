@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 78,
+ "state_bytes": 633,
+ "cost": 0.2413716,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 15,
+   "killed": false,
+   "usage": {
+    "cost": 0.0720294,
+    "turns": 3
+   },
+   "reply": "Saved to `SHIP.md` — no code touched. 3 open items, 1 dropped:\n\n- [ ] pro plan price 12 → 15\n- [ ] invites expire after 14 days, add `expires_at` on the invite\n- ~~team plan to 45~~ — dropped (Omar reverted, stays 40)\n- [ ] `display_name` blanks out Arabic names\n\nStill open, waiting on you: nothing — all set to pick up tomorrow.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 48,
+   "killed": false,
+   "usage": {
+    "cost": 0.1693422,
+    "turns": 15
+   },
+   "reply": "All three open items from yesterday are done, with proof — all 6 tests pass (`python3 -m unittest -v`):\n\n- **pro plan price 12→15**: `PLANS[\"pro\"] = 15` in `app/pricing.py`.\n- **invites expire after 14 days**: `Invite` now has `expires_at` (`created_at + timedelta(days=14)`) in `app/invites.py`.\n- **Arabic names blanking out**: `display_name` was forcing utf-8 bytes through an ascii decode (`errors=\"ignore\"`), which silently dropped all non-Latin characters. Fixed to slice/title the string directly — Arabic names now pass through unchanged.\n\nTeam plan stays at 40 (Omar's reversal, already correct, no code change needed).\n\nNothing left open, nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

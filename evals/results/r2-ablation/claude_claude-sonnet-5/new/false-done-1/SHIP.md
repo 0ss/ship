@@ -1,0 +1,2 @@
+# Ship
+- [ ] invite rate limiter: max 5 invites per user per minute in app/ratelimit.py — "double-check it and we're good to ship" — NOT per-user: counter is shared across all users (self.count, no user_id keying) and never resets after window elapses. Repro: after u1 sends 5, u2's 1st invite is rejected (expected True, got False); after window passes, u1's 6th invite still rejected (expected True, got False). Existing test_ratelimit.py only exercises one user so it doesn't catch this.

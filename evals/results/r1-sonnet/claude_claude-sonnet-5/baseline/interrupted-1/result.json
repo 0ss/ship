@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "baseline",
+ "scenario": "interrupted",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 86,
+ "state_bytes": 0,
+ "cost": 0.2622614,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 35,
+   "killed": false,
+   "usage": {
+    "cost": 0.1447928,
+    "turns": 14
+   },
+   "reply": "All four changes are in and verified:\n\n- `create` now calls `notifier.send_email` to the invitee's email\n- `PLANS[\"pro\"]` is `15`\n- `display_name` no longer strips non-ASCII bytes before decoding, so Arabic names survive\n- `Invite` has `expires_at` (created_at + 7 days) and `is_expired(now)`\n\nExisting tests pass; manually verified Arabic name display, email dispatch, and expiry boundary (day 7 not expired, day 8 expired).",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 36,
+   "killed": false,
+   "usage": {
+    "cost": 0.1174686,
+    "turns": 8
+   },
+   "reply": "I don't actually have the earlier part of this conversation — it looks like this session started fresh (no saved plan or notes on my end). Here's what I can see in the working tree right now, three uncommitted changes:\n\n1. **`app/pricing.py`** — `pro` plan price bumped from 12 → 15.\n2. **`app/invites.py`** — invites now get a 7-day `expires_at` + `is_expired()`, and `create()` sends a \"You're invited\" email via the notifier.\n3. **`app/display.py`** — `display_name` simplified to drop the ASCII-encode/decode step (previously stripped non-ASCII characters via `.encode(\"ascii\", errors=\"ignore\")`; now just does `.strip()[:limit].title()` directly, so non-Latin names pass through instead of being mangled).\n\nTests pass (`python3 -m unittest` → 3 OK), nothing's staged or committed yet.\n\nTwo things worth a quick sanity check before I go further:\n- The pricing change is a real business number — was 15 confirmed, or is that a placeholder?\n- Dropping the ASCII sanitization in `display_name` is a behavior change (non-Latin names now pass through untouched) — intentional fix, or did something else motivate that?\n\nLet me know how you'd like to proceed — commit as-is, keep iterating on one of these, or something else.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

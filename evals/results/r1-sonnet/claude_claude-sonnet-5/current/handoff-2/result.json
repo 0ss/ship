@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "current",
+ "scenario": "handoff",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 271,
+ "state_bytes": 2943,
+ "cost": 0.8318707999999999,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 62,
+   "killed": false,
+   "usage": {
+    "cost": 0.2386986,
+    "turns": 8
+   },
+   "reply": "Validation passes clean. Here's the ledger for tomorrow, saved to `SHIP.md`:\n\n**Active (open, no work started yet):**\n- **R1** — Pro plan price: $12 → $15\n- **R2** — Invites expire after **14 days** (corrected from the initial 7-day mention), add `expires_at` field on the invite\n- **R4** — Bug: `display_name` blanks out Arabic names\n\n**Closed (no action needed):**\n- **R3** — Team plan → $45, retracted; Omar decided it stays at $40\n\nNo work/checks were started, per your instruction — next session picks this up straight from `SHIP.md`. Next action when you're back: pick one of R1/R2/R4 to scope into a `Work` row and get moving.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 184,
+   "killed": false,
+   "usage": {
+    "cost": 0.5931721999999999,
+    "turns": 37
+   },
+   "reply": "All three active requirements from yesterday are built and passing, with the full test suite green.\n\n**Built:**\n1. **R1** — Pro plan price $12 → $15 (`app/pricing.py`)\n2. **R2** — Invite expiry 14 days + `expires_at` field on `Invite` (`app/invites.py`)\n3. **R4** — Fixed `display_name` blanking Arabic names — it was encoding to UTF-8 bytes then forcibly decoding as ASCII with `errors=\"ignore\"`, which silently dropped every non-ASCII character. Now it slices and titles the string directly (`app/display.py`)\n\nEach has a dedicated test (`tests/test_app.py`), all 6 tests pass.\n\n**Status:** `implemented-unproven`, not `check-passed` — I ran the tests myself, and Ship's contract doesn't let model-run evidence count as proof (evidence `by: model` is deliberately excluded from closing the loop). If you want this to reach `check-passed`, have someone/something else (CI, a teammate, or a separate review pass) rerun the three named checks in the `Checks` table and record the result.\n\nNothing is committed — only edited in the working tree. Let me know if you'd like me to commit this.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

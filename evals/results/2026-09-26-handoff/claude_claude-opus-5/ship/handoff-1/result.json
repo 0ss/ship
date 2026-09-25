@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-opus-5",
+ "arm": "ship",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 2,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 306,
+ "state_bytes": 3850,
+ "cost": 1.3762119999999998,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 122,
+   "killed": false,
+   "usage": {
+    "cost": 0.581838,
+    "turns": 18
+   },
+   "reply": "Captured, no code touched. `SHIP.md` is written at the repo root and validates clean.\n\n**What's in the ledger** (corrections already applied, not appended):\n\n| id | state | request |\n|---|---|---|\n| R1@1 | active | pro plan price 12 → 15 |\n| R2@2 | active | invites expire **14 days** after creation + `expires_at` on the invite |\n| R3@2 | out-of-scope | team plan **stays at 40** — the 45 raise is withdrawn |\n| R4@1 | active | `display_name` blanks out Arabic names |\n\n- The 7→14 day change and the scrapped 45 are recorded as `correction` history rows (`R2@1→R2@2`, `R3@1→R3@2`) with your exact wording, so tomorrow's session sees the final intent *and* why it changed. Omar's reversal is noted as the reason, attributed to you relaying it.\n- `W1`–`W3` are `planned` with named checks (`C1`–`C3`) against the existing `python3 -m unittest discover -s tests -t .` runner, which currently passes 3 tests. Each carries the blocker `hold: user said do not start coding yet` — that's deliberate, so a fresh session reads the hold before it writes code. The validator's summary renders those as `blocked` for that reason.\n- Your \"don't start coding\" instruction is logged in `Ignored` as a session directive, not product scope.\n- Evidence table is empty. Nothing is claimed as working.\n\nTwo things I noticed while anchoring file paths (recorded only as check wording, not as new scope):\n1. `app/display.py:3` does `.encode(\"utf-8\")[:limit]` then `.decode(\"ascii\", errors=\"ignore\")` — the ASCII decode is what empties Arabic names, and the byte-slice can also split a multibyte character. That's R4's likely cause.\n2. `tests/test_app.py:20` asserts `price(\"team\", 2) == 80`, which stays correct now that team holds at 40.\n\nNext action, whenever you're ready tomorrow: say go, and I'll clear the hold and take `W1` (pro → 15) first as the smallest provable slice. Want me to commit `SHIP.md` now so it's in git history too, or leave it uncommitted in the worktree?",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 134,
+   "killed": false,
+   "usage": {
+    "cost": 0.7943739999999999,
+    "turns": 28
+   },
+   "reply": "Built all three, all green. Everything from yesterday is committed.\n\n## What shipped\n\n| | Requirement | Change | Check |\n|---|---|---|---|\n| **R1** | Pro plan 12 → 15 | `app/pricing.py` — `pro: 15`, team left at 40 | ✅ pass |\n| **R2** | Invites expire, 14 days | `app/invites.py` — `INVITE_TTL = 14 days`, `Invite.expires_at` set from `created_at` | ✅ pass |\n| **R4** | Arabic names blanked | `app/display.py` — truncate by characters, not UTF-8 bytes | ✅ pass |\n\n**R3** (team → 45) stayed out-of-scope — Omar withdrew it, team is still 40, and there's a test pinning that.\n\nEvidence: `python3 -m unittest discover -s tests -t .`, 8 tests, OK, at `0672309`. Recorded as E1–E3 in `SHIP.md` and validated.\n\n## The display_name bug\n\nThe old line was `name.strip().encode(\"utf-8\")[:limit].decode(\"ascii\", errors=\"ignore\")`. Arabic is non-ASCII, so `errors=\"ignore\"` deleted every character — the name came back as an empty string, not a mangled one. Truncating the string directly fixes it and leaves ASCII behavior identical.\n\nOne deliberate call: `limit=24` used to mean 24 *bytes*, now it means 24 *characters*. For Latin names nothing changes; for Arabic names you now get 24 characters where the old code would have allowed about 12. That seemed like the reading you'd want from \"needs fixing,\" but it is a semantics change, so say the word if you'd rather cap bytes.\n\n## Two things I found but did not act on\n\n1. **`InviteService.notifier` is injected and never used.** `create()` stores the invite and returns it — nothing is ever sent. Yesterday's dump never asked for an invitation email, so I left it alone rather than inventing scope.\n2. **`expires_at` is a required field on `Invite`.** Any code constructing `Invite(...)` positionally with four arguments will now fail. Inside this repo only `create()` and the tests build one, so nothing is broken here, but a caller outside this repo would be.\n\nCaveat on the proof: these are my own tests, run by me. Model-reviewed, not independently verified — no separate reviewer looked at this diff.\n\nNext action: tell me whether the byte-vs-character cap on `display_name` is what you want, and whether that dangling notifier should become a real requirement.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  }
+ ]
+}

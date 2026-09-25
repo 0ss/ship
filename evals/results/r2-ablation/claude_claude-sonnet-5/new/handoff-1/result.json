@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 213,
+ "state_bytes": 647,
+ "cost": 0.306116,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 35,
+   "killed": false,
+   "usage": {
+    "cost": 0.058143600000000004,
+    "turns": 3
+   },
+   "reply": "Captured in `SHIP.md` at the repo root — no code touched.\n\n**Still open:**\n- pro plan price 12 → 15\n- invites expire after 14 days, `expires_at` on invite\n- `display_name` blanks out Arabic names\n\n**Dropped:** team plan to 45 (Omar reverted, stays at 40)\n\nPick it up anytime — next session just needs to read `SHIP.md` first.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 135,
+   "killed": false,
+   "usage": {
+    "cost": 0.24797239999999998,
+    "turns": 16
+   },
+   "reply": "All four items done (with proof), 7/7 tests passing:\n\n- **pro plan → 15**: `PLANS[\"pro\"]` updated in `app/pricing.py`; `test_pro_price` ok.\n- **invites expire after 14 days**: added `expires_at` to `Invite`, computed as `created_at + timedelta(days=14)`; `test_invite_expires_after_14_days` ok.\n- **team plan to 45**: dropped per Omar, left at 40; `test_team_price_unchanged` ok.\n- **Arabic names blanking**: `display_name` was encoding to UTF-8, slicing bytes, then decoding with `errors=\"ignore\"` on ASCII — that silently dropped every non-ASCII character. Fixed to slice/truncate on the string directly. `test_display_name_keeps_arabic` ok.\n\nNothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

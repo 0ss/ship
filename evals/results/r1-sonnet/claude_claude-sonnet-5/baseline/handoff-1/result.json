@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "baseline",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 102,
+ "state_bytes": 0,
+ "cost": 0.294508,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 21,
+   "killed": false,
+   "usage": {
+    "cost": 0.084034,
+    "turns": 4
+   },
+   "reply": "Saved. Here's the final state I captured (corrections already applied):\n\n1. Pro plan: $12 → $15\n2. Invite expiry: **14 days** (not 7), add `expires_at` to the invite\n3. Team plan: **stays at $40** — the $45 change is cancelled per Omar\n4. Bug: `display_name` blanks out Arabic names — needs a fix\n\nNothing was coded. This'll be there when you pick it back up tomorrow.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 67,
+   "killed": false,
+   "usage": {
+    "cost": 0.210474,
+    "turns": 23
+   },
+   "reply": "All four items from yesterday's brain dump are built and tested:\n\n1. **Pro plan** `app/pricing.py:1` — $12 → $15\n2. **Invite expiry** `app/invites.py` — added `expires_at` field, set to `created_at + 14 days`\n3. **Team plan** — left at $40 (the $45 change was cancelled, confirmed no-op)\n4. **Arabic `display_name` bug** `app/display.py` — root cause was `.encode(\"utf-8\")` then `.decode(\"ascii\", errors=\"ignore\")`, which silently dropped every non-ASCII byte; fixed to slice/title the string directly, preserving Arabic (and other non-Latin) names\n\nAdded regression tests for all four; full suite (6 tests) passes. Cleared the pending-TODO memory since it's now done.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

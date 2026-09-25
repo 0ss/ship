@@ -1,0 +1,115 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "pivot",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "sms_on_create": true,
+  "arabic": true,
+  "expiry_30": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 224,
+ "state_bytes": 791,
+ "cost": 1.9589374000000002,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 56,
+   "killed": false,
+   "usage": {
+    "cost": 0.17232640000000002,
+    "turns": 13
+   },
+   "reply": "Done, all three ticked with proof:\n\n- `Invite` now has `expires_at` (created_at + 7 days), and `InviteService.create()` calls `notifier.send_email(invite.email, ...)`.\n- `InviteService.export_csv()` returns CSV text with header `name,email,phone,created_at,expires_at` and one row per invite.\n- Verified via a script that ran real code (not just reasoning): email was recorded by `RecordingNotifier`, expiry landed exactly 7 days after creation, and CSV contained both created invites.\n- Full existing test suite (`python3 -m unittest`) still passes, 3/3.\n\nNothing waiting on you — everything requested is implemented and proven.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 26,
+   "killed": false,
+   "usage": {
+    "cost": 0.23434460000000001,
+    "turns": 5
+   },
+   "reply": "Done:\n\n- Swapped email for SMS — `create()` now calls `notifier.send_sms(invite.phone, ...)`, no more `send_email`. Verified: `notifier.sent == [('sms', '+15550001', ...)]`.\n- Removed `export_csv()` entirely.\n- `expires_at` (7 days) untouched and still verified.\n- Full test suite still passes, 3/3.\n\nNothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 2,
+   "secs": 33,
+   "killed": false,
+   "usage": {
+    "cost": 0.3099594,
+    "turns": 6
+   },
+   "reply": "Fixed. `display_name` was forcing UTF-8 bytes through an ASCII decode with `errors=\"ignore\"`, silently dropping every non-Latin character — Arabic names came out empty. Now it truncates and title-cases the Unicode string directly, no encoding round-trip.\n\nVerified: `display_name('محمد العلي')` → `'محمد العلي'` (previously `''`), Latin names still title-case correctly, and the length limit still works. Full test suite passes, 3/3. Nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 3,
+   "secs": 29,
+   "killed": false,
+   "usage": {
+    "cost": 0.3577134,
+    "turns": 4
+   },
+   "reply": "Done. Expiry is now 30 days — verified `expires_at` lands on 2026-01-31 for a 2026-01-01 creation. Full suite still passes, 3/3. Nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 4,
+   "secs": 24,
+   "killed": false,
+   "usage": {
+    "cost": 0.4262174,
+    "turns": 5
+   },
+   "reply": "Done. `InviteService.export_csv()` is back, now with just `name,phone` columns (no email/dates). Verified output:\n\n```\nname,phone\nada lovelace,+15550001\nbob,+15550002\n```\n\nFull test suite still passes, 3/3. Nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 5,
+   "secs": 17,
+   "killed": false,
+   "usage": {
+    "cost": 0.4583762,
+    "turns": 2
+   },
+   "reply": "All four items are done and verified — this run's checklist:\n\n- **SMS on invite creation** — `notifier.send_sms(invite.phone, ...)` fires on `create()`\n- **CSV export** — `InviteService.export_csv()` returns `name,phone` columns only\n- **30-day expiry** — `expires_at` = `created_at` + 30 days\n- **Arabic names fixed** — `display_name()` no longer mangles non-Latin text through an ASCII round-trip\n\nFull test suite passes (3/3). Working tree has `app/invites.py` and `app/display.py` modified, plus untracked `SHIP.md` tracking this work — nothing committed yet since you didn't ask for that. Want me to commit these changes?",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  }
+ ]
+}

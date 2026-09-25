@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "current",
+ "scenario": "buried",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "team_45": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 121,
+ "state_bytes": 2224,
+ "cost": 0.16922169999999995,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 114,
+   "killed": false,
+   "usage": {
+    "cost": 0.16922169999999995,
+    "turns": 28
+   },
+   "reply": "Done! I've extracted and completed the two explicit asks from the team chat:\n\n**Completed:**\n- **R1 (Pricing)**: Updated team plan from $40 to $45 as dana requested at 09:02\n- **R2 (Invite Expiration)**: Added `expires_at` field and `is_expired(now)` method to Invite class with 7-day expiration, as fatima requested at 13:20\n\n**Evidence:**\n- All unit tests pass (3/3)\n- Pricing updated in `app/pricing.py`, test expectations updated\n- Invite expiration logic verified: invites don't expire until exactly 7 days after creation\n- Changes committed with git:eb931b6 and git:57bcbfc\n\n**Ignored from transcript:** Noise (repeated messages, social chat, status updates) and open questions without actionable asks (\"does anyone know why node 18 is pinned\"). The team pairing, review activities, and credential rotation were already underway.\n\nSHIP.md is tracking state with all evidence recorded.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

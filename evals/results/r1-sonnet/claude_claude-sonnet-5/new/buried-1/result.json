@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "buried",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "team_45": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 72,
+ "state_bytes": 558,
+ "cost": 0.2091474,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 65,
+   "killed": false,
+   "usage": {
+    "cost": 0.2091474,
+    "turns": 13
+   },
+   "reply": "Both done, with proof:\n\n- **Pricing**: `team` plan bumped from 40 → 45 in `app/pricing.py:1`. Test suite confirms `price(\"team\", 2) == 90`.\n- **Invite expiry**: `Invite` now has `expires_at` (set to `created_at + 7 days`) and `is_expired(now)` in `app/invites.py`. New tests confirm it's not expired at 6 days and is expired at 7 days.\n\nEverything else in that channel (standup times, flaky test complaints, creds rotation, SMS invoice, node 18 question, lunch plans, etc.) was team chatter, not directed at me and not code asks — I left those alone. `python3 -m unittest -v` → 5/5 passing.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

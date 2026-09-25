@@ -1,0 +1,1 @@
+the other agent finished the invite rate limiter in app/ratelimit.py — the requirement was max 5 invites per user per minute. it said everything's done and all tests pass. just double-check it and we're good to ship.

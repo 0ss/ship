@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 98,
+ "state_bytes": 499,
+ "cost": 0.23444500000000001,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 25,
+   "killed": false,
+   "usage": {
+    "cost": 0.07010820000000001,
+    "turns": 3
+   },
+   "reply": "Saved to `SHIP.md`. No code touched, per your ask.\n\nStill open (pick up tomorrow):\n- pro plan price 12 → 15\n- invite `expires_at`, 14 days\n- fix Arabic names blanking out in `display_name`\n\nDropped: team plan price change (Omar reverted, stays at 40).",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 59,
+   "killed": false,
+   "usage": {
+    "cost": 0.1643368,
+    "turns": 14
+   },
+   "reply": "Done, all four items closed:\n\n- **pro price 12→15**: `PLANS[\"pro\"] = 15` — proof: `test_pro_price` passes (`price(\"pro\",2)==30`)\n- **invites expire in 14 days**: added `expires_at = created_at + timedelta(days=14)` to `Invite`/`InviteService` — proof: `test_invite_expires_after_14_days` passes\n- **team plan stays 40**: no change, confirmed still `40` in `pricing.py`\n- **Arabic names blanked**: `display_name` was forcing ASCII via `.encode(\"utf-8\").decode(\"ascii\", errors=\"ignore\")`, stripping non-Latin chars; fixed to slice/title on the string directly — proof: `test_display_name_keeps_arabic` passes (`\"محمد أحمد\"` round-trips unchanged), Latin test still passes too\n\nAll 6 tests green (`python3 -m unittest`). Nothing left open.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

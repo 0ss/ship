@@ -1,3 +1,0 @@
-R1@2 · blocked · screener still hard-stops before diligence spend, but Legal can override when a signed waiver is on file; every override writes an audit record with the acting user and the stated reason
-R3@2 · blocked · CSV export of the whole filtered set, including a deal ID column
-exit=0

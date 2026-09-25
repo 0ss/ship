@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "current",
+ "scenario": "messy",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "arabic": true,
+  "pro_15": true,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 173,
+ "state_bytes": 3510,
+ "cost": 0.5229853999999999,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 166,
+   "killed": false,
+   "usage": {
+    "cost": 0.5229853999999999,
+    "turns": 37
+   },
+   "reply": "Arabic names render correctly now, Latin names still title-case, and truncation at 24 chars still works. All three items from standup are shipped with passing evidence.\n\n## Summary\n\nReconciled the messy standup notes into `SHIP.md` and shipped the three concrete asks:\n\n1. **R1 — blank Arabic names (Samir's bug)**: `display_name` was encoding to UTF-8 bytes then decoding as `ascii, errors=\"ignore\"` — that silently dropped every non-ASCII character, so Arabic names vanished entirely. Fixed to truncate and title-case the string directly (`app/display.py:1`). Verified `\"محمد بن سلمان\"` now renders unchanged, Latin names still title-case, and 24-char truncation still works.\n2. **R2 — invite emails**: `InviteService.create` now calls `notifier.send_email(invite.email, ...)` with a friendly subject/body after storing the invite (`app/invites.py:19`).\n3. **R3 — pricing**: `pro` is now 15 (was 12); `team` and `free` untouched (`app/pricing.py:1`).\n\nAdded tests for all three (`tests/test_app.py`), ran `python3 -m unittest tests.test_app -v` → 6/6 pass, and recorded bound evidence in `SHIP.md`. Validator confirms all three are `check-passed`.\n\nDeferred, not built: **dark mode** (R4, Priya's opinion, not this sprint) and **CSV export** (R5, \"just thinking out loud\"). Ignored as noise: the Rust-rewrite joke, the SMS-outage reminiscing, and the coffee machine (unrelated to this codebase).\n\nNothing changed was committed to git — let me know if you want these committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  }
+ ]
+}

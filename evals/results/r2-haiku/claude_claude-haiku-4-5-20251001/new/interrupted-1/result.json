@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "interrupted",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 128,
+ "state_bytes": 582,
+ "cost": 0.16629500000000003,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 60,
+   "killed": false,
+   "usage": {
+    "cost": 0.0942842,
+    "turns": 16
+   },
+   "reply": "Done. All four changes shipped and verified:\n\n1. **Email on create** — `InviteService.create()` now calls `notifier.send_email()`\n2. **Pro plan $15** — updated PLANS in pricing.py\n3. **Arabic names** — fixed `display_name()` to work with Unicode (removed ASCII decode that was dropping all non-ASCII)\n4. **7-day expiry** — added `expires_at: datetime` field to Invite and `is_expired(now)` method that checks if current time exceeds expiry\n\nAll existing tests pass + full verification run confirms all four working.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 51,
+   "killed": false,
+   "usage": {
+    "cost": 0.07201080000000001,
+    "turns": 16
+   },
+   "reply": "Perfect! All work is complete and verified. Here's the summary:\n\n**Done (with proof):**\n- ✅ Invites send email on creation — tests passing (`test_create_stores_invite`)\n- ✅ Pro plan price set to 15 — tests passing (`test_price`)\n- ✅ Arabic names display correctly — `.title()` preserves non-Latin scripts\n- ✅ Invites expire after 7 days — `expires_at` and `is_expired()` implemented\n- ✅ All 3 unit tests pass\n- ✅ Committed: `6935977`\n\nEverything in SHIP.md is checked off and working. Your branch is ready to go.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

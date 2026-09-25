@@ -1,0 +1,56 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 1825,
+ "state_bytes": 562,
+ "cost": 0.5343792,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 36,
+   "killed": false,
+   "usage": {
+    "cost": 0.21723759999999998,
+    "turns": 3
+   },
+   "reply": "Captured in `SHIP.md` at the repo root — nothing lost. No coding done, as requested.\n\n**Still open** (all waiting for tomorrow's session):\n- pro plan price 12 → 15\n- invites expire after 14 days, add `expires_at` to the invite\n- fix `display_name` blanking out Arabic names\n\n**Struck:** team plan to 45 — dropped, team stays at 40 per Omar.\n\nPick up anytime by opening a fresh session in this repo and running `/ship:ship` again — it'll read `SHIP.md` first.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 163,
+   "killed": false,
+   "usage": {
+    "cost": 0.3171416,
+    "turns": 18
+   },
+   "reply": "All done (proof: `python3 -m unittest -v` → 6 tests ok):\n\n- **pro plan 12 → 15**: `app/pricing.py` PLANS updated; team stays at 40 (Omar's call, unchanged).\n- **invites expire after 14 days**: `Invite` gained `expires_at`, set to `created_at + 14 days` in `InviteService.create`.\n- **Arabic names blanked**: bug was `name.encode(\"utf-8\")` then `.decode(\"ascii\", errors=\"ignore\")`, which silently dropped every non-ASCII byte. Fixed `display_name` to slice/title-case the string directly — Arabic now survives round-trip, Latin names still title-case.\n\nAdded regression tests for all three. Nothing waiting on you.",
+   "judge": {
+    "asks_user": null,
+    "claims_done": null,
+    "raw": ""
+   }
+  }
+ ]
+}

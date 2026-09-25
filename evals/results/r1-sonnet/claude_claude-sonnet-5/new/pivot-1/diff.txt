@@ -1,0 +1,10 @@
+ app/__pycache__/display.cpython-314.pyc    | Bin 580 -> 470 bytes
+ app/__pycache__/invites.cpython-314.pyc    | Bin 1629 -> 2674 bytes
+ app/display.py                             |   3 +--
+ app/invites.py                             |  22 ++++++++++++++++++++--
+ tests/__pycache__/test_app.cpython-314.pyc | Bin 1917 -> 2225 bytes
+ tests/test_app.py                          |   3 +++
+ 6 files changed, 24 insertions(+), 4 deletions(-)
+
+untracked:
+SHIP.md

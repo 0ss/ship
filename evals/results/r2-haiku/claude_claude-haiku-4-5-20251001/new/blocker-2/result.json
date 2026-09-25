@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "blocker",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": true,
+ "tests_green": true,
+ "checks": {
+  "arabic": true,
+  "pro_12": true,
+  "visible_tests": true
+ },
+ "secs": 57,
+ "state_bytes": 214,
+ "cost": 0.0718419,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 49,
+   "killed": false,
+   "usage": {
+    "cost": 0.0718419,
+    "turns": 13
+   },
+   "reply": "**Done:** Arabic names are now displaying correctly. The issue was byte-level truncation followed by ASCII-only decoding. Fixed it to work with Unicode characters directly. All tests pass including the new `test_arabic_name` verification.\n\n**Waiting on you:** What's the new pro plan price you agreed on with Dana? (Currently it's 12 in pricing.py.)",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

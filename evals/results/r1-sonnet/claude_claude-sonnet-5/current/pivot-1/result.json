@@ -1,0 +1,115 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "current",
+ "scenario": "pivot",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 2,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "sms_on_create": true,
+  "arabic": true,
+  "expiry_30": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 463,
+ "state_bytes": 4492,
+ "cost": 5.0260598000000005,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 97,
+   "killed": false,
+   "usage": {
+    "cost": 0.29876800000000003,
+    "turns": 19
+   },
+   "reply": "All three features are implemented and passing tests.\n\n**Changes** (`app/invites.py`, `tests/test_app.py`):\n- `Invite` now has an `expires_at` field; `InviteService.create()` sets it to `created_at + 7 days`.\n- `create()` calls `self.notifier.send_email(invite.email, subject, body)` after creating the invite.\n- Added `InviteService.export_csv()` — returns CSV text (header + one row per invite: name, email, phone, created_at, expires_at).\n- Added 3 tests covering each behavior; full suite: 6/6 passing.\n\n**Note on evidence**: `skills/ship/scripts/ship-state.py` wasn't reachable from this sandbox (outside the allowed working directory), so I couldn't run its `basis`/`validate` commands. I computed the intent fingerprints by hand (SHA-256 of the requirement text, first 12 hex chars) and recorded evidence in `SHIP.md` manually — these may not byte-for-byte match what the bundled script would produce, and the file's shape hasn't been machine-validated. Worth a `validate` run if you have the script on a reachable path.\n\n**Next action**: changes are uncommitted (`SHIP.md`, `app/invites.py`, `tests/test_app.py`) — let me know if you want them committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 97,
+   "killed": false,
+   "usage": {
+    "cost": 0.5226200000000001,
+    "turns": 11
+   },
+   "reply": "Done — switched to SMS-only and dropped the CSV export.\n\n**Code** (`app/invites.py`, `tests/test_app.py`):\n- `create()` now calls `notifier.send_sms(invite.phone, body)` instead of `send_email`.\n- Removed `export_csv()` and its test entirely.\n- `expires_at` (7-day expiry) is untouched — still in place and passing.\n- Full suite: 5/5 passing.\n\n**Ledger** (`SHIP.md`):\n- R1 revised to rev 2 (SMS instead of email), with a `correction` history row explaining why (legal).\n- R2 (CSV) marked `closed` with a `close` history row — you explicitly said you don't need it.\n- Old email evidence marked superseded; new SMS evidence recorded as `pass`.\n\nOne caveat: the bundled `ship-state.py` validator isn't reachable from this sandbox (outside the allowed working directory), same issue as last time — I repaired the file by hand against the spec rather than running `validate`. If you have that script on a reachable path, worth a real validation pass. Nothing else pending unless you want these committed.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 2,
+   "secs": 54,
+   "killed": false,
+   "usage": {
+    "cost": 0.6935846,
+    "turns": 9
+   },
+   "reply": "Fixed. The bug was in `display_name()` (`app/display.py:1-4`): it force-encoded names to UTF-8 then decoded as `ascii` with `errors=\"ignore\"`, silently dropping every non-Latin byte — so any Arabic (or other non-Latin script) name collapsed to an empty string. `.title()` doesn't need ASCII to work correctly, so the ASCII round-trip was unnecessary.\n\n**Fix**: truncate by character count and title-case directly, no encoding detour:\n```python\ndef display_name(name, limit=24):\n    return name.strip()[:limit].title()\n```\nVerified `display_name(\"أحمد\")` now returns `\"أحمد\"` unchanged (Arabic has no case, so `.title()` is a no-op on it). Added a regression test; full suite is 6/6 passing.\n\nLogged as R4 in `SHIP.md` with evidence. Same caveat as before: I still can't reach the `ship-state.py` validator from this sandbox, so this is a hand-checked update, not machine-validated. Nothing else pending unless you want this committed.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 3,
+   "secs": 54,
+   "killed": false,
+   "usage": {
+    "cost": 0.9406336000000001,
+    "turns": 14
+   },
+   "reply": "Done — invite expiry is now 30 days.\n\n**Code**: `INVITE_LIFETIME` in `app/invites.py:4` changed from `timedelta(days=7)` to `timedelta(days=30)`; test updated to match. Full suite: 6/6 passing.\n\n**Ledger**: R3 bumped to revision 2 with a `correction` history row (H3) explaining the change; old 7-day evidence marked superseded, new 30-day evidence recorded as `pass`.\n\nSame standing caveat: the `ship-state.py` validator still isn't reachable from this sandbox, so this is hand-checked, not machine-validated. Nothing else pending unless you want these committed.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 4,
+   "secs": 58,
+   "killed": false,
+   "usage": {
+    "cost": 1.2209262,
+    "turns": 14
+   },
+   "reply": "Done — `InviteService.export_csv()` is back with just `name` and `phone` columns.\n\n```python\ndef export_csv(self):\n    buf = io.StringIO()\n    writer = csv.writer(buf)\n    writer.writerow([\"name\", \"phone\"])\n    for invite in self.invites:\n        writer.writerow([invite.name, invite.phone])\n    return buf.getvalue()\n```\n\nAdded a regression test (`test_export_csv_has_name_and_phone_only`); full suite is 7/7 passing.\n\n**Ledger**: R2 reopened at revision 2 (was `closed`, now `active`) with the narrowed scope, logged as a `correction` history row (H4) noting the original had 5 columns and this one intentionally has just 2. Same standing caveat on the unreachable validator. Nothing else pending unless you want these committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 5,
+   "secs": 28,
+   "killed": false,
+   "usage": {
+    "cost": 1.3495274000000002,
+    "turns": 6
+   },
+   "reply": "Committed as `dd2bd9c`. Final state of the invites feature:\n\n- **R1** — `create()` sends SMS via `notifier.send_sms` (email dropped per legal)\n- **R2** — `export_csv()` returns CSV with `name`, `phone` columns only\n- **R3** — invites expire 30 days after creation (`expires_at`)\n- **R4** — `display_name()` no longer blanks non-Latin names (Arabic fixed)\n\nAll 7 tests pass (`python3 -m unittest tests.test_app -v`), and `SHIP.md` is committed alongside as the ledger. Left the stray `__pycache__` `.pyc` diffs unstaged — they're build artifacts, not source changes; let me know if you'd rather I add a `.gitignore` for those.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

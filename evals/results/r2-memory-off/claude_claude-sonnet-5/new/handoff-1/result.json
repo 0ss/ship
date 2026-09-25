@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 111,
+ "state_bytes": 498,
+ "cost": 0.398455,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 20,
+   "killed": false,
+   "usage": {
+    "cost": 0.21432700000000002,
+    "turns": 3
+   },
+   "reply": "Saved to `SHIP.md` — nothing lost. Per your instruction, no coding started.\n\nStill open (all 3, waiting for tomorrow's session):\n- pro plan price 12 → 15\n- invites expire after 14 days, `expires_at` on invite\n- `display_name` blanks Arabic names\n\nDropped: team plan to 45 (Omar reverted, stays at 40).",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 63,
+   "killed": false,
+   "usage": {
+    "cost": 0.18412800000000001,
+    "turns": 14
+   },
+   "reply": "All four from yesterday: done, with proof (`python3 -m unittest -v`, 6/6 ok).\n\n- pro plan price → 15 (`app/pricing.py`)\n- invite `expires_at` = created_at + 14 days (`app/invites.py`)\n- team plan stays at 40 — no code change, dropped per Omar\n- `display_name` no longer strips Arabic (`app/display.py`, dropped the ascii-only encode/decode)\n\nNothing left open, nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "current",
+ "scenario": "buried",
+ "trial": 2,
+ "complete": false,
+ "recall": 0.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 1,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "team_45": false,
+  "expiry_7_method": false,
+  "visible_tests": true
+ },
+ "secs": 33,
+ "state_bytes": 1525,
+ "cost": 0.046700599999999995,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 25,
+   "killed": false,
+   "usage": {
+    "cost": 0.046700599999999995,
+    "turns": 3
+   },
+   "reply": "I've extracted two asks from the transcript:\n\n**R1 — Update pricing to 45 for team plan** (unclear)  \nDana asked to update pricing today. I need to know: Where is the pricing defined—is it in code, a config file, database, or somewhere else?\n\n**R2 — Add invite expiration** (active)  \nFatima wants invites to expire after 7 days. This needs an `expires_at` field and an `is_expired(now)` method to check if a link is stale.\n\nThe rest of the transcript is noise: finance logistics, scheduling updates, peer code review requests, and team chatter.\n\nWhere should I look for the pricing configuration, and is there a schema file I should reference for the invite model?",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  }
+ ]
+}

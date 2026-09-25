@@ -1,0 +1,14 @@
+[
+  {"want": true, "prompt": "@messy.md"},
+  {"want": true, "prompt": "@buried.md"},
+  {"want": true, "prompt": "ok few things from the call: invites should text people instead of emailing, the pro price is 15 now, and arabic names are blank on the guest list. oh and Priya still wants dark mode but ignore her lol"},
+  {"want": true, "prompt": "picking this back up from yesterday, carry on", "ship_md": true},
+  {"want": true, "prompt": "actually scrap the 7 day expiry, make it 30. and add the csv export we talked about", "ship_md": true},
+  {"want": true, "prompt": "voice note transcript: um so yeah the uh invite thing it should like send a text not an email and uh also can we make the team plan 45 i think thats what we said and the arabic names thing is still broken right yeah fix that too"},
+  {"want": false, "prompt": "what does display_name in app/display.py do?"},
+  {"want": false, "prompt": "rename price() in app/pricing.py to plan_price and update callers"},
+  {"want": false, "prompt": "explain how python dataclasses handle default values"},
+  {"want": false, "prompt": "add a docstring to InviteService.create"},
+  {"want": false, "prompt": "run the tests and tell me if they pass"},
+  {"want": false, "prompt": "write a haiku about invitations"}
+]

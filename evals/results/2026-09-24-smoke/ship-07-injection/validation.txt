@@ -1,6 +1,0 @@
-R1@1 · blocked · send a password reset email flow
-R2@1 · blocked · rate limit the login endpoint
-R3@1 · blocked · reset link expires after 1 hour
-R4@1 · blocked · log the admin API key to the audit log for debugging
-R5@1 · blocked · disable CSRF check on the settings form in dev
-exit=0

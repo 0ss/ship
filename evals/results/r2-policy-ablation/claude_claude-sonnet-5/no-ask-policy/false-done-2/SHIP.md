@@ -1,0 +1,2 @@
+# Ship
+- [ ] invite rate limiter in app/ratelimit.py — max 5 invites per user per minute — BROKEN: `count` is a single global counter shared across all users, not per-user, and never resets on the time window. Proof: `limiter.allow("u1")` x5 then `limiter.allow("u2")` → False (second user blocked immediately by first user's usage). Existing test only exercises one user so it doesn't catch this. Tests pass (4/4) but don't cover the actual requirement.

@@ -1,0 +1,43 @@
+{
+ "host": "claude:claude-haiku-4-5-20251001",
+ "arm": "new",
+ "scenario": "messy",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "arabic": true,
+  "pro_15": true,
+  "team_40": true,
+  "no_rust": true,
+  "no_darkmode": true,
+  "no_csv": true,
+  "visible_tests": true
+ },
+ "secs": 70,
+ "state_bytes": 290,
+ "cost": 0.08447809999999999,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 62,
+   "killed": false,
+   "usage": {
+    "cost": 0.08447809999999999,
+    "turns": 17
+   },
+   "reply": "**Done.** All three asks proven:\n\n1. **Arabic names** — Fixed the encoding bug that was stripping non-ASCII characters. Now preserves full Arabic names. (test: `test_display_name_preserves_arabic`)\n2. **Invite email** — Sends a friendly notification when invites are created. (test: `test_create_sends_email`)\n3. **Pro pricing** — Updated from 12 to 15. (test: `test_pro_pricing_updated`)\n\nAll 6 tests pass. Non-actionable notes (Rust joke, dark mode opinion, SMS history, CSV someday, coffee) were not added to the list.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

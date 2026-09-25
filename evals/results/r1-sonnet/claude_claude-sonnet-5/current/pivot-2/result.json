@@ -1,0 +1,115 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "current",
+ "scenario": "pivot",
+ "trial": 2,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 4,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "sms_on_create": true,
+  "arabic": true,
+  "expiry_30": true,
+  "csv_name_phone": true,
+  "visible_tests": true
+ },
+ "secs": 598,
+ "state_bytes": 6668,
+ "cost": 6.660441999999999,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 106,
+   "killed": false,
+   "usage": {
+    "cost": 0.34424499999999997,
+    "turns": 23
+   },
+   "reply": "All three requirements are implemented and verified:\n\n- **R1 — invite email**: `InviteService.create` now calls `notifier.send_email(invite.email, ...)` after creating the invite (`app/invites.py:29`).\n- **R2 — CSV export**: `InviteService.export_csv()` returns CSV text with a header row plus one row per invite (`app/invites.py:39`).\n- **R3 — 7-day expiry**: `Invite` gained an `expires_at` field, set to `created_at + timedelta(days=7)` (`app/invites.py:11-16, 27`).\n\nAdded three tests covering each behavior; full suite passes (6/6, `python3 -m unittest -v`). State is tracked in `SHIP.md` with all three requirements marked `implemented`/`pass`.\n\nOne caveat: the `ship-state.py` validator script wasn't reachable from this sandbox (its path is outside the allowed working directory), so `SHIP.md` wasn't run through the automated validator — I hand-built it to match the schema instead.\n\nNothing is committed yet — `app/invites.py`, `tests/test_app.py`, and `SHIP.md` are unstaged. Let me know if you'd like me to commit.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 1,
+   "secs": 155,
+   "killed": false,
+   "usage": {
+    "cost": 0.7047338,
+    "turns": 14
+   },
+   "reply": "Done. Reconciled per your correction:\n\n- **R1 (revision 2)**: `InviteService.create` now calls `notifier.send_sms(invite.phone, ...)` — email sending removed entirely (`app/invites.py`).\n- **R2**: closed — `export_csv()` and its test deleted, no CSV code remains.\n- **R3**: unchanged — `expires_at` still set to `created_at + 7 days`.\n\nAll 5 tests pass. `SHIP.md` is updated: R1 bumped to rev 2 with a `History` row explaining the email→SMS switch (legal requirement), R2 marked `closed` with its own history row, and new `W4`/`C4`/`E4` cover the SMS check.\n\nOne flag: the session-start hook reported the prior `SHIP.md` as invalid, but the `ship-state.py` validator isn't reachable from this sandbox (same issue as last turn), so I couldn't run it to confirm or pinpoint the exact cause — likely the hand-computed `intent` fingerprint hash not matching whatever canonical algorithm the real `basis` command uses. I rebuilt the file by hand to match the documented schema as closely as I can verify manually. If you have access to run the validator, worth a spot-check.\n\nNothing committed — still sitting as unstaged changes to `app/invites.py`, `tests/test_app.py`, plus new `SHIP.md`.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  },
+  {
+   "session": 0,
+   "turn": 2,
+   "secs": 69,
+   "killed": false,
+   "usage": {
+    "cost": 0.940006,
+    "turns": 11
+   },
+   "reply": "Root cause was in `app/display.py:3-4` — it encoded names to UTF-8 bytes, then decoded with `\"ascii\", errors=\"ignore\"`, which silently drops every non-ASCII byte. Any Arabic (or other non-Latin) name lost 100% of its bytes and came back empty.\n\nFix: `display_name` now truncates and title-cases the string directly instead of round-tripping through ASCII bytes:\n\n```python\ndef display_name(name, limit=24):\n    return name.strip()[:limit].title()\n```\n\nAdded a regression test (`test_display_name_keeps_arabic`) confirming `\"فاطمة الزهراء\"` now round-trips unchanged. All 6 tests pass. Logged as `R4` in `SHIP.md`, work/check/evidence rows `W5`/`C5`/`E5`.\n\nStill nothing committed — six files modified, `SHIP.md` untracked. Let me know if you'd like these committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 0,
+   "turn": 3,
+   "secs": 73,
+   "killed": false,
+   "usage": {
+    "cost": 1.2459043999999997,
+    "turns": 14
+   },
+   "reply": "`INVITE_LIFETIME` is now `timedelta(days=30)` (`app/invites.py:4`). All 6 tests pass. Ledger updated: R3 bumped to revision 2, `W6`/`C6`/`E6` added, `H3` records the 7→30 day correction.\n\nStill nothing committed. Current state across all four changes this session: SMS-only notifications, no CSV export, 30-day expiry, and the Arabic-name display fix. Let me know if you'd like it committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 0,
+   "turn": 4,
+   "secs": 72,
+   "killed": false,
+   "usage": {
+    "cost": 1.5749179999999996,
+    "turns": 15
+   },
+   "reply": "`InviteService.export_csv()` is back, scoped to just `name,phone` columns (`app/invites.py`). All 7 tests pass. Ledger: R2 reopened at revision 2 (`active`, narrower scope), `W7`/`C7`/`E7` added, `H4` records the reopen.\n\nNothing committed yet. Session so far: SMS-only invite notifications, 30-day expiry, Arabic display-name fix, and now a name/phone-only CSV export. Let me know if you'd like this committed.",
+   "judge": {
+    "asks_user": true,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 0,
+   "turn": 5,
+   "secs": 68,
+   "killed": false,
+   "usage": {
+    "cost": 1.8506347999999992,
+    "turns": 11
+   },
+   "reply": "Committed as `2b09c8e`. Working tree is clean, all 7 tests pass.\n\nFinal state of the invite feature:\n- **SMS-only notifications** — `notifier.send_sms(invite.phone, ...)` on create, no email\n- **30-day expiry** — `Invite.expires_at = created_at + timedelta(days=30)`\n- **CSV export** — `InviteService.export_csv()` returns `name,phone` rows only\n- **Arabic name fix** — `display_name` no longer strips non-Latin characters\n\n`SHIP.md` carries the full trail (4 requirements, 7 work items, 7 checks, 7 passing evidence rows, 4 history entries covering the email→SMS switch, the CSV close/reopen, and the 7→30 day correction) if you want to trace how we got here.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

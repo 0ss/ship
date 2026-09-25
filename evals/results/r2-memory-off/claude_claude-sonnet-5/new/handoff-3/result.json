@@ -1,0 +1,55 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "handoff",
+ "trial": 3,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "pro_15": true,
+  "expiry_14": true,
+  "arabic": true,
+  "team_40": true,
+  "visible_tests": true
+ },
+ "secs": 74,
+ "state_bytes": 408,
+ "cost": 0.2021152,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 13,
+   "killed": false,
+   "usage": {
+    "cost": 0.052969600000000006,
+    "turns": 3
+   },
+   "reply": "Saved to `SHIP.md` — nothing lost. No code touched, as requested.\n\n- [ ] pro plan price 12 → 15\n- [ ] invites expire after 14 days, add `expires_at` on invite (superseded the earlier \"7 days\")\n- ~~team plan to 45~~ — dropped, team stays at 40 per Omar\n- [ ] display_name blanks out Arabic names\n\nPick it up anytime — next session just needs to read `SHIP.md` first.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": false
+   }
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 44,
+   "killed": false,
+   "usage": {
+    "cost": 0.1491456,
+    "turns": 17
+   },
+   "reply": "All done — every line from yesterday is ticked, all 6 tests pass (`python3 -m unittest -v`):\n\n- pro plan price 12 → 15 (`app/pricing.py`)\n- invites now carry `expires_at` = `created_at` + 14 days (`app/invites.py`)\n- `display_name` no longer strips Arabic (was forcing ascii-decode on utf-8-encoded bytes, which dropped all non-Latin text); now truncates on characters and preserves the string\n- team plan stays at 40, confirmed dropped per your note\n\nNothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

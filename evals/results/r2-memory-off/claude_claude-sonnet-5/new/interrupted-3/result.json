@@ -1,0 +1,49 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "interrupted",
+ "trial": 3,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 159,
+ "state_bytes": 488,
+ "cost": 0.1048882,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 75,
+   "killed": true,
+   "usage": {},
+   "reply": "",
+   "judge": {}
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 46,
+   "killed": false,
+   "usage": {
+    "cost": 0.1048882,
+    "turns": 6
+   },
+   "reply": "All four done, confirmed by the full suite (7/7 passing):\n\n- Invite creation emails the invitee via `notifier.send_email`\n- Pro plan price is 15\n- Arabic names now display correctly (the old `.encode(\"ascii\")` was stripping non-Latin chars)\n- Invites carry `expires_at` and `is_expired(now)`\n\nNothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

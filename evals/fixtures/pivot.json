@@ -1,0 +1,8 @@
+[
+  "ok invites stuff. when an invite gets created, send them an email — notifier.send_email to the invite's email address. also add a CSV export of all invites, InviteService.export_csv() returning the csv text. and invites should expire after 7 days, put an expires_at on the invite.",
+  "wait actually no emails at all, legal says SMS only. notifier.send_sms to the invite's phone instead. and forget the CSV thing, we don't need it.",
+  "also Arabic names are broken on the guest list, they come out blank",
+  "oh and make expiry 30 days, 7 is way too short",
+  "ugh ok finance just pinged, we DO need the csv export after all. just name and phone columns, nothing else",
+  "that's everything, finish it off"
+]

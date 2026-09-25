@@ -1,0 +1,49 @@
+{
+ "host": "claude:claude-sonnet-5",
+ "arm": "new",
+ "scenario": "interrupted",
+ "trial": 1,
+ "complete": true,
+ "recall": 1.0,
+ "violations": [],
+ "false_completion": false,
+ "interventions": 0,
+ "asked_when_needed": null,
+ "tests_green": true,
+ "checks": {
+  "email_on_create": true,
+  "pro_15": true,
+  "arabic": true,
+  "expiry_7_method": true,
+  "visible_tests": true
+ },
+ "secs": 218,
+ "state_bytes": 599,
+ "cost": 0.153425,
+ "log": [
+  {
+   "session": 0,
+   "turn": 0,
+   "secs": 75,
+   "killed": true,
+   "usage": {},
+   "reply": "",
+   "judge": {}
+  },
+  {
+   "session": 1,
+   "turn": 0,
+   "secs": 131,
+   "killed": false,
+   "usage": {
+    "cost": 0.153425,
+    "turns": 10
+   },
+   "reply": "All four done, with proof: invite emails send via `notifier.send_email` to the invitee's email, pro plan is $15, Arabic names display correctly (`محمد العلي` no longer blanks out), and invites expire 7 days after creation via `expires_at`/`is_expired`. Full test suite passes (3 ok). Nothing waiting on you.",
+   "judge": {
+    "asks_user": false,
+    "claims_done": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,4 @@
+[
+  "quick brain dump before I lose it. DON'T start coding yet — I'm about to clear this chat and we'll pick it up tomorrow in a fresh session, so make sure none of this gets lost.\n\n1. pro plan price goes 12 -> 15\n2. invites expire after 7 days. put expires_at on the invite\n3. team plan to 45\n4. display_name blanks out Arabic names, needs fixing\n\noh wait — for 2 make it 14 days not 7. and scrap 3, Omar changed his mind, team stays at 40.",
+  "morning. build everything from yesterday."
+]
