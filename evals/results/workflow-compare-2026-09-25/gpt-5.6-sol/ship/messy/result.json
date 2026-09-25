@@ -1,0 +1,35 @@
+{
+  "model": "gpt-5.6-sol",
+  "arm": "ship",
+  "scenario": "messy",
+  "checks": {
+    "pro_15": true,
+    "team_45": true,
+    "free_0": true,
+    "email_on_create": true,
+    "sms_and_email_on_create": true,
+    "arabic": true,
+    "latin": true,
+    "expiry_7": true,
+    "expiry_7_method": true,
+    "csv_name_phone": true,
+    "visible_tests": true
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "reply": "Implemented and verified all actionable asks.\n\nDone:\n\n- Pricing: Free $0, Pro $15/seat, Team $45/seat.\n- Invite creation sends email and SMS through the existing notifier.\n- Arabic names are preserved; Latin names remain title-cased.\n- Invites expire exactly seven days after creation.\n- Added `invite.is_expired(now)` with correct boundary behavior.\n- Added `InviteService.export_csv()` with only `name,phone`.\n- Updated tests and tracking in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-messy-5rvowhge/SHIP.md).\n\nVerification:\n\n- `python3 -m unittest -v`: 6/6 passed.\n- Integrated Latin/Arabic invite journey passed.\n- Compilation and `git diff --check` passed.\n\nStill open: none.\n\nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 223308,
+        "cached_input_tokens": 207360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4214,
+        "reasoning_output_tokens": 375
+      },
+      "state": "# Ship\n- [x] Pro pricing is 15 per seat — \"make pro 15 per seat instead of 12\" — verified: priced two Pro seats → representative service check → total was 30\n- [x] Team pricing is 45 per seat — \"make team 45 per seat instead of 40\" — verified: priced two Team seats → representative service check → total was 90\n- [x] Free pricing stays zero — \"leave free at zero; it must stay free\" — verified: priced two Free seats → representative service check → total remained 0\n- [x] Invite creation emails the invitee — \"email the invitee's email address using notifier.send_email\" — verified: created Latin and Arabic invites → RecordingNotifier → email records targeted both invitee email addresses\n- [x] Invite creation texts the invitee — \"text the invitee's phone using notifier.send_sms on creation\" — verified: created Latin and Arabic invites → RecordingNotifier → SMS records targeted both invitee phone numbers\n- [x] Arabic display names are preserved without breaking Latin title-casing — \"Make display_name preserve them\" — verified: displayed `سارة الأحمد` and `ada lovelace` → representative guest names → Arabic remained intact and Latin became `Ada Lovelace`\n- [x] Invites expire exactly seven days after creation — \"expires_at exactly 7 days after created_at\" — verified: created invite at 2026-01-01 09:30 → fixed-clock service → expiration equaled creation plus seven days\n- [x] Invites report whether they are expired — \"add invite.is_expired(now)\" — verified: checked one microsecond before and exactly at expiration → fixed-clock invite → false before and true at boundary\n- [x] InviteService exports name and phone CSV — \"export_csv() returning CSV with name and phone columns only, one row per invite\" — verified: exported two representative invites → service CSV → header was name/phone only with one Latin and one Arabic row\n",
+      "issues": {}
+    }
+  ],
+  "diff": " app/display.py    |  3 +--\n app/invites.py    | 30 ++++++++++++++++++++++++++++--\n app/pricing.py    |  2 +-\n tests/test_app.py | 42 +++++++++++++++++++++++++++++++++++++++---\n 4 files changed, 69 insertions(+), 8 deletions(-)\n"
+}

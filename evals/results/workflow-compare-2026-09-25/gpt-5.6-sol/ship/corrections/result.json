@@ -1,0 +1,60 @@
+{
+  "model": "gpt-5.6-sol",
+  "arm": "ship",
+  "scenario": "corrections",
+  "checks": {
+    "sms_on_create": true,
+    "arabic": true,
+    "expiry_30": true,
+    "csv_name_phone": true,
+    "visible_tests": true
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "reply": "Implemented and verified all requested invite behavior in [app/invites.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-pnkx18fi/app/invites.py):\n\n- Creation sends an invite email.\n- CSV export includes every invite and all fields.\n- Invites expire exactly seven days after creation.\n- Added coverage in [tests/test_app.py](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-pnkx18fi/tests/test_app.py).\n- Recorded verification in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-pnkx18fi/SHIP.md).\n\nVerification: all 6 tests pass, plus an end-to-end two-invite journey. No PRD/spec was needed because the ship workflow resolved this as execution work.\n\nDone: all three asks.  \nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 212319,
+        "cached_input_tokens": 198144,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3312,
+        "reasoning_output_tokens": 301
+      },
+      "state": "# Ship\n- [x] Send an invite email on creation — \"Send an invite email on creation\" — verified: created two invites with a recording notifier → both recipient addresses received one invite email\n- [x] Export all invite data as CSV — \"export all invite data as CSV\" — verified: exported two representative invites, including a comma in a name → both rows and all five invite fields parsed correctly\n- [x] Expire invites after 7 days — \"expire invites after 7 days\" — verified: created an invite at 2026-09-25 09:00 → active immediately before and expired exactly at 2026-10-02 09:00\n",
+      "issues": {},
+      "artifacts": {}
+    },
+    {
+      "session": 0,
+      "turn": 1,
+      "reply": "Implemented the corrections:\n\n- Invite creation now sends SMS only—no email.\n- CSV export was removed and marked cancelled in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-pnkx18fi/SHIP.md).\n- Arabic guest names now render correctly and truncate by Unicode characters.\n- Seven-day expiry remains intact.\n- All 7 tests pass, including the corrected end-to-end Arabic invite journey.\n\nDone: SMS-only invites, CSV cancellation, Arabic names, seven-day expiry.  \nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 434567,
+        "cached_input_tokens": 409344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5981,
+        "reasoning_output_tokens": 459
+      },
+      "state": "# Ship\n- [x] Send an invite by SMS only — \"SMS only, no email\" — verified: created an Arabic-named invite with recording transport → exactly one SMS went to its phone and no email was emitted\n- ~~Export all invite data as CSV~~ — dropped: \"Cancel CSV\"\n- [x] Expire invites after 7 days — \"expire invites after 7 days\" — verified: created an invite at 2026-09-25 09:00 → active immediately before and expired exactly at 2026-10-02 09:00\n- [x] Fix blank Arabic guest names — \"fix blank Arabic guest names\" — verified: displayed a whitespace-padded Arabic guest and a length-limited Arabic name → visible Arabic text was preserved and truncated by characters\n",
+      "issues": {},
+      "artifacts": {}
+    },
+    {
+      "session": 0,
+      "turn": 2,
+      "reply": "Final corrections implemented and verified:\n\n- Invite expiry is now 30 days, including SMS wording.\n- CSV export restored with exactly `name` and `phone`.\n- SMS-only delivery remains intact.\n- Arabic guest names remain fixed.\n- All 8 tests pass, plus the combined end-to-end journey.\n\n[SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-pnkx18fi/SHIP.md) records the full correction history and final verification.\n\nDone: all current asks.  \nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 687249,
+        "cached_input_tokens": 656512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8352,
+        "reasoning_output_tokens": 580
+      },
+      "state": "# Ship\n- [x] Send an invite by SMS only — \"SMS only, no email\" — verified: created an Arabic-named invite with recording transport → exactly one SMS went to its phone and no email was emitted\n- ~~Export all invite data as CSV~~ — dropped: \"Cancel CSV\"\n- [x] Export invite name and phone as CSV — \"Finance needs CSV again, but only name and phone\" — verified: exported Arabic and comma-containing invite names from a two-invite service → parsed CSV contained two rows and exactly name and phone columns\n- [x] Expire invites after 30 days — \"expiry is 30 days, not 7\" — verified: created invites at 2026-09-25 09:00 → SMS stated 30 days, invite remained active immediately before and expired exactly at 2026-10-25 09:00\n- [x] Fix blank Arabic guest names — \"fix blank Arabic guest names\" — verified: displayed a whitespace-padded Arabic guest and a length-limited Arabic name → visible Arabic text was preserved and truncated by characters\n",
+      "issues": {},
+      "artifacts": {}
+    }
+  ],
+  "diff": " app/display.py    |  3 +--\n app/invites.py    | 29 +++++++++++++++++++++++++++--\n tests/test_app.py | 48 +++++++++++++++++++++++++++++++++++++++++++++++-\n 3 files changed, 75 insertions(+), 5 deletions(-)\n"
+}

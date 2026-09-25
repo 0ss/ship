@@ -1,0 +1,76 @@
+{
+  "model": "gpt-5.6-luna",
+  "arm": "ship",
+  "scenario": "corrections",
+  "checks": {
+    "sms_on_create": true,
+    "arabic": true,
+    "expiry_30": true,
+    "csv_name_phone": true,
+    "visible_tests": true
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Implemented and verified the invite lifecycle.\n\n- Invite creation sends an email.\n- Invites expire after 7 days.\n- CSV export includes all invite data and expiry state.\n- Added tests; all 5 pass.\n- Published local issue: [.scratch/issues/invite-lifecycle.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-kz9lnwhe/.scratch/issues/invite-lifecycle.md>)\n- Updated [SHIP.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-kz9lnwhe/SHIP.md>)\n\nDone: verified email, CSV export, and seven-day expiry.  \nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 273742,
+        "cached_input_tokens": 245248,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3351,
+        "reasoning_output_tokens": 413
+      },
+      "state": "# Ship\n- [x] Send an invite email on creation — \"Send an invite email on creation\" — verified: created an invite with `RecordingNotifier`; one email was recorded for the invitee with an expiry date in the body.\n- [x] Export all invite data as CSV — \"export all invite data as CSV\" — verified: exported a created invite; CSV contained the header and name, email, phone, created-at, expiry, and expired fields.\n- [x] Expire invites after 7 days — \"expire invites after 7 days\" — verified: advanced the clock exactly seven days and ran expiry; the invite was marked expired.\n",
+      "issues": {
+        "invite-lifecycle.md": "# Invite lifecycle\n\nLabel: ready-for-agent\n\n## Request\n\nSupport the complete invite lifecycle:\n\n- Send an invite email immediately when an invite is created.\n- Export all invite records as CSV, including lifecycle state.\n- Expire invites seven days after creation.\n\n## Acceptance criteria\n\n- Invite creation records one email notification for the invitee.\n- Every invite has an `expires_at` seven days after `created_at`.\n- Expiry at or after `expires_at` marks the invite expired.\n- CSV export includes all invites, including expired ones, with name, email, phone, timestamps, and expired state.\n\n## Verification\n\nImplemented in `app/invites.py`; covered by `tests/test_app.py`. `python3 -m unittest -v` passes all 5 tests.\n"
+      },
+      "artifacts": {
+        ".scratch/issues/invite-lifecycle.md": "# Invite lifecycle\n\nLabel: ready-for-agent\n\n## Request\n\nSupport the complete invite lifecycle:\n\n- Send an invite email immediately when an invite is created.\n- Export all invite records as CSV, including lifecycle state.\n- Expire invites seven days after creation.\n\n## Acceptance criteria\n\n- Invite creation records one email notification for the invitee.\n- Every invite has an `expires_at` seven days after `created_at`.\n- Expiry at or after `expires_at` marks the invite expired.\n- CSV export includes all invites, including expired ones, with name, email, phone, timestamps, and expired state.\n\n## Verification\n\nImplemented in `app/invites.py`; covered by `tests/test_app.py`. `python3 -m unittest -v` passes all 5 tests.\n"
+      }
+    },
+    {
+      "session": 0,
+      "turn": 1,
+      "model": "gpt-5.6-luna",
+      "reply": "Correction completed and verified.\n\n- Invite creation now sends SMS only; no email.\n- CSV export was cancelled and removed.\n- Arabic guest names no longer render blank.\n- Seven-day expiry remains intact.\n- Tests: 5 passed.\n- Updated [SHIP.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-kz9lnwhe/SHIP.md>).\n- Published updated local issue: [.scratch/issues/invite-sms-and-arabic-names.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-kz9lnwhe/.scratch/issues/invite-sms-and-arabic-names.md>).\n\nDone: SMS-only flow, CSV cancellation, Arabic names, and expiry verified.  \nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 468053,
+        "cached_input_tokens": 427264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5934,
+        "reasoning_output_tokens": 684
+      },
+      "state": "# Ship\n- [x] Send an invite by SMS on creation — \"legal says SMS only, no email\" — verified: created an invite with `RecordingNotifier`; one SMS was recorded for the invitee's phone with an expiry date in the body and no email was sent.\n- ~~Export all invite data as CSV~~ — dropped: \"Cancel CSV.\"\n- [x] Expire invites after 7 days — \"expire invites after 7 days\" — verified: advanced the clock exactly seven days and ran expiry; the invite was marked expired.\n- [x] Preserve blank Arabic guest names — \"fix blank Arabic guest names\" — verified: displayed `ضيف عربي`; the Arabic text remained visible.\n",
+      "issues": {
+        "invite-sms-and-arabic-names.md": "# Invite SMS and Arabic guest names\n\nLabel: ready-for-agent\n\n## Request\n\n- Legal correction: send invite notifications by SMS only; do not send email.\n- Cancel CSV export.\n- Preserve Arabic guest names instead of rendering them blank.\n\n## Acceptance criteria\n\n- Invite creation records one SMS to the invitee's phone and no email.\n- CSV export is not part of the invite service.\n- Arabic guest names remain visible in the guest list.\n\n## Verification\n\nImplemented in `app/invites.py` and `app/display.py`; covered by `tests/test_app.py`.\n"
+      },
+      "artifacts": {
+        ".scratch/issues/invite-sms-and-arabic-names.md": "# Invite SMS and Arabic guest names\n\nLabel: ready-for-agent\n\n## Request\n\n- Legal correction: send invite notifications by SMS only; do not send email.\n- Cancel CSV export.\n- Preserve Arabic guest names instead of rendering them blank.\n\n## Acceptance criteria\n\n- Invite creation records one SMS to the invitee's phone and no email.\n- CSV export is not part of the invite service.\n- Arabic guest names remain visible in the guest list.\n\n## Verification\n\nImplemented in `app/invites.py` and `app/display.py`; covered by `tests/test_app.py`.\n"
+      }
+    },
+    {
+      "session": 0,
+      "turn": 2,
+      "model": "gpt-5.6-luna",
+      "reply": "Final corrections completed and verified.\n\n- Expiry changed to 30 days.\n- CSV export restored with exactly `name` and `phone`.\n- SMS-only notifications retained.\n- Arabic guest names remain visible.\n- Tests: 6 passed.\n- Updated [SHIP.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-kz9lnwhe/SHIP.md>).\n- Published [.scratch/issues/invite-final-corrections.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-corrections-kz9lnwhe/.scratch/issues/invite-final-corrections.md>).\n\nDone: all current asks verified.  \nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 778821,
+        "cached_input_tokens": 729600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8474,
+        "reasoning_output_tokens": 755
+      },
+      "state": "# Ship\n- [x] Send an invite by SMS on creation — \"legal says SMS only, no email\" — verified: created an invite with `RecordingNotifier`; one SMS was recorded for the invitee's phone with an expiry date in the body and no email was sent.\n- [x] Export invite name and phone as CSV — \"Finance needs CSV again, but only name and phone.\" — verified: exported an invite; output contained exactly `name,phone` and one matching data row.\n- [x] Expire invites after 30 days — \"expiry is 30 days, not 7\" — verified: advanced the clock exactly 30 days and ran expiry; the invite was marked expired.\n- [x] Preserve blank Arabic guest names — \"fix blank Arabic guest names\" — verified: displayed `ضيف عربي`; the Arabic text remained visible.\n",
+      "issues": {
+        "invite-final-corrections.md": "# Invite final corrections\n\nLabel: ready-for-agent\n\n## Request\n\n- Keep invite notifications SMS-only.\n- Expire invites after 30 days.\n- Restore finance CSV export with only name and phone.\n- Preserve Arabic guest names.\n\n## Acceptance criteria\n\n- Invite creation records one SMS to the invitee's phone and no email.\n- `expires_at` is 30 days after creation and expiry occurs at that time.\n- CSV export contains exactly `name` and `phone` columns.\n- Arabic guest names remain visible in the guest list.\n\n## Verification\n\nImplemented in `app/invites.py` and `app/display.py`; covered by `tests/test_app.py`.\n"
+      },
+      "artifacts": {
+        ".scratch/issues/invite-final-corrections.md": "# Invite final corrections\n\nLabel: ready-for-agent\n\n## Request\n\n- Keep invite notifications SMS-only.\n- Expire invites after 30 days.\n- Restore finance CSV export with only name and phone.\n- Preserve Arabic guest names.\n\n## Acceptance criteria\n\n- Invite creation records one SMS to the invitee's phone and no email.\n- `expires_at` is 30 days after creation and expiry occurs at that time.\n- CSV export contains exactly `name` and `phone` columns.\n- Arabic guest names remain visible in the guest list.\n\n## Verification\n\nImplemented in `app/invites.py` and `app/display.py`; covered by `tests/test_app.py`.\n"
+      }
+    }
+  ],
+  "diff": " app/display.py    |  3 +--\n app/invites.py    | 31 +++++++++++++++++++++++++++++--\n tests/test_app.py | 23 +++++++++++++++++++++--\n 3 files changed, 51 insertions(+), 6 deletions(-)\n",
+  "web_code": null
+}

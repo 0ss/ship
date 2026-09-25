@@ -1,0 +1,38 @@
+{
+  "model": "gpt-5.6-luna",
+  "arm": "ship",
+  "scenario": "messy",
+  "checks": {
+    "pro_15": true,
+    "team_45": true,
+    "free_0": true,
+    "email_on_create": true,
+    "sms_and_email_on_create": true,
+    "arabic": true,
+    "latin": true,
+    "expiry_7": true,
+    "expiry_7_method": true,
+    "csv_name_phone": true,
+    "visible_tests": true
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Implemented and verified all actionable asks:\n\n- Pro: 15/seat; Team: 45/seat; Free: 0.\n- Invite creation sends email and SMS through the fake notifier.\n- Arabic names preserved; Latin names still title-case.\n- Invites expire exactly 7 days after creation with `is_expired(now)`.\n- Added `InviteService.export_csv()` with only `name,phone` columns.\n- Added/updated regression tests.\n- Updated [`SHIP.md`](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-messy-eth5536k/SHIP.md>).\n\nVerification: `python3 -m unittest discover -v` — 5 tests passed. No PRD/spec issue was needed because this was executed directly.",
+      "usage": {
+        "input_tokens": 214088,
+        "cached_input_tokens": 194048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3633,
+        "reasoning_output_tokens": 379
+      },
+      "state": "# Ship\n- [x] Pro costs 15 per seat, team costs 45 per seat, and free remains zero — \"make pro 15 per seat instead of 12\" / \"make team 45 per seat instead of 40\" / \"leave free at zero\" — verified: `python3 -m unittest discover -v` passed pricing regression tests\n- [x] Invite creation emails and texts the invitee — \"email ... using notifier.send_email\" / \"text ... using notifier.send_sms\" — verified: fake `RecordingNotifier` captured email and SMS calls in the invite creation test\n- [x] Arabic guest names remain visible while Latin names title-case — \"Make display_name preserve them\" / \"don't break ... Latin name title-casing\" — verified: Arabic-preservation and Latin-title-case tests passed\n- [x] Invites expire seven days after creation and expose is_expired(now) — \"expires_at exactly 7 days after created_at\" / \"add invite.is_expired(now)\" — verified: boundary checks passed at just before and exactly seven days\n- [x] InviteService.export_csv() returns name and phone columns only — \"returning CSV with name and phone columns only, one row per invite\" — verified: export regression test passed with header and one invite row\n",
+      "issues": {},
+      "artifacts": {}
+    }
+  ],
+  "diff": " app/display.py    |  3 +--\n app/invites.py    | 19 +++++++++++++++++++\n app/pricing.py    |  2 +-\n tests/test_app.py | 19 +++++++++++++++++--\n 4 files changed, 38 insertions(+), 5 deletions(-)\n",
+  "web_code": null
+}

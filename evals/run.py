@@ -14,6 +14,7 @@ import argparse
 import concurrent.futures as cf
 import json
 import os
+import signal
 import shutil
 import subprocess
 import sys
@@ -92,13 +93,18 @@ ALLOWED = ["Read", "Edit", "Write", "Glob", "Grep", "TodoWrite", "Skill"] + [
 
 
 def sh(cmd, cwd, timeout):
+    p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         text=True, stdin=subprocess.DEVNULL, start_new_session=True)
     try:
-        p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout,
-                           stdin=subprocess.DEVNULL)
-        return p.stdout, p.stderr, False
-    except subprocess.TimeoutExpired as e:
-        out = e.stdout.decode() if isinstance(e.stdout, bytes) else (e.stdout or "")
-        return out, "", True
+        out, err = p.communicate(timeout=timeout)
+        return out, err, False
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(p.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        out, err = p.communicate()
+        return out, err, True
 
 
 class Host:

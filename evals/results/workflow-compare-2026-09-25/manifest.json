@@ -1,0 +1,31 @@
+{
+  "models": [
+    "gpt-5.6-sol",
+    "gpt-5.6-luna",
+    "gpt-5.6-sol>gpt-5.6-luna",
+    "gpt-5.6-sol>gpt-5.6-sol>gpt-5.6-luna"
+  ],
+  "arms": [
+    "ship",
+    "to-prd",
+    "to-spec",
+    "baseline",
+    "to-prd-to-spec"
+  ],
+  "scenarios": [
+    "messy",
+    "corrections",
+    "false-done",
+    "handoff",
+    "parcel"
+  ],
+  "skill_sha256": {
+    "ship": "eb09b496d2727bd646260310d7a7c174c2b473583c13db7575bee434ca3f915c",
+    "to-prd": "eaf4850538d3c4c0e13e6be8a5cebbec762a451fb6e0201bae7c1f599f1db1b3",
+    "to-spec": "267638edd513b5918de626ad5605d261952abb7428cb308869c663ca924e93e7"
+  },
+  "method": "same prompts and seed; local issue tracker; separate code and spec grading",
+  "base_commit": "cbbe00a490b9f189929c67cee4506c77447f664c",
+  "completed_runs": 45,
+  "unscored_timeout_attempts": 3
+}

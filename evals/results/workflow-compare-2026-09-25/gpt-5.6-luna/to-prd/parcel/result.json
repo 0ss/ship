@@ -1,0 +1,38 @@
+{
+  "model": "gpt-5.6-luna",
+  "arm": "to-prd",
+  "scenario": "parcel",
+  "checks": {
+    "visible_tests": true,
+    "parcel_click": {
+      "before": true,
+      "after": true,
+      "fixture": true,
+      "passed": true
+    }
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Implemented the parcel click journey.\n\n- Rendered parcel buttons now open their details.\n- Fixture route remains supported.\n- PRD published to [parcel-details-on-rendered-click.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-to-prd-parcel-emigdtyr/.scratch/issues/parcel-details-on-rendered-click.md>).\n- Tests and JS syntax checks pass.\n- Browser verification is blocked because the environment disallows starting a local HTTP server.",
+      "usage": {
+        "input_tokens": 156733,
+        "cached_input_tokens": 140288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2263,
+        "reasoning_output_tokens": 357
+      },
+      "state": null,
+      "issues": {
+        "parcel-details-on-rendered-click.md": "## Problem Statement\n\nRendered parcel buttons are visible on the parcel map, but selecting one does not open its details. The fixture URL can display details, which does not represent the real user journey.\n\n## Solution\n\nWire rendered parcel selection to the existing parcel-details display so clicking any parcel button opens its address and area. Preserve the `fixture` query route for deterministic previews and checks.\n\n## User Stories\n\n1. As a map user, I want to click a rendered parcel, so that I can open its details.\n2. As a map user, I want the selected parcel identifier, address, and area to be visible, so that I can understand the parcel I selected.\n3. As a map user, I want selecting a second parcel to replace the first parcel's details, so that the details stay aligned with my latest selection.\n4. As a developer, I want the existing fixture route to keep working, so that deterministic previews and checks remain available.\n5. As an accessibility user, I want parcels to remain native buttons, so that keyboard activation follows the same details-opening behavior as pointer activation.\n\n## Implementation Decisions\n\n- Add click handling at the map container level and resolve the activated parcel from its data attribute.\n- Reuse the existing parcel-details display function rather than duplicating rendering logic.\n- Keep unknown parcel IDs as a no-op.\n- Preserve fixture initialization after event wiring so `/map.html?fixture=P-101` continues to show details.\n- No data model or server changes are required.\n\n## Testing Decisions\n\n- Verify the normal `/map.html` journey by clicking a rendered parcel and asserting that its details become visible and contain the selected parcel data.\n- Verify clicking another rendered parcel replaces the displayed details.\n- Verify `/map.html?fixture=P-101` still displays the fixture details.\n- Verify native button activation remains available for keyboard users.\n- Existing Python unit tests remain the project baseline; browser behavior is the relevant regression surface for this change.\n\n## Out of Scope\n\n- Adding new parcels or changing parcel data.\n- Changing the visual design of the map or details panel.\n- Adding routing, persistence, or server-side parcel APIs.\n\n## Further Notes\n\nThe completion criterion is an interaction through the normal map route, not only a fixture URL that preloads details.\n\nLabel: needs-triage\n"
+      },
+      "artifacts": {
+        ".scratch/issues/parcel-details-on-rendered-click.md": "## Problem Statement\n\nRendered parcel buttons are visible on the parcel map, but selecting one does not open its details. The fixture URL can display details, which does not represent the real user journey.\n\n## Solution\n\nWire rendered parcel selection to the existing parcel-details display so clicking any parcel button opens its address and area. Preserve the `fixture` query route for deterministic previews and checks.\n\n## User Stories\n\n1. As a map user, I want to click a rendered parcel, so that I can open its details.\n2. As a map user, I want the selected parcel identifier, address, and area to be visible, so that I can understand the parcel I selected.\n3. As a map user, I want selecting a second parcel to replace the first parcel's details, so that the details stay aligned with my latest selection.\n4. As a developer, I want the existing fixture route to keep working, so that deterministic previews and checks remain available.\n5. As an accessibility user, I want parcels to remain native buttons, so that keyboard activation follows the same details-opening behavior as pointer activation.\n\n## Implementation Decisions\n\n- Add click handling at the map container level and resolve the activated parcel from its data attribute.\n- Reuse the existing parcel-details display function rather than duplicating rendering logic.\n- Keep unknown parcel IDs as a no-op.\n- Preserve fixture initialization after event wiring so `/map.html?fixture=P-101` continues to show details.\n- No data model or server changes are required.\n\n## Testing Decisions\n\n- Verify the normal `/map.html` journey by clicking a rendered parcel and asserting that its details become visible and contain the selected parcel data.\n- Verify clicking another rendered parcel replaces the displayed details.\n- Verify `/map.html?fixture=P-101` still displays the fixture details.\n- Verify native button activation remains available for keyboard users.\n- Existing Python unit tests remain the project baseline; browser behavior is the relevant regression surface for this change.\n\n## Out of Scope\n\n- Adding new parcels or changing parcel data.\n- Changing the visual design of the map or details panel.\n- Adding routing, persistence, or server-side parcel APIs.\n\n## Further Notes\n\nThe completion criterion is an interaction through the normal map route, not only a fixture URL that preloads details.\n\nLabel: needs-triage\n"
+      }
+    }
+  ],
+  "diff": " web/app.js | 9 +++++++--\n 1 file changed, 7 insertions(+), 2 deletions(-)\n",
+  "web_code": "const parcels = {\n  \"P-101\": { address: \"12 River Lane\", area: \"680 m²\" },\n  \"P-102\": { address: \"4 Oak Street\", area: \"420 m²\" },\n};\n\nfunction showParcel(id) {\n  const parcel = parcels[id];\n  if (!parcel) return;\n  const details = document.querySelector(\"#details\");\n  details.textContent = `${id} — ${parcel.address} — ${parcel.area}`;\n  details.hidden = false;\n}\n\ndocument.querySelector(\"#map\").addEventListener(\"click\", (event) => {\n  const parcelButton = event.target.closest(\".parcel\");\n  if (!parcelButton) return;\n  showParcel(parcelButton.dataset.parcelId);\n});\n\n// Keep the fixture route available for deterministic previews and checks.\nconst fixture = new URLSearchParams(location.search).get(\"fixture\");\nif (fixture) showParcel(fixture);\n"
+}

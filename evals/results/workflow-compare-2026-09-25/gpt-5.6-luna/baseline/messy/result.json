@@ -1,0 +1,38 @@
+{
+  "model": "gpt-5.6-luna",
+  "arm": "baseline",
+  "scenario": "messy",
+  "checks": {
+    "pro_15": true,
+    "team_45": true,
+    "free_0": true,
+    "email_on_create": true,
+    "sms_and_email_on_create": true,
+    "arabic": true,
+    "latin": true,
+    "expiry_7": true,
+    "expiry_7_method": true,
+    "csv_name_phone": true,
+    "visible_tests": true
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Implemented the actionable asks:\n\n- Pro: 15/seat; Team: 45/seat; Free remains 0.\n- Invite creation sends email and SMS through the fake notifier.\n- Invites expire 7 days after creation with `is_expired(now)`.\n- Added `InviteService.export_csv()` with only `name,phone` columns.\n- Arabic names are preserved while Latin names remain title-cased.\n- Updated the outdated pricing test.\n\nAll tests pass: 3/3.",
+      "usage": {
+        "input_tokens": 224762,
+        "cached_input_tokens": 198656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2230,
+        "reasoning_output_tokens": 372
+      },
+      "state": null,
+      "issues": {},
+      "artifacts": {}
+    }
+  ],
+  "diff": " app/display.py    |  3 +--\n app/invites.py    | 24 ++++++++++++++++++++++--\n app/pricing.py    |  2 +-\n tests/test_app.py |  2 +-\n 4 files changed, 25 insertions(+), 6 deletions(-)\n",
+  "web_code": null
+}

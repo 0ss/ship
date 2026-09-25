@@ -39,6 +39,14 @@ Claude Haiku's long-dump attempt timed out without a reply; its unscored
 artifact is under `infrastructure/`. OpenCode Go returned a provider quota
 error. Neither host supplies cross-family evidence in this run.
 
+## Workflow comparison (Ship vs Matt's to-prd/to-spec)
+
+See [the report](results/workflow-compare-2026-09-25/REPORT.md) and
+[rubric](results/workflow-compare-2026-09-25/RUBRIC.md). The isolated runner
+`compare_workflows.py` tests native planning artifacts separately from code,
+including a headless-Chrome rendered-parcel click and a fresh-context
+PRD→spec→implementation chain. No real GitHub issues are created.
+
 ## Run
 
 ```bash

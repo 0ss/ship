@@ -1,0 +1,6 @@
+{
+  "model": "gpt-5.6-sol",
+  "arm": "to-spec",
+  "scenario": "false-done",
+  "infrastructure_error": "TimeoutError('to-spec/false-done session 0 turn 0')"
+}

@@ -1,0 +1,56 @@
+{
+  "model": "gpt-5.6-luna",
+  "arm": "ship",
+  "scenario": "handoff",
+  "checks": {
+    "pro_15": true,
+    "expiry_14": true,
+    "arabic": true,
+    "team_40": true,
+    "visible_tests": true
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Done: created the persistent [SHIP.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-handoff-8xfg0_ik/SHIP.md>) and published the spec to the local tracker:\n\n[update-pricing-invites-and-display-names.md](</private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-handoff-8xfg0_ik/.scratch/issues/update-pricing-invites-and-display-names.md>)\n\nCaptured decisions:\n\n- Pro: 15\n- Invite expiry: 14 days with `expires_at`\n- Team: remains 40\n- Arabic display names: fix required\n- Team increase to 45: cancelled\n\nStill open: implementation and verification tomorrow.",
+      "usage": {
+        "input_tokens": 151850,
+        "cached_input_tokens": 137216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2039,
+        "reasoning_output_tokens": 276
+      },
+      "state": "# Ship\n- [ ] Pro plan price is 15 — \"pro plan price goes 12 -> 15\" — ready for implementation: update `app.pricing.PLANS`; next: run pricing checks and verify Pro pricing is 15 while Team remains 40\n- [ ] Invites expire after 14 days and expose `expires_at` — \"invites expire after 7 days\" then \"make it 14 days not 7\" — ready for implementation: add `expires_at` to `app.invites.Invite` and derive it from creation time; next: verify the created invite has the correct 14-day expiry\n- [ ] Arabic display names remain readable — \"display_name blanks out Arabic names, needs fixing\" — ready for implementation: fix `app.display.display_name` so Arabic characters are preserved while the length limit remains safe; next: verify with an Arabic guest name and an ASCII name\n- ~~Team plan price increase~~ — dropped: \"scrap 3, Omar changed his mind, team stays at 40\"\n",
+      "issues": {
+        "update-pricing-invites-and-display-names.md": "# Update pricing, invite expiry, and display names\n\n## Summary\n\nImplement the three current product asks captured in the latest brain dump. The Team plan price remains unchanged at 40; the proposed increase to 45 is cancelled.\n\n## Requirements\n\n1. Set the Pro plan price to 15 (currently 12).\n2. Add `expires_at` to `app.invites.Invite`. New invites must expire 14 days after `created_at`.\n3. Fix `app.display.display_name` so Arabic names are not blanked or corrupted. Preserve the existing user-facing shortening behavior as safely as possible.\n4. Keep the Team plan price at 40. Do not implement the cancelled increase to 45.\n\n## Acceptance criteria\n\n- `price(\"pro\")` returns 15.\n- `price(\"team\")` returns 40.\n- A newly created invite exposes `expires_at`, and it is exactly 14 days after its creation timestamp.\n- An Arabic name passed to `display_name` returns visible Arabic text rather than an empty string; existing ASCII name behavior continues to work.\n\n## Source decisions\n\n- \"pro plan price goes 12 -> 15\"\n- \"invites expire after 7 days\" corrected by the later message to \"make it 14 days not 7\"\n- \"team plan to 45\" cancelled by the later message: \"scrap 3, Omar changed his mind, team stays at 40\"\n- \"display_name blanks out Arabic names, needs fixing\"\n\nLabel: ready-for-agent\n"
+      },
+      "artifacts": {
+        ".scratch/issues/update-pricing-invites-and-display-names.md": "# Update pricing, invite expiry, and display names\n\n## Summary\n\nImplement the three current product asks captured in the latest brain dump. The Team plan price remains unchanged at 40; the proposed increase to 45 is cancelled.\n\n## Requirements\n\n1. Set the Pro plan price to 15 (currently 12).\n2. Add `expires_at` to `app.invites.Invite`. New invites must expire 14 days after `created_at`.\n3. Fix `app.display.display_name` so Arabic names are not blanked or corrupted. Preserve the existing user-facing shortening behavior as safely as possible.\n4. Keep the Team plan price at 40. Do not implement the cancelled increase to 45.\n\n## Acceptance criteria\n\n- `price(\"pro\")` returns 15.\n- `price(\"team\")` returns 40.\n- A newly created invite exposes `expires_at`, and it is exactly 14 days after its creation timestamp.\n- An Arabic name passed to `display_name` returns visible Arabic text rather than an empty string; existing ASCII name behavior continues to work.\n\n## Source decisions\n\n- \"pro plan price goes 12 -> 15\"\n- \"invites expire after 7 days\" corrected by the later message to \"make it 14 days not 7\"\n- \"team plan to 45\" cancelled by the later message: \"scrap 3, Omar changed his mind, team stays at 40\"\n- \"display_name blanks out Arabic names, needs fixing\"\n\nLabel: ready-for-agent\n"
+      }
+    },
+    {
+      "session": 1,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Built everything from yesterday:\n\n- Pro price updated to 15; Team remains 40.\n- Invites now expose `expires_at`, set exactly 14 days after creation.\n- Arabic display names are preserved.\n- Added regression tests.\n- Updated `SHIP.md` with verified proof.\n\nValidation: 5 tests passed; `git diff --check` passed.\n\nStill open: none.  \nWaiting on you: nothing.",
+      "usage": {
+        "input_tokens": 182333,
+        "cached_input_tokens": 165632,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2364,
+        "reasoning_output_tokens": 175
+      },
+      "state": "# Ship\n- [x] Pro plan price is 15 — \"pro plan price goes 12 -> 15\" — verified: ran `python3 -m unittest -v`; `price(\"pro\")` returned 15 and `price(\"team\", 2)` returned 80 (Team remains 40)\n- [x] Invites expire after 14 days and expose `expires_at` — \"invites expire after 7 days\" then \"make it 14 days not 7\" — verified: created an invite with a fixed `2026-01-01` clock; `expires_at` was exactly `2026-01-15`\n- [x] Arabic display names remain readable — \"display_name blanks out Arabic names, needs fixing\" — verified: ran the display-name tests with `\"محمد علي\"` and `\"ada lovelace\"`; results were visible Arabic text and `\"Ada Lovelace\"`\n- ~~Team plan price increase~~ — dropped: \"scrap 3, Omar changed his mind, team stays at 40\"\n",
+      "issues": {
+        "update-pricing-invites-and-display-names.md": "# Update pricing, invite expiry, and display names\n\n## Summary\n\nImplement the three current product asks captured in the latest brain dump. The Team plan price remains unchanged at 40; the proposed increase to 45 is cancelled.\n\n## Requirements\n\n1. Set the Pro plan price to 15 (currently 12).\n2. Add `expires_at` to `app.invites.Invite`. New invites must expire 14 days after `created_at`.\n3. Fix `app.display.display_name` so Arabic names are not blanked or corrupted. Preserve the existing user-facing shortening behavior as safely as possible.\n4. Keep the Team plan price at 40. Do not implement the cancelled increase to 45.\n\n## Acceptance criteria\n\n- `price(\"pro\")` returns 15.\n- `price(\"team\")` returns 40.\n- A newly created invite exposes `expires_at`, and it is exactly 14 days after its creation timestamp.\n- An Arabic name passed to `display_name` returns visible Arabic text rather than an empty string; existing ASCII name behavior continues to work.\n\n## Source decisions\n\n- \"pro plan price goes 12 -> 15\"\n- \"invites expire after 7 days\" corrected by the later message to \"make it 14 days not 7\"\n- \"team plan to 45\" cancelled by the later message: \"scrap 3, Omar changed his mind, team stays at 40\"\n- \"display_name blanks out Arabic names, needs fixing\"\n\nLabel: ready-for-agent\n"
+      },
+      "artifacts": {
+        ".scratch/issues/update-pricing-invites-and-display-names.md": "# Update pricing, invite expiry, and display names\n\n## Summary\n\nImplement the three current product asks captured in the latest brain dump. The Team plan price remains unchanged at 40; the proposed increase to 45 is cancelled.\n\n## Requirements\n\n1. Set the Pro plan price to 15 (currently 12).\n2. Add `expires_at` to `app.invites.Invite`. New invites must expire 14 days after `created_at`.\n3. Fix `app.display.display_name` so Arabic names are not blanked or corrupted. Preserve the existing user-facing shortening behavior as safely as possible.\n4. Keep the Team plan price at 40. Do not implement the cancelled increase to 45.\n\n## Acceptance criteria\n\n- `price(\"pro\")` returns 15.\n- `price(\"team\")` returns 40.\n- A newly created invite exposes `expires_at`, and it is exactly 14 days after its creation timestamp.\n- An Arabic name passed to `display_name` returns visible Arabic text rather than an empty string; existing ASCII name behavior continues to work.\n\n## Source decisions\n\n- \"pro plan price goes 12 -> 15\"\n- \"invites expire after 7 days\" corrected by the later message to \"make it 14 days not 7\"\n- \"team plan to 45\" cancelled by the later message: \"scrap 3, Omar changed his mind, team stays at 40\"\n- \"display_name blanks out Arabic names, needs fixing\"\n\nLabel: ready-for-agent\n"
+      }
+    }
+  ],
+  "diff": " app/display.py    |  3 +--\n app/invites.py    |  6 ++++--\n app/pricing.py    |  2 +-\n tests/test_app.py | 13 ++++++++++++-\n 4 files changed, 18 insertions(+), 6 deletions(-)\n",
+  "web_code": null
+}

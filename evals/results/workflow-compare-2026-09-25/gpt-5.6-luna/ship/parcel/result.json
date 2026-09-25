@@ -1,0 +1,34 @@
+{
+  "model": "gpt-5.6-luna",
+  "arm": "ship",
+  "scenario": "parcel",
+  "checks": {
+    "visible_tests": true,
+    "parcel_click": {
+      "before": true,
+      "after": true,
+      "fixture": true,
+      "passed": true
+    }
+  },
+  "log": [
+    {
+      "session": 0,
+      "turn": 0,
+      "model": "gpt-5.6-luna",
+      "reply": "Implemented the real parcel click journey in [web/app.js](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-parcel-rfi7u7en/web/app.js).\n\nChecks passed:\n\n- Python tests: 3 passed\n- JavaScript syntax check passed\n- Fixture route preserved\n\nStill open: browser verification is blocked because the local server cannot bind and no browser surface is available. Recorded in [SHIP.md](/private/var/folders/6s/qc0vj1kx14d9v219s61lmg2m0000gn/T/ship-compare-ship-parcel-rfi7u7en/SHIP.md).",
+      "usage": {
+        "input_tokens": 292010,
+        "cached_input_tokens": 265984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2488,
+        "reasoning_output_tokens": 445
+      },
+      "state": "# Ship\n- [ ] Clicking a rendered parcel opens its details — \"when I click a rendered parcel, its details should open\" — blocked: local HTTP server cannot bind (`PermissionError: [Errno 1] Operation not permitted`) and no browser surface is available; implementation is in `web/app.js`; next: run `/map.html` and click Parcel P-101 in an environment with a permitted server/browser\n- [ ] Preserve the fixture route — \"preserve the fixture route\" — implemented: `?fixture=P-101` still calls `showParcel`; static checks pass, but browser verification is blocked by the same environment restriction\n",
+      "issues": {},
+      "artifacts": {}
+    }
+  ],
+  "diff": " web/app.js | 6 ++++--\n 1 file changed, 4 insertions(+), 2 deletions(-)\n",
+  "web_code": "const parcels = {\n  \"P-101\": { address: \"12 River Lane\", area: \"680 m²\" },\n  \"P-102\": { address: \"4 Oak Street\", area: \"420 m²\" },\n};\n\nfunction showParcel(id) {\n  const parcel = parcels[id];\n  if (!parcel) return;\n  const details = document.querySelector(\"#details\");\n  details.textContent = `${id} — ${parcel.address} — ${parcel.area}`;\n  details.hidden = false;\n}\n\ndocument.querySelectorAll(\"[data-parcel-id]\").forEach((button) => {\n  button.addEventListener(\"click\", () => showParcel(button.dataset.parcelId));\n});\n\nconst fixture = new URLSearchParams(location.search).get(\"fixture\");\nif (fixture) showParcel(fixture);\n"
+}
