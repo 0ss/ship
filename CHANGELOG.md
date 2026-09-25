@@ -5,6 +5,9 @@
 - reduced Ship to a checklist of current asks and observed proof; kept one
   portable `SHIP.md` and removed the six-table schema, validator, receipt
   hashes, mandatory review, session hook, and lifecycle machinery
+- release QA: 29/30 Ship completions across two Codex models and 15 matched
+  scenarios per model; retained raw results, end-to-end limiter checks, and
+  explicit limitations in `evals/results/release-qa-2026-09-25/`
 - replaced hand-labelled smoke fixtures with an execution benchmark that runs
   real coding agents against hidden acceptance checks, reset sessions, and
   adversarial input; retained current and ablated skill snapshots for comparison
