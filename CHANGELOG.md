@@ -1,5 +1,12 @@
 # changelog
 
+## 0.5.1
+
+- require proof of the user's actual journey before checking an ask off;
+  distinguish implemented, verified, and blocked work in the short ledger
+- bound verification and environment retries; record exact blockers and next
+  actions without turning investigations into ledger entries
+
 ## 0.5.0
 
 - reduced Ship to a checklist of current asks and observed proof; kept one

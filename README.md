@@ -37,15 +37,15 @@ The file in your project will look like:
 
 ```markdown
 # Ship
-- [ ] Send invite SMS — "legal says SMS only" (was: email)
-- [x] Show Arabic names — proof: `python3 -m unittest` passed
+- [ ] Send invite SMS — "legal says SMS only" (was: email) — implemented: notifier wired; next: verify delivery
+- [x] Show Arabic names — verified: opened guest list → Arabic record → full name displayed
 - ~~CSV export~~ — dropped: "forget the CSV thing"
 - [ ] Expire invites after 14 days
 ```
 
 For non-Claude agents, use the same prompt without `/ship`: `Use the ship skill.
 Here's the messy version: ...` Ship uses your agent's existing tools; only
-observed working results get checked off. No service or runtime dependency.
+verified user journeys get checked off. No service or runtime dependency.
 
 [Benchmark and limits](evals/README.md) · Verify this repo: `./scripts/validate.sh`
 
